@@ -1,0 +1,5 @@
+package QuizzApp.Service;
+
+public class UserService {
+
+}

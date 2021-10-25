@@ -1,0 +1,28 @@
+package QuizzApp.DAL;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class DBHelper {
+	
+	public boolean ExecuteQuery(String query)
+	{
+		CreateConnect(query);
+		return false;
+	}
+	private void CreateConnect(String str)
+	{
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			String url = "jdbc:mysql://http://localhost:8000/phpmyadmin/quizzappdata";
+			String name = "root";
+			String pass = "@chuongthai1357901";
+			Connection con = DriverManager.getConnection(url,name,pass);
+			System.out.println("Connected");
+			con.close();
+		}catch (Exception e) {
+			System.out.println("Error: " +e);
+		}
+	}
+}
