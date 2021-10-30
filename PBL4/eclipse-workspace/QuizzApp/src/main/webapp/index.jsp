@@ -1,44 +1,51 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="resource/formLogin.css">
-<title>Login</title>
+<title>Quiz App</title>
 </head>
 
-<body>
-	<div>
-		<div id="heading">
-			<h1>LOGIN</h1>
-		</div>
-		<div class="splitdiv">
-			<div class="leftsplit">
-				<h1>WELCOME TO QUIZGAME!</h1>
-			</div>
-			<div class="rightsplit">
-				<form action="Login" method="post" class="form-login">
-					<div class="form-group">
-						<input type="text" class="form-input" name="user"
-							placeholder="Username">
-					</div>
-					<div class="form-group">
-						<input type="password" class="form-input" name="pass"
-							placeholder="Password">
-					</div>
-					<div>
-						<input type="submit" class="form-submit" name="btn_login"
-							value="LOGIN">
-					</div>
-					<hr>
-					<div>
-						Do not have account yet? <input type="submit" class="form-submit"
-							name="btn_signup" value="SIGN UP">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+<body>   
+    <div> <!--header-->
+        <a href=""><img src=""></a> <!--logo-->
+        <ul> <!--danh mục trên header (tự chế)-->
+            <li><a href="">How to play?</a></li>
+            <li><a href="">New template</a></li>
+        </ul>
+        <div>
+            <a href="">Vào game</a> <!--Dẫn tới trang nhập code để chơi-->
+            <a href="SignUp.jsp">Đăng ký</a> <!--Dẫn tới trang đăng ký-->
+        </div>
+    </div>
+    <div> <!--nội dung-->
+        <div>
+            <h1>Quizz App</h1>
+            <h3>Vài dòng giới thiệu, slogan...</h3>
+            <button type="button" onclick="window.location.href='SignUp.jsp'">Tạo một bộ câu hỏi</button> <!--Dẫn tới đăng ký-->
+            <button type="button" onclick="window.location.href='Login.jsp'">Đăng nhập</button> <!--Dẫn tới đăng nhập-->
+        </div>
+        <div> <!--thêm vài nội dung màu mè-->
+            <h2>Bắt đầu</h2> <!--hướng dẫn sử dụng-->
+            <div>
+                <div>1</div>
+                <div>Tạo bộ câu hỏi</div>
+                <div><img src=""></div> <!--hình ảnh minh hoạ-->
+            </div>
+            <div>
+                <div>2</div>
+                <div>Người chơi tham gia trả lời</div>
+                <div><img src=""></div> <!--hình ảnh minh hoạ-->
+            </div>
+            <div>
+                <div>3</div>
+                <div>Kết quả xếp hạng</div>
+                <div><img src=""></div> <!--hình ảnh minh hoạ-->
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

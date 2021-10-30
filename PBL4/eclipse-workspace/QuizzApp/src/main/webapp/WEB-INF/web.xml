@@ -16,6 +16,18 @@
   	<description></description>
   	<servlet-class>QuizzApp.Controller.LogoutController</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>AddNewExamController</servlet-name>
+  	<display-name>AddNewExamController</display-name>
+  	<description></description>
+  	<servlet-class>QuizzApp.Controller.AddNewExamController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>SignUpController</servlet-name>
+  	<display-name>SignUpController</display-name>
+  	<description></description>
+  	<servlet-class>QuizzApp.Controller.SignUpController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>LoginController</servlet-name>
   	<url-pattern>/Login</url-pattern>
@@ -23,6 +35,14 @@
   <servlet-mapping>
   	<servlet-name>LogoutController</servlet-name>
   	<url-pattern>/Logout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AddNewExamController</servlet-name>
+  	<url-pattern>/AddNewExam</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>SignUpController</servlet-name>
+  	<url-pattern>/SignUp</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
   <welcome-file>index.jsp</welcome-file>
