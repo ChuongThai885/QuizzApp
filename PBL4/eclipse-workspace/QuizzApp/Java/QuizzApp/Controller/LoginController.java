@@ -19,7 +19,7 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("user");
 		String pass = request.getParameter("pass");
-		if(new UserService().CheckAccount(email, pass))
+		if(new UserService().Is_Exist_User(email, pass))
 		{
 			HttpSession ses = request.getSession();
 			ses.setAttribute("user", email);

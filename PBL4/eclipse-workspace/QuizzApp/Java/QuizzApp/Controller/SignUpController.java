@@ -23,7 +23,7 @@ public class SignUpController extends HttpServlet {
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
 		UserService ser = new UserService();
-		if(ser.CheckAccount(email, pass))
+		if(ser.Is_Exist_User(email, pass))
 		{
 			HttpSession session = request.getSession();
 			session.setAttribute("error", "Email already in use");
@@ -31,7 +31,7 @@ public class SignUpController extends HttpServlet {
 		}
 		else
 		{
-			if(ser.CreateAccount(name,email,pass))
+			if(ser.Create_User(name,email,pass))
 			{
 				HttpSession session = request.getSession();
 				session.setAttribute("user", email);
