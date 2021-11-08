@@ -2,6 +2,20 @@
 	pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+response.setHeader("Expires", "0"); //Proxies
+
+//check user login yet
+boolean check = false;
+Cookie[] cookies = request.getCookies();
+for(Cookie c : cookies)
+{
+	if(c.getName().equals("val")) check = true;
+}
+if(check == false) response.sendRedirect("index.jsp");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,17 +23,6 @@
 <title>WELCOME</title>
 </head>
 <body>
-	<%
-	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
-	response.setHeader("Pragma", "no-cache"); //HTTP 1.0
-	response.setHeader("Expires", "0"); //Proxies
-
-	if (session.getAttribute("user") == null) {
-		//RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-		//dispatcher.forward(request, response);
-		response.sendRedirect("Login.jsp");
-	}
-	%>
 	Hello ${user}
 	<br>
 	<iframe width="560" height="315"
