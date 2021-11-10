@@ -1,4 +1,4 @@
-package Service;
+package QuizzApp.Service;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.List;
 
-import Model.*;
+import QuizzApp.Model.*;
 
 public class DataService {
 	public boolean Create_User(String name,String email,String pass)
@@ -120,7 +120,7 @@ public class DataService {
 	{
 		try
 		{
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:6033/quizzappdata";
 			String name = "root";
 			String pass = "@chuongthai1357901";

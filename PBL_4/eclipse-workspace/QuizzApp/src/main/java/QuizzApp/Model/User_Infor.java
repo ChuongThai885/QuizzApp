@@ -1,4 +1,4 @@
-package Model;
+package QuizzApp.Model;
 
 import java.util.Date;
 
@@ -38,6 +38,11 @@ public class User_Infor {
 	}
 	public void setSignUp_Date(Date signUp_Date) {
 		SignUp_Date = signUp_Date;
+	}
+	@Override
+	public String toString() {
+		return "User_Infor [ID=" + ID + ", Name=" + Name + ", Email=" + Email + ", pass=" + pass + ", SignUp_Date="
+				+ SignUp_Date + "]";
 	}
 	
 }
