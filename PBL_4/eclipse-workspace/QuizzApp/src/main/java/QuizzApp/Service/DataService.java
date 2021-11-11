@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.List;
+import java.util.*;
 
 import QuizzApp.Model.*;
 
@@ -85,12 +85,57 @@ public class DataService {
 		}
 		return false;
 	}
+	
 	public boolean Add_New_Exam()
 	{
 		return false;
 	}
-	public List<Answer> Get_Ans_by_QuesID(int ID_Question)
+	
+	public ArrayList<Answer> Get_List_Answer_by_ID_Question(long ID_Question)
 	{
+		try (Statement st = CreateConnect().createStatement())
+		{
+			ArrayList<Answer> las = new ArrayList<Answer>();
+			Answer a = new Answer();
+			ResultSet res = st.executeQuery("SELECT * FROM quizzappdata.answers where ID_Ques =" + ID_Question);
+			while(res.next())
+			{
+				a.setID(res.getLong("ID"));
+				a.setSelected(res.getBoolean("Selected"));
+				a.setAns(res.getString("Answer"));
+				a.setID_Question(res.getLong("ID_Ques"));
+				las.add(a);
+			}
+			return las;
+		}
+		catch (Exception e) {
+			System.out.println("Error get list ans :" + e.getMessage());
+		}
+		return null;
+	}
+	
+	public ArrayList<Question> Get_List_Quesion_by_ID_Exam(int ID_Exam)
+	{
+		try (Statement st = CreateConnect().createStatement())
+		{
+			ArrayList<Question> ques = new ArrayList<Question>();
+			Question q = new Question();
+			String query = "SELECT * FROM quizzappdata.question where ID_Ex =" + ID_Exam;
+			ResultSet res = st.executeQuery(query);
+			while(res.next())
+			{
+				q.setID(res.getLong("ID"));
+				q.setQues(res.getString("Ques"));
+				q.setIs_Multi(res.getBoolean("Is_Multi"));
+				q.setID_Ex(res.getInt("ID_Ex"));
+				System.out.println(q.toString());
+				ques.add(q);
+			}
+			return ques;
+		}
+		catch (Exception e) {
+			System.out.println("Error get list question: "+e.getMessage());
+		}
 		return null;
 	}
 	

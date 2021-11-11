@@ -8,19 +8,19 @@
   	<servlet-name>LoginController</servlet-name>
   	<display-name>LoginController</display-name>
   	<description></description>
-  	<servlet-class>Controller.LoginController</servlet-class>
+  	<servlet-class>QuizzApp.Controller.LoginController</servlet-class>
   </servlet>
   <servlet>
   	<servlet-name>LogoutController</servlet-name>
   	<display-name>LogoutController</display-name>
   	<description></description>
-  	<servlet-class>Controller.LogoutController</servlet-class>
+  	<servlet-class>QuizzApp.Controller.LogoutController</servlet-class>
   </servlet>
   <servlet>
   	<servlet-name>SignUpController</servlet-name>
   	<display-name>SignUpController</display-name>
   	<description></description>
-  	<servlet-class>Controller.SignUpController</servlet-class>
+  	<servlet-class>QuizzApp.Controller.SignUpController</servlet-class>
   </servlet>
   
   <servlet-mapping>

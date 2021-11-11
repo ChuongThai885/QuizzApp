@@ -40,4 +40,25 @@ public class QuizzService {
 		//
 		return null;
 	}
+	public ArrayList<QuestionForm> get_List_QuestionForm_by_ID_Exam(int ID_Exam)
+	{
+		try
+		{
+			DataService service = new DataService();
+			ArrayList<QuestionForm> lqf = new ArrayList<QuestionForm>();
+			ArrayList<Question> lq = service.Get_List_Quesion_by_ID_Exam(ID_Exam);
+			QuestionForm qf = new QuestionForm();
+			for(Question i : lq)
+			{
+				qf.setQues(i);
+				qf.setAns(service.Get_List_Answer_by_ID_Question(i.getID()));
+				lqf.add(qf);
+			}
+			return lqf;
+		}
+		catch (Exception e) {
+			System.out.println("Error get list question form: " + e.getMessage()); 
+		}
+		return null;
+	}
 }

@@ -19,8 +19,8 @@ const io = require("socket.io")(server, {
     //     // res.end();
     // }
 });
-//array has number length is 5
-const IDRoom = [];
+//array has number length is 5, contain ID used of the room
+const IDRoom = [11111,21356,12345];
 function GenerateIDRoom()
 {
     let random = Math.floor(Math.random() * 99999) + 10000;
@@ -45,7 +45,22 @@ function RemoveIDRoom(ID)
         console.log('ID room list: ' + IDRoom);
     }
 }
+class Room
+{
+    constructor(IDAdmin, LtUser)
+    {
+        this.IDAdmin = IDAdmin;
+        this.LtUser = LtUser;
+    }
+}
 
+//contain Room [IDRoom] (has an ID Admin, List of ID user, name  user, score)
+const RoomList = [];
+var b = new Room(123,[123,456]);
+RoomList.push(b);
+var c = RoomList[0];
+console.log(c.LtUser);
+//vd
 
 app.get('/',(req,res)=>{
     res.sendFile(__dirname + "/lobby.html");
@@ -59,6 +74,24 @@ io.on('connection',(socket) =>{
     console.log('user connected')
     socket.on('on-chat',data =>{
         io.emit('user-chat',data)
+    })
+    //for admin, connect to server and create room
+    socket.on('create-room', (cb) =>{
+        console.log(IDRoom);
+        cb("Hello from server");
+    })
+    //for user
+    socket.on('joining-room',(id_room,cb) =>{
+        console.log(id_room);
+        console.log(IDRoom);
+        if(IDRoom.includes(parseInt(id_room)))
+        {
+            cb("Room exist");
+        }
+        else
+        {
+            cb("Room doesn't exist");
+        }
     })
     socket.on('disconnect', (socket) =>{
         console.log('user disconnected');

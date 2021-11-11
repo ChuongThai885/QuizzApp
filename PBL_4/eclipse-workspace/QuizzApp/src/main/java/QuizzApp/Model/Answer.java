@@ -30,5 +30,9 @@ public class Answer {
 	public void setID_Question(long iD_Question) {
 		ID_Question = iD_Question;
 	}
+	@Override
+	public String toString() {
+		return "Answer [ID=" + ID + ", selected=" + selected + ", Ans=" + Ans + ", ID_Question=" + ID_Question + "]";
+	}
 	
 }

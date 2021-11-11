@@ -6,7 +6,7 @@ public class Question {
 	private String Ques;
 	private boolean Is_Multi;
 	private int Countdown_Time;
-	private int ID_Quizz;
+	private int ID_Ex;
 	public long getID() {
 		return ID;
 	}
@@ -31,10 +31,15 @@ public class Question {
 	public void setCountdown_Time(int countdown_Time) {
 		Countdown_Time = countdown_Time;
 	}
-	public int getID_Quizz() {
-		return ID_Quizz;
+	public int getID_Ex() {
+		return ID_Ex;
 	}
-	public void setID_Quizz(int iD_Quizz) {
-		ID_Quizz = iD_Quizz;
+	public void setID_Ex(int iD_Ex) {
+		ID_Ex = iD_Ex;
+	}
+	@Override
+	public String toString() {
+		return "Question [ID=" + ID + ", Ques=" + Ques + ", Is_Multi=" + Is_Multi + ", Countdown_Time=" + Countdown_Time
+				+ ", ID_Ex=" + ID_Ex + "]";
 	}
 }

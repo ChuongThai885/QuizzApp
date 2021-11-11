@@ -18,9 +18,9 @@
 	</form>
 
 </body>
-<script src="http://116.103.144.150:3000/socket.io/socket.io.js"></script>
+<script src="http://localhost:3000/socket.io/socket.io.js"></script>
 <script>
-		const socket = io("http://116.103.144.150:3000");
+		const socket = io("http://localhost:3000");
 
 		const name = prompt('Nhập tên m!');
 		const chatForm = document.querySelector('#chat-form');
@@ -35,6 +35,9 @@
 			});
 			chatMess.value = '';
 		})
+		socket.emit('create-room', room => {
+			console.log(room);
+		} )
 		const messages = document.querySelector('#messages')
 		socket.on('user-chat',(message) =>{
 			const chatItem = document.createElement('li');

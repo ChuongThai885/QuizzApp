@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <meta charset="UTF-8">
+        <title>
+            Welcome
+        </title>
+    </header>
+    <body>
+        <form id="send-ID">
+            Nhập ID phòng:<input type="text" id="IDroom" name="ID">
+            <button id="sent-ID">Gửi</button>
+        </form>
+    </body>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io("http://localhost:3000");
+        const form_sendID = document.querySelector('#send-ID')
+        const id_input = document.querySelector('#IDroom');
+        form_sendID.addEventListener('submit',(e) =>{
+            e.preventDefault();
+
+            const id = id_input.value;
+            console.log(id);
+            socket.emit('joining-room',id, message => { 
+                console.log(message);
+            })
+        })
+    </script>
+</html>
