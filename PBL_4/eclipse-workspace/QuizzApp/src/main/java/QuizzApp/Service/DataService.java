@@ -37,7 +37,7 @@ public class DataService {
 			ResultSet res = st.executeQuery();
 			while(res.next())
 			{
-				user.setID(res.getLong("ID"));
+				user.setID(res.getInt("ID"));
 				user.setName(res.getString("User_Name"));
 				user.setEmail(res.getString("Email"));
 				user.setPass(res.getString("Pass"));
@@ -91,25 +91,28 @@ public class DataService {
 		return false;
 	}
 	
-	public ArrayList<Answer> Get_List_Answer_by_ID_Question(long ID_Question)
+	public ArrayList<Exam> Get_List_Exam_by_Email_User(String email)
 	{
-		try (Statement st = CreateConnect().createStatement())
+		String query = "SELECT * FROM quizzappdata.exercise where (Select ID from quizzappdata.users where Email = ?)";
+		try (PreparedStatement st = CreateConnect().prepareStatement(query))
 		{
-			ArrayList<Answer> las = new ArrayList<Answer>();
-			Answer a = new Answer();
-			ResultSet res = st.executeQuery("SELECT * FROM quizzappdata.answers where ID_Ques =" + ID_Question);
+			st.setString(1, email);
+			ArrayList<Exam> le = new ArrayList<Exam>();
+			Exam ex = new Exam();
+			ResultSet res = st.executeQuery();
 			while(res.next())
 			{
-				a.setID(res.getLong("ID"));
-				a.setSelected(res.getBoolean("Selected"));
-				a.setAns(res.getString("Answer"));
-				a.setID_Question(res.getLong("ID_Ques"));
-				las.add(a);
+				ex.setID(res.getInt("ID"));
+				ex.setTopic(res.getString("Topic"));
+				ex.setName(res.getString("Ex_Name"));
+				ex.setID_User(res.getInt("ID_User"));
+				System.out.println(ex.toString());
+				le.add(ex);
 			}
-			return las;
+			return le;
 		}
 		catch (Exception e) {
-			System.out.println("Error get list ans :" + e.getMessage());
+			// TODO: handle exception
 		}
 		return null;
 	}
@@ -118,23 +121,54 @@ public class DataService {
 	{
 		try (Statement st = CreateConnect().createStatement())
 		{
-			ArrayList<Question> ques = new ArrayList<Question>();
-			Question q = new Question();
 			String query = "SELECT * FROM quizzappdata.question where ID_Ex =" + ID_Exam;
 			ResultSet res = st.executeQuery(query);
+			ArrayList<Question> arrayList = new ArrayList<Question>();
 			while(res.next())
 			{
-				q.setID(res.getLong("ID"));
-				q.setQues(res.getString("Ques"));
-				q.setIs_Multi(res.getBoolean("Is_Multi"));
-				q.setID_Ex(res.getInt("ID_Ex"));
-				System.out.println(q.toString());
-				ques.add(q);
+				Question question = new Question();
+				question.setID(res.getLong("ID"));
+				question.setQues(res.getString("Ques"));
+				question.setIs_Multi(res.getBoolean("Is_Multi"));
+				question.setCountdown_Time(res.getInt("Countdown_Time"));
+				question.setID_Ex(res.getInt("ID_Ex"));
+				arrayList.add(question);
 			}
-			return ques;
+//			for(Question as : arrayList)
+//			{
+//				System.out.println(as.toString());
+//			}
+			return arrayList;
 		}
 		catch (Exception e) {
 			System.out.println("Error get list question: "+e.getMessage());
+		}
+		return null;
+	}
+	
+	public ArrayList<Answer> Get_List_Answer_by_ID_Question(long ID_Question)
+	{
+		try (Statement st = CreateConnect().createStatement())
+		{
+			ResultSet res = st.executeQuery("SELECT * FROM quizzappdata.answers where ID_Ques =" + ID_Question);
+			ArrayList<Answer> arrayList = new ArrayList<Answer>();
+			while(res.next())
+			{
+				Answer answer = new Answer();
+				answer.setID(res.getLong("ID"));
+				answer.setSelected(res.getBoolean("Selected"));
+				answer.setAns(res.getString("Answer"));
+				answer.setID_Question(res.getLong("ID_Ques"));
+				arrayList.add(answer);
+			}
+//			for(Answer as : arrayList)
+//			{
+//				System.out.println(as.toString());
+//			}
+			return arrayList;
+		}
+		catch (Exception e) {
+			System.out.println("Error get list ans :" + e.getMessage());
 		}
 		return null;
 	}
@@ -165,7 +199,7 @@ public class DataService {
 	{
 		try
 		{
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:6033/quizzappdata";
 			String name = "root";
 			String pass = "@chuongthai1357901";

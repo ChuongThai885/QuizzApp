@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizz game</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+
+<body>
+    <!-- Quiz Box -->
+    <button id="button-start">Start</button>
+    <div class="quiz_box">
+        <header>
+            <div class="total_ques">
+                <!-- Inserted Question Count Number from JS-->
+            </div>
+            <div class="title">Quizz Game</div>
+            <div class="timer">
+                <div class="time_left_txt">Time left</div>
+                <div class="timer_sec"></div>
+            </div>
+        </header>
+        <section>
+            <div class="que_text">
+                <!--Insert question from JS-->
+            </div>
+            <div class="option_list">
+                <!--insert options from JS-->
+            </div>
+        </section>
+    </div>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/js/script.js"></script>
+</body>
+
+</html>

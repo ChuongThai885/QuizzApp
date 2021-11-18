@@ -30,4 +30,8 @@ public class Exam {
 	public void setID_User(int iD_User) {
 		ID_User = iD_User;
 	}
+	@Override
+	public String toString() {
+		return "Exam [ID=" + ID + ", Name=" + Name + ", Topic=" + Topic + ", ID_User=" + ID_User + "]";
+	}
 }

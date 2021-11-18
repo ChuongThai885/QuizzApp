@@ -1,30 +1,77 @@
 <!DOCTYPE html>
 <html>
-    <header>
-        <meta charset="UTF-8">
-        <title>
-            Welcome
-        </title>
-    </header>
-    <body>
-        <form id="send-ID">
-            Nhập ID phòng:<input type="text" id="IDroom" name="ID">
-            <button id="sent-ID">Gửi</button>
-        </form>
-    </body>
-    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
-    <script>
-        const socket = io("http://localhost:3000");
-        const form_sendID = document.querySelector('#send-ID')
-        const id_input = document.querySelector('#IDroom');
-        form_sendID.addEventListener('submit',(e) =>{
-            e.preventDefault();
+<header>
+    <meta charset="UTF-8">
+    <title>
+        Welcome
+    </title>
+</header>
 
-            const id = id_input.value;
-            console.log(id);
-            socket.emit('joining-room',id, message => { 
-                console.log(message);
-            })
+<body>
+    <h1 id="welcome-tag"></h1>
+    <form id="send-ID">
+        Nhập ID phòng:<input type="text" id="IDroom" name="ID">
+        <button id="send_id">Gửi</button>
+    </form>
+    <form id="send-name">
+        Nhập tên của bạn:<input type="text" id="UserName" name="ID">
+        <button id="send_Name">Gửi</button>
+    </form>
+</body>
+<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+<script>
+    document.getElementById("send-name").style.display = "none";
+
+    const socket = io("http://localhost:3000");
+
+    const form_sendID = document.querySelector('#send-ID');
+    const form_sendName = document.querySelector('#send-name');
+
+    const id_input = document.querySelector('#IDroom');
+    const name_input = document.querySelector('#UserName');
+
+    let id_room, name;
+
+    form_sendID.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        id_room = id_input.value;
+        name_input.value = "";
+        socket.emit('joining-room', id_room, message => {
+            //console.log(message);
+            if (message == "Room exist") {
+                document.getElementById("send-ID").style.display = "none";
+                document.getElementById("send-name").style.display = "block";
+            }
+            else {
+                id_input.value = "";
+                alert(message);
+            }
         })
-    </script>
+    })
+    form_sendName.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        name = name_input.value;
+        
+        socket.emit('set-name', id_room, name, message => {
+            if (message == "OK") {
+                document.getElementById('welcome-tag').textContent = `Welcome player, you are in room ${id_room}`;
+                document.getElementById("send-name").style.display = "none";
+            }
+            else {
+                document.getElementById('welcome-tag').textContent = "Name has been used, please types again";
+            }
+        })
+
+        socket.on('admin-disconnect', (message) => {
+            alert(message);
+
+            document.getElementById("send-ID").style.display ="block";
+            document.getElementById("send-name").style.display ="none";
+            document.getElementById('welcome-tag').textContent = "";
+        })
+    })
+</script>
+
 </html>

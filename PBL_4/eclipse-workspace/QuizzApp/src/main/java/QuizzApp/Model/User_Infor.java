@@ -4,15 +4,15 @@ import java.util.Date;
 
 public class User_Infor {
 	
-	private long ID;
+	private int ID;
 	private String Name;
 	private String Email;
 	private String pass;
 	private Date SignUp_Date;
-	public long getID() {
+	public int getID() {
 		return ID;
 	}
-	public void setID(long iD) {
+	public void setID(int iD) {
 		ID = iD;
 	}
 	public String getName() {

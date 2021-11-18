@@ -1,9 +1,12 @@
 package QuizzApp.Controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
+import QuizzApp.Model.Exam;
 import QuizzApp.Service.*;
 
 /**
@@ -17,10 +20,13 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("user");
 		String pass = request.getParameter("pass");
-		if(new UserService().Is_Exist_User(email, pass))
+		UserService service = new UserService();
+		if(service.Is_Exist_User(email, pass))
 		{
-//			HttpSession ses = request.getSession();
-//			ses.setAttribute("user", email);
+			HttpSession ses = request.getSession();
+			ses.setAttribute("m", "chuongthai");
+			ArrayList<Exam> el = new QuizzService().Get_AllQuizzes(email);
+			ses.setAttribute("listquizz", el);
 			try
 			{
 				email = new EncodeService().encodeString(email);

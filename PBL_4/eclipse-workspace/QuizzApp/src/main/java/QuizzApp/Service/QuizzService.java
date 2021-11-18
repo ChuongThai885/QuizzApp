@@ -5,15 +5,17 @@ import java.util.ArrayList;
 import QuizzApp.Model.*;
 
 public class QuizzService {
+	
+	DataService service = new DataService();
+	
 	public boolean Add_New_Quizz(int ID_User,Exam ex)
 	{
 		return false;
 	}
 	
-	public ArrayList<Exam> Get_AllQuizzes(int ID_User)
+	public ArrayList<Exam> Get_AllQuizzes(String email)
 	{
-		//
-		return null;
+		return service.Get_List_Exam_by_Email_User(email);
 	}
 	
 	public boolean Update_Quizz(int ID_User,Exam ex)
@@ -44,17 +46,16 @@ public class QuizzService {
 	{
 		try
 		{
-			DataService service = new DataService();
-			ArrayList<QuestionForm> lqf = new ArrayList<QuestionForm>();
-			ArrayList<Question> lq = service.Get_List_Quesion_by_ID_Exam(ID_Exam);
-			QuestionForm qf = new QuestionForm();
-			for(Question i : lq)
+			ArrayList<QuestionForm> arrayListQuestionForm = new ArrayList<QuestionForm>();
+			ArrayList<Question> arrayListQuestion = service.Get_List_Quesion_by_ID_Exam(ID_Exam);
+			for(int i = 0; i < arrayListQuestion.size(); i++)
 			{
-				qf.setQues(i);
-				qf.setAns(service.Get_List_Answer_by_ID_Question(i.getID()));
-				lqf.add(qf);
+				QuestionForm questionForm = new QuestionForm();
+				questionForm.setQues(arrayListQuestion.get(i));
+				questionForm.setAns(service.Get_List_Answer_by_ID_Question(arrayListQuestion.get(i).getID()));
+			    arrayListQuestionForm.add(questionForm);
 			}
-			return lqf;
+			return arrayListQuestionForm;
 		}
 		catch (Exception e) {
 			System.out.println("Error get list question form: " + e.getMessage()); 
