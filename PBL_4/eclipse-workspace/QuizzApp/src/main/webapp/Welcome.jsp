@@ -50,12 +50,10 @@ try {
 	<%
 	for (Exam i : le) {
 	%>
-	<li>
-	<%= i.getName() %>
+	<li><%= i.getName() %>
 		<form method="post" action="PlayGame?id=<%=i.getID()%>">
 			<input type="submit" value="Create Room">
-		</form>
-	</li>
+		</form></li>
 	<%
 	}
 	%>

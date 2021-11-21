@@ -30,7 +30,7 @@ try {
 			<li><a href="">New template</a></li>
 		</ul>
 		<div>
-			<a href="">Vào game</a>
+			<a href="http://116.103.144.150:3000/">Vào game</a>
 			<!--Dẫn tới trang nhập code để chơi-->
 			<a href="SignUp.jsp">Đăng ký</a>
 			<!--Dẫn tới trang đăng ký-->

@@ -4,49 +4,51 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>Chat cùng Chương Thái</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>QuizzGame management</title>
+		<link rel="stylesheet" href="css/game_management.css">
+		<link rel="stylesheet" type="text/css"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 	</head>
 
 	<body>
-		<h1 id="ID-Room"></h1>
-		<button id="button-start">Start</button>
-		<ul id="users"></ul>
+		<div class="start_box">
+			<h1 class="ID-Room"></h1>
+			<button class="button-start">Start</button>
+			<button class="button-cancel">Cancel</button>
+			<ul class="users"></ul>
+		</div>
 
+		<!-- Quiz Box -->
+		<div class="quiz_box">
+			<header>
+				<div class="total_ques">
+					<!-- Inserted Question Count Number from JS-->
+				</div>
+				<div class="title">Quizz Game</div>
+				<div class="timer">
+					<div class="time_left_txt">Time left</div>
+					<div class="timer_sec"></div>
+				</div>
+			</header>
+			
+			<section>
+				<button class="next_ques">Next</button>
+				<button class="finish_countdown">Finish</button>
+				<div class="que_text">
+					<!--Insert question from JS-->
+				</div>
+				<div class="option_list">
+					<!--insert options from JS-->
+				</div>
+			</section>
+			
+		</div>
+
+		<!-- <script src="http://localhost:3000/socket.io/socket.io.js"></script> -->
+		<script src="http://116.103.144.150:3000/socket.io/socket.io.js"></script>
+		<script>const quizes = <%= request.getSession().getAttribute("quiz") %>;</script>
+		<script src="js/game.js"></script>
 	</body>
-	<script src="http://localhost:3000/socket.io/socket.io.js"></script>
-	<script>
-		let number_of_users = 0;
-		document.getElementById("button-start").setAttribute("hidden", "hidden"); // if users in room = 0 then disable butt
-		let questions = [];
-		const socket = io("http://localhost:3000");
-
-		socket.on('connect', () => {
-			console.log(socket.id + '');
-		})
-		socket.emit('create-room', room => {
-			document.getElementById('ID-Room').textContent = `Your room ID is : ${room}`;
-		})
-		const users = document.querySelector('#users')
-		socket.on('joined-user', (message) => {
-			if (number_of_users == 0) {
-				document.getElementById("button-start").removeAttribute("hidden"); 
-			}
-			number_of_users++;
-			const Item = document.createElement('li');
-			Item.textContent = message;
-			users.appendChild(Item);
-		})
-
-		const button_start = document.querySelector('#button-start');
-		button_start.addEventListener('click', (e) => {
-			questions =  <%= request.getSession().getAttribute("quiz") %>;
-			console.log(questions[0]);
-			socket.emit('start-game', questions);
-			socket.on('get-question', (index, maxquestion, question) => {
-				//
-			})
-		})
-	</script>
 
 	</html>
-	<% //page for client joining %>
