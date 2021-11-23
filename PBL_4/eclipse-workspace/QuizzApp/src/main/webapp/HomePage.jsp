@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Quiz App</title>
-    <link rel="stylesheet" href="HomePage.css">
+    <link rel="stylesheet" href="css/HomePage.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
@@ -65,7 +65,7 @@
             <div class="step-container">
                 <div class="step-num">1</div>
                 <div class="step-title">Tạo bộ câu hỏi</div>
-                <div><img src="https://cdn.riddle.com/website/assets/homepage/img/illo-quiz-types.webp" width="300"></div>
+                <div><img src="https://cdn.riddle.com/website/assets/homepage/img/illo-quiz-types.webp" width="280"></div>
                 <!--hình ảnh minh hoạ-->
             </div>
             <div class="step-container">
@@ -79,7 +79,7 @@
                 <div class="step-num">3</div>
                 <div class="step-title">Kết quả xếp hạng</div>
                 <div><img src="https://cdn1.participoll.com/wp-content/uploads/2013/01/27015509/feature3-300x196.png"
-                    width="300"></div>
+                    width="280"></div>
                 <!--hình ảnh minh hoạ-->
             </div>
         </div>

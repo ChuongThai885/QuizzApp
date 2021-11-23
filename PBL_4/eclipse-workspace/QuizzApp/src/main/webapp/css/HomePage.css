@@ -157,14 +157,14 @@ li a:hover {
     padding: 20px 0px 20px 0px;
 }
 .usage-content-container{
-    width: 100%;
+    width: 1070px;
     display: flex;
     justify-items: center;
 }
 .step-container{
-    width: calc((100% - 32px) / 3);
+    width: 350px;
     margin: 0px 15px 0px 15px;
-    padding: 0px 20px 0px 20px;
+    padding: 0px 10px 0px 10px;
     border: solid 5px #04d9d9;
     border-radius: 20px;
     background-color: #c3f5f5;
