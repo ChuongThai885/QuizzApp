@@ -10,45 +10,41 @@ if (session.getAttribute("user") != null) {
 %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="css/formLogin.css">
-<title>Login</title>
-</head>
-<body>
-	<div>
-		<div id="heading">
-			<h1>LOGIN</h1>
-		</div>
-		<div class="splitdiv">
-			<div class="leftsplit">
-				<h1>WELCOME TO QUIZGAME!</h1>
-			</div>
-			<div class="rightsplit">
-				<form action="Login" method="post" class="form-login">
 
-					<label id="error"></label>
-					<div class="form-group">
-						<input type="text" class="form-input" name="user"
-							placeholder="Username">
-					</div>
-					<div class="form-group">
-						<input type="password" class="form-input" name="pass"
-							placeholder="Password">
-					</div>
-					<div>
-						<input type="submit" class="form-submit" name="btn_login"
-							onsubmit="event.preventDefault()" value="LOGIN">
-					</div>
-					<hr>
-					<div>
-						Do not have account yet? <input type="submit" class="form-submit"
-							name="btn_signup" value="SIGN UP">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/formLogin.css">
+    <title>Đăng nhập</title>
+</head>
+
+<body>
+    <div>
+        <div id="heading">
+            <h1>ĐĂNG NHẬP</h1>
+        </div>
+        <div class="splitdiv">
+            <div class="leftsplit">
+                <h2>CHÀO BẠN!</h2>
+            </div>
+            <div class="rightsplit">
+                <form action="" method="" class="form-login">
+                    <div class="form-group">
+                        <input type="text" class="form-input" name="user" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-input" name="pass" placeholder="Mật khẩu">
+                    </div>
+                    <div class="btn-group">
+                        <input type="submit" class="form-submit" name="btn_login" value="ĐĂNG NHẬP">
+                    </div>
+                    <div class="btn-group">
+                        Chưa có tài khoản?
+                        <a href="SignUp.jsp">ĐĂNG KÝ</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 	<script type="text/javascript">
 		var str = document.getElementById("error");
 		if ("${error}" != "") {

@@ -9,29 +9,28 @@ for (Cookie c : cookies) {
 %>
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Đăng ký</title>
+    <meta charset="UTF-8">
+    <title>Đăng ký</title>
+    <link rel="stylesheet" href="css/formSignUp.css">
 </head>
 <body>
-	<h1>SIGN UP</h1>
-	<form action="SignUp" method="post">
-		<P>
-			<input type="text" name="user" placeholder="Username">
-		</P>
-		<P>
-			<input type="text" name="email" placeholder="Email">
-		</P>
-		<P>
-			<input type="password" name="pass" placeholder="Password">
-		</P>
-		<P>
-			<input type="password" name="pass_again"
-				placeholder="Nhắc lại password">
-		</P>
-		<p>
-			<input type="submit" name="btn_signup" value="SIGN UP">
-		</p>
-	</form>
+    <h1>ĐĂNG KÝ</h1>
+    <form class="form-signup">
+        <div class="form-group">
+            <input type="text" name="user" class="form-input" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <input type="password" name="pass" class="form-input" placeholder="Mật khẩu">
+        </div>
+        <div class="form-group">
+            <input type="password" name="pass_again" class="form-input" placeholder="Nhắc lại mật khẩu">
+        </div>  
+        <div class="btn-container">
+            <input type="submit" name="btn_signup" class="form-submit" value="ĐĂNG KÝ">
+        </div>    
+        <p></p>
+    </form>
 </body>
 </html>
