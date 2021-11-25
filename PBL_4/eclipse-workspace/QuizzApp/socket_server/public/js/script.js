@@ -6,9 +6,10 @@ const form_sendID = document.querySelector('#send-ID');
 const form_sendName = document.querySelector('#send-name');
 const id_input = document.querySelector('#IDroom');
 const name_input = document.querySelector('#UserName');
-
+const result = document.querySelector(".result");
 const start_box = document.querySelector(".start_box");
 const quiz_box = document.querySelector(".quiz_box");
+const end_box = document.querySelector(".end_box");
 const option_list = document.querySelector(".option_list");
 const timeText = document.querySelector(".timer .time_left_txt");
 const timeCount = document.querySelector(".timer .timer_sec");
@@ -18,7 +19,8 @@ const tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
 const crossIconTag = '<div class="icon cross"><i class="fas fa-times"></i></div>';
 
 // all variable we use in this project
-let id_room, name;
+let id_room,
+name_user;
 
 let quiz;
 let total_ques = 0;
@@ -35,14 +37,13 @@ form_sendID.addEventListener('submit', (e) => {
     e.preventDefault();
 
     id_room = id_input.value;
-    name_input.value = "";
+    id_input.value = "";
     socket.emit('joining-room', id_room, message => {
         if (message == "Room exist") {
             document.getElementById("send-ID").style.display = "none";
             document.getElementById("send-name").style.display = "block";
         }
         else {
-            id_input.value = "";
             id_room = 0;
             alert(message);
         }
@@ -52,15 +53,15 @@ form_sendID.addEventListener('submit', (e) => {
 form_sendName.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    name = name_input.value;
+    name_user = name_input.value;
+    name_input.value = "";
 
-    socket.emit('set-name', id_room, name, message => {
+    socket.emit('set-name', id_room, name_user, message => {
         if (message == "OK") {
             document.getElementById('welcome-tag').textContent = `Welcome player, you are in room ${id_room}`;
             document.getElementById("send-name").style.display = "none";
         }
         else {
-            name = "";
             document.getElementById('welcome-tag').textContent = "Name has been used, please types again";
         }
     })
@@ -68,6 +69,7 @@ form_sendName.addEventListener('submit', (e) => {
 
 //start, hidden quizbox and button start
 quiz_box.classList.add("hidden");
+end_box.classList.add("hidden");
 document.getElementById("send-name").style.display = "none";
 
 //all functions
@@ -120,20 +122,6 @@ function startTimer() //start counting, get received timex
             {
                 clearInterval(timerID); //clear counter
                 timeText.textContent = "Time Off"; //change the time text to time off
-                const allOptions = option_list.children.length; //getting all option items
-                const correctAns = quiz.answer; //getting correct answer from array
-
-                const userAns = selected_Answer;
-                //show incorrect answer
-                for (i = 0; i < allOptions; i++) {
-                    if (option_list.children[i].textContent == userAns) {
-                        if (userAns != correctAns) {
-                            option_list.children[i].classList.add("incorrect");
-                            option_list.children[i].insertAdjacentHTML("beforeend", crossIconTag);
-                            console.log('Inorrect answer');
-                        }
-                    }
-                }
             }
         }
     }
@@ -163,17 +151,12 @@ function optionSelected(answer) {
     var selected_time = new Date();
     time_left = ((MAX_TIME * 1000 - (selected_time - received_time)) > 0) ? (MAX_TIME * 1000 - (selected_time - received_time)) : 0;
 
-    console.log(selected_time - received_time);
-    console.log(received_time + "," + selected_time + "\n" + time_left);
     selected_Answer = answer.textContent;
     
     if (selected_Answer == quiz.answer) {
         score = calculate_score();
-        console.log(score + "inner");
     }
     const allOptions = option_list.children.length; //getting all option items
-
-    console.log(score);
 
     for (i = 0; i < allOptions; i++) {
         option_list.children[i].classList.add("disabled"); //once user select an option then disabled all options
@@ -187,12 +170,11 @@ function calculate_score() {
 
 // event socket process funtion
 socket.on('get-question', (maxquestion, question) => {
+    score = 0;
     document.getElementById('welcome-tag').textContent = "";
     quiz_box.classList.remove("hidden");
     setMaxQuestion(maxquestion);
     quiz = JSON.parse(question);
-    console.log(quiz + "," + maxquestion + "\n" + quiz.answer);
-    console.log(JSON.parse(question));
     ShowQuestion();
 })
 
@@ -204,6 +186,7 @@ socket.on('end-quiz',() => {
     const correctAns = quiz.answer; //getting correct answer from array
     
     const userAns = selected_Answer;
+    result.innerHTML = `<div  class="result_item"> ${score} </div>`; // show score
     //show correct answer
     if (userAns == '') { // if player not select any answer
         select_CorrectAnswer();
@@ -236,11 +219,40 @@ socket.on('admin-disconnect', (message) => {
     alert(message);
 
     quiz_box.classList.add("hidden");
+    end_box.classList.add("hidden");
     document.getElementById("send-ID").style.display = "block";
     document.getElementById("send-name").style.display = "none";
     document.getElementById('welcome-tag').textContent = "";
 })
 
 socket.on('return-result',(arr) => {
+    quiz_box.classList.add("hidden");
+    end_box.classList.remove("hidden");
+
+    const rankings = document.querySelector(".rankings");
+    const data = JSON.parse(arr);
+    //const max_height = document.querySelector('.end_box').offsetHeight;
+    let rankings_item = '';
+    // let total = 0;
+    // for (var i of data) {
+    //     total += i.count;// ?
+    // }
+    for (var i of data) {
+        //console.log(i.Name);
+        //let height = (max_height * i.count) / total;
+        //result_item += `<div  class="result_item" style="height:${height}px"> ${i.count} </div>`;
+        rankings_item += `<div>${i.Name} + ${i.score}</div>`
+    }
+    rankings.innerHTML = rankings_item;
     console.log(arr);
+})
+
+socket.on('get-rank',(score,rank) => {
+    const player_rank = document.querySelector(".player_rank");
+    var player_rank_item = `<div>u are in rank ${rank} with score ${score},,congrats !</div>`;
+    if(parseInt(rank) < 4)
+    {
+        player_rank_item = `<div>u are in top ${rank} with score ${score}</div>`;
+    }
+    player_rank.innerHTML = player_rank_item;
 })

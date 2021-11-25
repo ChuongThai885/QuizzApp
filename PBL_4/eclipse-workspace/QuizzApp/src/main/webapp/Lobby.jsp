@@ -16,6 +16,7 @@
 			<h1 class="ID-Room"></h1>
 			<button class="button-start">Start</button>
 			<button class="button-cancel">Cancel</button>
+			<button class="button-lock">Lock</button>
 			<ul class="users"></ul>
 		</div>
 
@@ -38,11 +39,19 @@
 				<div class="que_text">
 					<!--Insert question from JS-->
 				</div>
+				<div class="result">
+					<!-- insert number of times the answer is selected from JS -->
+				</div>
 				<div class="option_list">
 					<!--insert options from JS-->
 				</div>
 			</section>
-			
+		</div>
+		
+		<div class="end_box">
+			<div class="rankings">
+				<!-- insert top 3 players with the highest score and player rank from JS -->
+			</div>
 		</div>
 
 		<!-- <script src="http://localhost:3000/socket.io/socket.io.js"></script> -->

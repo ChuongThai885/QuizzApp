@@ -15,16 +15,20 @@ body {
 }
 
 .quiz_box {
-	position: absolute;
-	top: 50%;
-	left: 50%;
+	position: relative;
 	width: 100%;
-	transform: translate(-50%, -50%);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	height: 100vh; 
+	/*  ni la bang chieu cao man hinh nha */
 	background: #fff;
 }
 
 .quiz_box header {
-	position: relative;
+	position: absolute;
+	width: 100%;
+	top: 0;
 	z-index: 2;
 	height: 70px;
 	padding: 0 30px;
@@ -81,14 +85,6 @@ body {
 	border: 1px solid #343a40;
 	user-select: none;
 }
-
-/* .quiz_box header .time_line {
-	position: absolute;
-	bottom: 0px;
-	left: 0px;
-	height: 3px;
-	background: #007bff;
-} */
 
 .quiz_box section {
 	padding: 25px 30px 20px 30px;
@@ -183,3 +179,19 @@ section .option_list .option.disabled {
 .quiz_box section button:hover{
     background: #0263ca; 
 }*/
+
+.result {
+	margin: 10px auto;
+	height: 30vh;
+	/*  ni la t thay co co do, nghi cai doan cau hoi co the dai hon, thi du set lai nho chut, nhung da so thi z */
+	width: 50%;
+	display: flex;
+	justify-content: space-around;
+	align-items: flex-end;
+	/* background-color: palegreen; */
+}
+.result_item {
+	width: calc(25% - 10px);
+	background-color: #84d8d3;
+	border-radius: 5px;
+}

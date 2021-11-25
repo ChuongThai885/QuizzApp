@@ -32,8 +32,7 @@ try {
 <title>WELCOME</title>
 </head>
 <body>
-	Hello ${name}
-	<%=request.getSession().getAttribute("m").toString()%>
+	Hello
 	<br>
 	<iframe width="560" height="315"
 		src="https://www.youtube.com/embed/r_0JjYUe5jo?controls=0"
@@ -58,8 +57,7 @@ try {
 	}
 	%>
 	<script type="text/javascript">
-	console.log('<%=request.getSession().getAttribute("m").toString()%>
-		');
+	console.log('<%=request.getSession().getAttribute("m").toString()%>');
 	</script>
 </body>
 </html>

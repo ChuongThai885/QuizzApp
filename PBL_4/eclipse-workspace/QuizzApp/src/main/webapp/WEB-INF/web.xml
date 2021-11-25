@@ -27,6 +27,12 @@
 		<description></description>
 		<servlet-class>QuizzApp.Controller.GameController</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>HomeController</servlet-name>
+		<display-name>HomeController</display-name>
+		<description></description>
+		<servlet-class>QuizzApp.Controller.HomeController</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>LoginController</servlet-name>
@@ -47,5 +53,9 @@
 	<servlet-mapping>
 		<servlet-name>GameController</servlet-name>
 		<url-pattern>/PlayGame</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>HomeController</servlet-name>
+		<url-pattern>/HomeController</url-pattern>
 	</servlet-mapping>
 </web-app>

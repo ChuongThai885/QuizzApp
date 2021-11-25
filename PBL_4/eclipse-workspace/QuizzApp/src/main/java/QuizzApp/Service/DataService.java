@@ -93,7 +93,7 @@ public class DataService {
 	
 	public ArrayList<Exam> Get_List_Exam_by_Email_User(String email)
 	{
-		String query = "SELECT * FROM quizzappdata.exercise where (Select ID from quizzappdata.users where Email = ?)";
+		String query = "SELECT * FROM quizzappdata.exercise where ID_User = (Select ID from quizzappdata.users where Email = ?)";
 		try (PreparedStatement st = CreateConnect().prepareStatement(query))
 		{
 			st.setString(1, email);

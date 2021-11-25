@@ -9,7 +9,8 @@ quiz = [
     option: [
       'giấy lộn',
       'giấy chứng nhận sở hữu một phần doanh nghiệp',
-      'giấy chứng nhận số tiền doanh nghiệp vay'
+      'giấy chứng nhận số tiền doanh nghiệp vay',
+      'me thêm vô để test dậy á :3'
     ],
     answer: 'giấy chứng nhận sở hữu một phần doanh nghiệp'
   },
@@ -36,6 +37,7 @@ let selected_Answer = '';
 let timerID;
 //constants that represent to elements in html file
 const quiz_box = document.querySelector(".quiz_box");
+const end_box = document.querySelector(".end_box");
 const option_list = document.querySelector(".option_list");
 const timeText = document.querySelector(".timer .time_left_txt");
 const timeCount = document.querySelector(".timer .timer_sec");
@@ -55,7 +57,7 @@ function ShowQuestion() {
   }
   que_text.innerHTML = que_tag;
   option_list.innerHTML = option_tag;
-  clearInterval(timerID);
+  clearInterval(timerID); // như v k
   MAX_TIME = quiz[0].Countdown_Time;
 
   startTimer();
@@ -161,6 +163,7 @@ function startTimer() {
 }
 
 const button_start = document.querySelector('#button-start');
+// button_start.setAttribute("hidden","hidden");
 button_start.addEventListener('click', (e) => {
   if (quiz.length == 1) {
     console.log('quizz completed');
@@ -174,3 +177,36 @@ button_start.addEventListener('click', (e) => {
 //main
 total_ques = quiz.length;
 ShowQuestion();
+
+//nayf ne
+
+const arr = [
+  { "answer": "giấy lộn", "count": 3 },
+  { "answer": "giấy chứng nhận sở hữu một phần doanh nghiệp", "count": 5 },
+  { "answer": "giấy chứng nhận số tiền doanh nghiệp vay", "count": 2 }
+]
+// total = tổng đáp án
+//  get height : const max_height = document.querySelector('#result').height();
+//  
+let total = 0;
+for (var i of arr) {
+  total += i.count;
+}
+
+console.log(total);
+let result = document.querySelector('#result');
+const max_height = document.querySelector('#result').offsetHeight;
+//max_height/total * count tao cai arr size hoạc la bo do lun cai list ni cung dc du, man rieng cho lanh :v
+let arr1 = [];
+// for(var i of arr)
+// {
+//     let height = (max_height*i.count)/total
+//     result.append( $(`<div  class="result_item" style="height:${height}px"> ${height} </div>`))
+// }
+let option_tag = '';
+for (var i of arr) {
+  let height = (max_height*i.count)/total;
+  option_tag += `<div  class="result_item" style="height:${height}px"> ${i.count} </div>`;
+}
+result.innerHTML = option_tag;
+

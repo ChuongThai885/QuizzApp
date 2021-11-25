@@ -2,6 +2,8 @@
 //constants that represent to elements in html file
 const start_box = document.querySelector(".start_box");
 const quiz_box = document.querySelector(".quiz_box");
+const end_box = document.querySelector(".end_box");
+const result = document.querySelector(".result");
 const option_list = document.querySelector(".option_list");
 const timeText = document.querySelector(".timer .time_left_txt");
 const timeCount = document.querySelector(".timer .timer_sec");
@@ -11,6 +13,7 @@ const button_next = document.querySelector(".next_ques");
 const users = document.querySelector('.users');
 const button_start = document.querySelector('.button-start');
 const button_cancel = document.querySelector('.button-cancel');
+const button_lock = document.querySelector('.button-lock');
 
 let number_of_users = 0;
 let quiz;
@@ -20,6 +23,7 @@ let IDRoom = 0;
 
 //start, hidden quizbox and button start
 quiz_box.classList.add("hidden");
+end_box.classList.add("hidden");
 button_start.setAttribute("hidden", "hidden"); // if users in room = 0 then disable
 button_finish.setAttribute("hidden", "hidden");
 button_next.setAttribute("hidden", "hidden");
@@ -77,7 +81,7 @@ function startTimer() //start counting, get received timex
                 button_next.removeAttribute("hidden");
 
                 socket.emit('get-result', IDRoom, message => {
-                    console.log(message);//get data from server and put on view
+                    ShowResult(JSON.parse(message));//get data from server and put on view
                 });
                 clearInterval(timerID); //clear counter
                 timeText.textContent = "Time Off"; //change the time text to time off
@@ -116,16 +120,23 @@ function select_CorrectAnswer() {
     }
 }
 
-//socket event process funtion
-socket.on('connect', () => {
-    console.log(socket.id + '');
-})
+function ShowResult(data) // add items into class result 
+{
+    const max_height = document.querySelector('.result').offsetHeight;
+    let result_item = '';
+    let total = 0;
+    for (var i of data) {
+        total += i.count;
+    }
+    for (var i of data) {
+        console.log(i.answer);
+        let height = (max_height * i.count) / total;
+        result_item += `<div  class="result_item" style="height:${height}px"> ${i.count} </div>`;
+    }
+    result.innerHTML = result_item;
+}
 
-socket.emit('create-room', room => {
-    IDRoom = room;
-    document.querySelector('.ID-Room').textContent = `Your room ID is : ${room}`;
-})
-
+//add event button
 button_start.addEventListener('click', (e) => //when clicked button start start quiz
 {
     start_box.classList.add("hidden");
@@ -136,6 +147,11 @@ button_start.addEventListener('click', (e) => //when clicked button start start 
 button_cancel.addEventListener('click', (e) => //when clicked button cancel redirect to home page
 {
     location.href = "/QuizzApp/Welcome.jsp";
+})
+
+button_lock.addEventListener('click',(e) => //when clicked button lock, lock or unlock room
+{
+    socket.emit('change-state-room',IDRoom);
 })
 
 button_finish.addEventListener('click', (e) => // when button finish is being clicked, stop timer, show answer, bla bla... 
@@ -149,13 +165,24 @@ button_finish.addEventListener('click', (e) => // when button finish is being cl
     select_CorrectAnswer();
 
     socket.emit('get-result', IDRoom, message => {
-        console.log(message);//get data from server and put on view
+        ShowResult(JSON.parse(message));
     });
 })
 
 button_next.addEventListener('click', (e) => {
+    result.innerHTML = '';
     button_next.setAttribute("hidden", "hidden");
     socket.emit('next-question', IDRoom);
+})
+
+//socket event process funtion
+socket.on('connect', () => {
+    console.log(socket.id + '');
+})
+
+socket.emit('create-room', room => {
+    IDRoom = room;
+    document.querySelector('.ID-Room').textContent = `Your room ID is : ${room}`;
 })
 
 socket.on('joined-user', (message) => {
@@ -172,11 +199,28 @@ socket.on('get-question', (maxquestion, question) => {
     quiz_box.classList.remove("hidden");
     quiz = JSON.parse(question);
     setMaxQuestion(maxquestion);
-    console.log(quiz + "," + maxquestion + "\n" + quiz.answer);
-    console.log(JSON.parse(question) + '\n' + JSON.parse(question).answer);
     ShowQuestion();
 })
 
 socket.on('return-result', (arr) => {
+    quiz_box.classList.add("hidden");
+    end_box.classList.remove("hidden");
+
+    const rankings = document.querySelector(".rankings");
+    const data = JSON.parse(arr);
+    //const max_height = document.querySelector('.end_box').offsetHeight;
+    let rankings_item = '';
+    // let total = 0;
+    // for (var i of data) {
+    //     total += i.count;// ?
+    // }
+    for (var i of data) {
+        //console.log(i.Name);
+        //let height = (max_height * i.count) / total;
+        //result_item += `<div  class="result_item" style="height:${height}px"> ${i.count} </div>`;
+        rankings_item += `<div>${i.Name} + ${i.score}</div>`
+    }
+    rankings.innerHTML = rankings_item;
     console.log(arr);
 })
+
