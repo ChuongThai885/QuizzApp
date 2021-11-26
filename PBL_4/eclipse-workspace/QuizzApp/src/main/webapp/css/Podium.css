@@ -1,0 +1,42 @@
+.podium-container{
+    margin: auto;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    border-bottom: 4px solid #0487d9;
+}
+.position-container{
+    margin: 0px 10px 0px 10px;
+    width: 120px;
+    background-color: lightblue;
+    text-align: center;
+}
+.second-container{
+    height: 280px;
+}
+
+.first-container{
+    height: 380px;
+}
+.third-container{
+    height: 180px;
+}
+.picture-container{
+    background-color: #ffffff;
+}
+.position-name{
+    height: fit-content;
+    width: 120px;
+    background-color: #ffffff;
+    font-family:Arial, Helvetica, sans-serif;
+    color: #0487d9;
+    font-size: 24px;
+}
+.congrat-container{
+    margin-top: 50px;
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+    color: #0487d9;
+    font-size: 20px;
+}

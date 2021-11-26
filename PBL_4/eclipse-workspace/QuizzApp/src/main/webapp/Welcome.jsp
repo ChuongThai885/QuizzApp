@@ -27,12 +27,73 @@ try {
 %>
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="ISO-8859-1">
-<title>WELCOME</title>
+	<meta charset="UTF-8">
+	<title>Trang cá nhân</title>
+	<link rel="stylesheet" href="css/Welcome.css">
 </head>
+
 <body>
-	Hello ${name}
+	<header>
+		<div class="left-container">
+			<a href="HomePage.html"><img src="https://www.dng24.co.uk/wp-content/uploads/2016/12/quiz.jpg" height="50">
+			</a>
+		</div>
+		<div class="nav-container">
+			<ul>
+				<li><a href="Welcome.html">Trang cá nhân</a></li>
+				<li><a href="AddQuiz.html">Tạo quiz mới</a></li>
+			</ul>
+		</div>
+		<div class="right-container">
+			<div class="right-item">
+				<input type="text" name="txtSearch" class="form-input" placeholder="Tìm kiếm">
+			</div>
+			<div class="right-item">
+				Chào, Phuong<!--${name}
+					<%=request.getSession().getAttribute("m").toString()%>-->
+			</div>
+			<div class="right-item">
+				<a href="Logout">Đăng xuất</a>
+			</div>
+		</div>
+	</header>
+	<div class="content">
+		<div class="personal-info">
+			<div class="info-item">
+				<h4>Thông tin cá nhân </h4>
+			</div>
+			<div class="info-item">
+				Phuong <!--${name}<%=request.getSession().getAttribute("m").toString()%>-->
+			</div>
+			<div class="info-item">
+				maiphuongpham150@ gmail.com <!--<% %>-->
+			</div>
+			<div class="info-item">
+				Tạo quiz mới <input type="button" class="btn-general btn-add" value="+">
+			</div>
+		</div>
+		<div class="quizlist-container">
+			<div class="quiz-container">
+				<div class="quiz-title">
+					<div class="title-text">
+						<b>Quiz 1 <!--<% %>--> </b>
+					</div>
+					<div class="btn-group">
+						<input type="button" class="btn-general btn-important" value="Chơi">
+						<input type="submit" class="btn-general btn-other" value="Sửa">
+					</div>
+				</div>
+				<div class="quiz-content">
+					<p>Topic 1 <!--<% %>--></p>
+					<p>12<!--<% %>--> câu hỏi</p>					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!--Hello ${name}
 	<%=request.getSession().getAttribute("m").toString()%>
 	<br>
 	<iframe width="560" height="315"
@@ -58,8 +119,8 @@ try {
 	}
 	%>
 	<script type="text/javascript">
-	console.log('<%=request.getSession().getAttribute("m").toString()%>
-		');
-	</script>
+	console.log('<%=request.getSession().getAttribute("m").toString()%>');
+	</script>-->
 </body>
+
 </html>

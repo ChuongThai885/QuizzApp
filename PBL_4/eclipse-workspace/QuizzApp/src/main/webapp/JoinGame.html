@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quizz game</title>
+<link rel="stylesheet" href="css/JoinGame.css">
+<script>
+    function InputCode(){
+        var c = document.formCode.txtCode.value;
+        if(c == "") {
+            alert ("Hãy nhập mã game"); 
+        }
+        else {
+            document.getElementById("CodeInput").style.display = "none";
+            document.getElementById("NameInput").style.display = "block";
+        }       
+    }
+</script>
+</head>
+
+<body>
+    <div class="form-input-container" id="CodeInput">       
+        <form class="form-input" name="formCode">
+            <h1>
+                QUIZZ GAME
+            </h1>
+        <div class="input-item">
+            <input type="text" name="txtCode" placeholder="Nhập mã game" class="input-textbox">
+        </div>
+        <div class="input-item">
+            <input type="button" value="Nhập" onclick="InputCode()" class="input-button">
+        </div>
+        </form>
+    </div>
+    <div class="form-input-container" id="NameInput" style="display:none;">      
+        <form class="form-input">
+            <h1>
+                QUIZZ GAME
+            </h1>
+        <div class="input-item">
+            <input type="text" placeholder="Nhập tên" class="input-textbox">
+        </div>
+        <div class="input-item">
+            <input type="button" value="Bắt đầu chơi" class="input-button" onclick="InputName()">
+        </div>
+        </form>
+    </div>
+</body>
+</html>

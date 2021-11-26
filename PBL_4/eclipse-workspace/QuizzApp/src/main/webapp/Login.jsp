@@ -27,7 +27,7 @@ if (session.getAttribute("user") != null) {
                 <h2>CHÀO BẠN!</h2>
             </div>
             <div class="rightsplit">
-                <form action="" method="" class="form-login">
+                <form action="Login" method="post" class="form-login">
                     <div class="form-group">
                         <input type="text" class="form-input" name="user" placeholder="Email">
                     </div>

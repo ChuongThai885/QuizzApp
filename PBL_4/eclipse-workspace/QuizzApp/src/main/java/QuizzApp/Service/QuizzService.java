@@ -1,5 +1,9 @@
 package QuizzApp.Service;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import QuizzApp.Model.*;
@@ -10,7 +14,18 @@ public class QuizzService {
 	
 	public boolean Add_New_Quizz(int ID_User,Exam ex)
 	{
-		return false;
+		String query = "insert into quizzappdata.exercise (Topic, Ex_Name, ID_User) values (?,?,?)";
+		try {
+			PreparedStatement ps = CreateConnect().prepareStatement(query);
+			ps.setString(1, ex.getTopic());
+			ps.setString(2, ex.getName());
+			ps.setInt(3, ID_User);
+			ps.execute();
+			return true;
+		} catch (SQLException e) {
+			System.out.println("DB Ser: "+ e.getMessage());
+			return false;
+		}		
 	}
 	
 	public ArrayList<Exam> Get_AllQuizzes(String email)
@@ -59,6 +74,20 @@ public class QuizzService {
 		}
 		catch (Exception e) {
 			System.out.println("Error get list question form: " + e.getMessage()); 
+		}
+		return null;
+	}
+	private Connection CreateConnect()
+	{
+		try
+		{
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String url = "jdbc:mysql://localhost:6033/quizzappdata";
+			String name = "root";
+			String pass = "matkhausql1@";
+			return DriverManager.getConnection(url,name,pass);
+		}catch (Exception e) {
+			System.out.println("Error: " +e);
 		}
 		return null;
 	}

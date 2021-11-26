@@ -6,6 +6,14 @@ public class Exam {
 	private String Name;
 	private String Topic;
 	private int ID_User;
+	public Exam(String quiz, String topic, int iduser) {
+		Name = quiz;
+		Topic = topic;
+		ID_User = iduser;
+	}
+	public Exam() {
+		// TODO Auto-generated constructor stub
+	}
 	public int getID() {
 		return ID;
 	}

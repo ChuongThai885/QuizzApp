@@ -2,6 +2,9 @@
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 <web-app>
+	<welcome-file-list>
+		<welcome-file>/HomePage.jsp</welcome-file>
+	</welcome-file-list>
 	<display-name>Archetype Created Web Application</display-name>
 	<servlet>
 		<servlet-name>LoginController</servlet-name>
@@ -27,6 +30,12 @@
 		<description></description>
 		<servlet-class>QuizzApp.Controller.GameController</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>AddQuizController</servlet-name>
+		<display-name>AddQuizController</display-name>
+		<description></description>
+		<servlet-class>QuizzApp.Controller.AddQuizController</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>LoginController</servlet-name>
@@ -47,5 +56,9 @@
 	<servlet-mapping>
 		<servlet-name>GameController</servlet-name>
 		<url-pattern>/PlayGame</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AddQuizController</servlet-name>
+		<url-pattern>/AddQuizController</url-pattern>
 	</servlet-mapping>
 </web-app>
