@@ -42,8 +42,10 @@ if (session.getAttribute("user") != null) {
 					</div>
 					<hr>
 					<div>
-						Do not have account yet? <input type="submit" class="form-submit"
-							name="btn_signup" value="SIGN UP">
+					Do not have account yet?
+					<button class="form-submit" onclick="signUp(this)" name="btn_signup">
+					SIGN UP
+					</button>
 					</div>
 				</form>
 			</div>
@@ -56,6 +58,14 @@ if (session.getAttribute("user") != null) {
 	<%session.removeAttribute("error");
 session.invalidate();%>
 		} else {
+		}
+	</script>
+	
+	<script>
+		function signUp(event)
+		{
+			event.preventDefault();
+			location.href = "/QuizzApp/SignUp.jsp";
 		}
 	</script>
 </body>

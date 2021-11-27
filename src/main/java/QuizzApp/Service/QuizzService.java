@@ -13,34 +13,24 @@ public class QuizzService {
 		return false;
 	}
 	
-	public ArrayList<Exam> Get_AllQuizzes(String email)
+	public ArrayList<Exam> Get_All_Exam(String email)
 	{
 		return service.Get_List_Exam_by_Email_User(email);
 	}
 	
-	public boolean Update_Quizz(int ID_User,Exam ex)
+	public boolean Update_Exam(Exam ex)
 	{
-		return false;
+		return service.Update_Exam(ex);
 	}
 	
-	public boolean Remove_Quizz(int ID_Quiz)
+	public boolean Remove_Exam(int ID_Ex)
 	{
-		return false;
+		return service.Remove_Exam(ID_Ex);
 	}
 	
-	public boolean add_NewQuestion(int ID_Ex, Question ques, ArrayList<Answer> ans)
+	public boolean add_New_Question(int ID_Ex, QuestionForm form)
 	{
-		return false;
-	}
-	public ArrayList<Question> get_All_Questions(int ID_Quizz)
-	{
-		//
-		return null;
-	}
-	public QuestionForm get_Question_Forms(int ID_Ques)
-	{
-		//
-		return null;
+		return service.add_New_Question(ID_Ex, form);
 	}
 	public ArrayList<QuestionForm> get_List_QuestionForm_by_ID_Exam(int ID_Exam)
 	{

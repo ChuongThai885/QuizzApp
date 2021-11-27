@@ -5,76 +5,107 @@
 try {
 	Cookie[] cookies = request.getCookies();
 	for (Cookie c : cookies) {
-		if (c.getName().equals("val"))
+		if (c.getName().equals("name"))
 	response.sendRedirect("Welcome.jsp");
 	}
 } catch (Exception e) {
 	System.out.println(e.getMessage());
 }
 %>
-<!DOCTYPE html>
 <html>
 
 <head>
+<meta charset="UTF-8">
 <title>Quiz App</title>
+<link rel="stylesheet" href="css/HomePage.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body>
-	<div>
-		<!--header-->
-		<a href=""><img src=""></a>
-		<!--logo-->
-		<ul>
-			<!--danh mục trên header (tự chế)-->
-			<li><a href="">How to play?</a></li>
-			<li><a href="">New template</a></li>
-		</ul>
-		<div>
-			<a href="http://116.103.144.150:3000/">Vào game</a>
-			<!--Dẫn tới trang nhập code để chơi-->
-			<a href="SignUp.jsp">Đăng ký</a>
-			<!--Dẫn tới trang đăng ký-->
+	<!--header-->
+	<header>
+		<div class="left-container">
+			<a href=""><img
+				src="https://www.dng24.co.uk/wp-content/uploads/2016/12/quiz.jpg"
+				height="60"> </a>
 		</div>
-	</div>
-	<div>
+		<div class="nav-container">
+			<ul>
+				<li><a href="">Cách chơi</a></li>
+				<li><a href="">Mẫu quiz mới</a></li>
+			</ul>
+		</div>
+		<div class="right-container">
+			<div class="btn-container">
+				<a href="SignUp.jsp">Đăng ký</a>
+				<!--Dẫn tới trang nhập code để chơi-->
+			</div>
+			<div class="btn-container">
+				<a href="">Vào game</a>
+				<!--Dẫn tới trang đăng ký-->
+			</div>
+		</div>
+	</header>
+	<div class="content">
 		<!--nội dung-->
-		<div>
-			<h1>Quizz App</h1>
-			<h3>Vài dòng giới thiệu, slogan...</h3>
-			<button type="button" onclick="window.location.href='SignUp.jsp'">Tạo
-				một bộ câu hỏi</button>
-			<!--Dẫn tới đăng ký-->
-			<button type="button" onclick="window.location.href='Login.jsp'">Đăng
-				nhập</button>
-			<!--Dẫn tới đăng nhập-->
+		<div class="introduction-container">
+			<div class="text-container">
+				<h1>Quiz App</h1>
+				<h3>Học, ôn tập, vui chơi cùng Quiz App</h3>
+				<div class="group-button">
+					<div class="main-btn-container">
+						<a href="SignUp.jsp">Bắt đầu </a>
+						<!--Dẫn tới đăng ký-->
+					</div>
+					<div class="main-btn-container">
+						<a href="Login.jsp">Đăng nhập</a>
+						<!--Dẫn tới đăng nhập-->
+					</div>
+				</div>
+			</div>
+			<div class="picture-container">
+				<img
+					src="https://stjohns.wrexhamparish.org.uk/wp-content/uploads/2017/11/QuizGeobuuk-547x381.png"
+					width="500px">
+			</div>
 		</div>
-		<div>
-			<!--thêm vài nội dung màu mè-->
-			<h2>Bắt đầu</h2>
+		<div class="usage-container">
+			<div class="usage-title">
+				<h2>Sử dụng Quiz App thật dễ dàng</h2>
+			</div>
 			<!--hướng dẫn sử dụng-->
-			<div>
-				<div>1</div>
-				<div>Tạo bộ câu hỏi</div>
-				<div>
-					<img src="">
+			<div class="usage-content-container">
+				<div class="step-container">
+					<div class="step-num">1</div>
+					<div class="step-title">Tạo bộ câu hỏi</div>
+					<div>
+						<img
+							src="https://cdn.riddle.com/website/assets/homepage/img/illo-quiz-types.webp"
+							width="280">
+					</div>
+					<!--hình ảnh minh hoạ-->
 				</div>
-				<!--hình ảnh minh hoạ-->
-			</div>
-			<div>
-				<div>2</div>
-				<div>Người chơi tham gia trả lời</div>
-				<div>
-					<img src="">
+				<div class="step-container">
+					<div class="step-num">2</div>
+					<div class="step-title">Người chơi tham gia qua mã pin</div>
+					<div>
+						<img
+							src="https://loquiz.com/wpmainpage/wp-content/uploads/2020/02/Quiz-game-700x467.jpg"
+							width="280">
+					</div>
+					<!--hình ảnh minh hoạ-->
 				</div>
-				<!--hình ảnh minh hoạ-->
-			</div>
-			<div>
-				<div>3</div>
-				<div>Kết quả xếp hạng</div>
-				<div>
-					<img src="">
+				<div class="step-container">
+					<div class="step-num">3</div>
+					<div class="step-title">Kết quả xếp hạng</div>
+					<div>
+						<img
+							src="https://cdn1.participoll.com/wp-content/uploads/2013/01/27015509/feature3-300x196.png"
+							width="280">
+					</div>
+					<!--hình ảnh minh hoạ-->
 				</div>
-				<!--hình ảnh minh hoạ-->
 			</div>
 		</div>
 	</div>

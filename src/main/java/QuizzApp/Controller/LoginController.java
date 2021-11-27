@@ -24,8 +24,8 @@ public class LoginController extends HttpServlet {
 		if(service.Is_Exist_User(email, pass))
 		{
 			HttpSession ses = request.getSession();
-			ses.setAttribute("m", "chuongthai");
-			ArrayList<Exam> el = new QuizzService().Get_AllQuizzes(email);
+			ses.setAttribute("user", service.Get_User(email));
+			ArrayList<Exam> el = new QuizzService().Get_All_Exam(email);
 			ses.setAttribute("listquizz", el);
 			try
 			{

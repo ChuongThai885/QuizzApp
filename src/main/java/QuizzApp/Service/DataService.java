@@ -1,5 +1,6 @@
 package QuizzApp.Service;
 
+import java.io.Console;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -117,6 +118,100 @@ public class DataService {
 		return null;
 	}
 	
+	public boolean Update_Exam(Exam ex)
+	{
+		String query = "update quizzappdata.exercise set Topic = ?, Ex_Name=? where ID =?";
+		try (PreparedStatement statement = CreateConnect().prepareStatement(query))
+		{
+			statement.setString(1, ex.getTopic());
+			statement.setString(2, ex.getName());
+			statement.setString(3, "" + ex.getID());
+			int result = statement.executeUpdate();
+			if(result > 0)
+				return true;
+		}
+		catch (Exception e) {
+			System.out.println(e);
+		}
+		return false;
+	}
+	
+	public boolean Remove_Exam(int ID)
+	{
+		String query = "delete from quizzappdata.exercise where ID = ?";
+		try (PreparedStatement statement = CreateConnect().prepareStatement(query))
+		{
+			statement.setString(1, "" + ID);
+			int result = statement.executeUpdate();
+			if(result > 0)
+				return true;
+		}
+		catch (Exception e) {
+			System.out.println(e);
+		}
+		return false;
+	}
+	
+	public boolean add_New_Question(int ID_Ex, QuestionForm form)
+	{
+		String query = "insert into quizzappdata.question (Ques,Is_Multi,Countdown_Time,ID_Ex) values (?,?,?,?);";
+		// add question first
+		try (PreparedStatement statement = CreateConnect().prepareStatement(query))
+		{
+			statement.setString(1, form.getQues().getQues());
+			statement.setString(2, "" + form.getQues().isIs_Multi());
+			statement.setString(3, "" + form.getQues().getCountdown_Time());
+			statement.setString(4, "" + ID_Ex);
+			int result = statement.executeUpdate();
+			if(result < 1)
+				return false;
+		}
+		catch (Exception e) {
+			System.out.println("add new ques : "+ e);
+			return false;
+		}
+		
+		try
+		{
+			for(Answer i : form.getAns() )
+			{
+				// check if answer is exist
+				query = "SELECT * FROM quizzappdata.answers where ID_Ques = (SELECT ID FROM quizzappdata.question where Ques = ? ) and Answer = ? ";
+				try (PreparedStatement statement = CreateConnect().prepareStatement(query))
+				{
+					statement.setString(1, form.getQues().getQues());
+					statement.setString(2, i.getAns());
+					ResultSet resultSet = statement.executeQuery();
+					if(resultSet.next())
+						return false;
+				}
+				catch (Exception e1) {
+					System.out.println("check ans : " + e1);
+					return false;
+				}
+				//if not exist
+				query = "insert into quizzappdata.answers(Answer,Selected,ID_Ques) values ( ?, ?, (SELECT ID FROM quizzappdata.question where Ques = ?) );";
+				try (PreparedStatement statement = CreateConnect().prepareStatement(query))
+				{
+					statement.setString(1, i.getAns());
+					statement.setString(2, "" + i.isSelected());
+					statement.setString(3, form.getQues().getQues());
+					int result = statement.executeUpdate();
+					if(result < 1)
+						return false;
+				}
+				catch (Exception e1) {
+					System.out.println("Add ans : " + e1);
+					return false;
+				}
+			}
+		}
+		catch (Exception e) {
+			System.out.println("add answers :" + e);
+		}
+		return false;
+	}
+	
 	public ArrayList<Question> Get_List_Quesion_by_ID_Exam(int ID_Exam)
 	{
 		try (Statement st = CreateConnect().createStatement())
@@ -173,28 +268,6 @@ public class DataService {
 		return null;
 	}
 	
-	public ResultSet GetData(String query)
-	{
-		try (Statement st = CreateConnect().createStatement())
-		{
-			return st.executeQuery(query);
-		}
-		catch (Exception e) {
-			return null;
-		}
-	}
-	
-	public boolean ExecuteUpdate(String query)
-	{
-		try ( Statement st = CreateConnect().createStatement() )
-		{
-			int n = st.executeUpdate(query);
-			if(n>0) return true;
-			else return false;
-		}catch (Exception e) {
-			return false;
-		}
-	}
 	private Connection CreateConnect()
 	{
 		try
