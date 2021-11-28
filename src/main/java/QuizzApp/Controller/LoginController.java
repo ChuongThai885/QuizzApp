@@ -25,11 +25,12 @@ public class LoginController extends HttpServlet {
 		{
 			HttpSession ses = request.getSession();
 			ses.setAttribute("user", service.Get_User(email));
-			ArrayList<Exam> el = new QuizzService().Get_All_Exam(email);
-			ses.setAttribute("listquizz", el);
+			//ArrayList<Exam> el = new QuizzService().Get_All_Exam(email);
+			//ses.setAttribute("listquizz", el);
 			try
 			{
 				email = new EncodeService().encodeString(email);
+				System.out.println(new EncodeService().encodeString("test"));
 			}
 			catch (Exception e) {
 				System.out.println("Error encode email:" + e.getMessage());

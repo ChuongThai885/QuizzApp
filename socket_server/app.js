@@ -179,14 +179,13 @@ io.on('connection', (socket) => {
     socket.on('get-result', (idRoom, cb) => //when manager request all player have to submit
     {
         try {
-            if(RoomList[parseInt(idRoom)].IDAdmin == socket.id)
-            {
+            if (RoomList[parseInt(idRoom)].IDAdmin == socket.id) {
                 socket.to(idRoom.toString()).emit('end-quiz'); // event for player to submit ans
-            //RoomList[idRoom].List_User.sort((a, b) => (a.score < b.score) ? 1 : ((b.score < a.score) ? -1 : 0));
-            setTimeout(() => {
-                var res = JSON.stringify(RoomList[idRoom].ListSelected);
-                cb(res); //sent data back to manager
-            }, 1000);
+                //RoomList[idRoom].List_User.sort((a, b) => (a.score < b.score) ? 1 : ((b.score < a.score) ? -1 : 0));
+                setTimeout(() => {
+                    var res = JSON.stringify(RoomList[idRoom].ListSelected);
+                    cb(res); //sent data back to manager
+                }, 1000);
             }
         } catch (error) {
             console.log(error);
@@ -261,10 +260,9 @@ io.on('connection', (socket) => {
     {
         try {
             var i = parseInt(idRoom);
-            id(RoomList[i].IDAdmin == socket.id)
-        {
-            RoomList[i].IsAvailable = (RoomList[i].IsAvailable) ? false : true;
-        }
+            if (RoomList[i].IDAdmin == socket.id) {
+                RoomList[i].IsAvailable = (RoomList[i].IsAvailable) ? false : true;
+            }
         } catch (error) {
             console.log(error);
             return;

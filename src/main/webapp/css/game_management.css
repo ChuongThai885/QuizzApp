@@ -10,10 +10,6 @@
 	font-family: 'Poppins', sans-serif;
 }
 
-body {
-	background-color: #ecf5ff;
-}
-
 .quiz_box {
 	position: relative;
 	width: 100%;
@@ -125,13 +121,13 @@ body {
 	border: 1px solid #b8daff;
 }
 
-section .option_list .option.correct {
+.quiz_box section .option_list .option.correct {
 	color: #155724;
 	background: #d4edda;
 	border: 1px solid #c3e6cb;
 }
 
-section .option_list .option.disabled {
+.quiz_box section .option_list .option.disabled {
 	pointer-events: none;
 }
 
@@ -157,30 +153,7 @@ section .option_list .option.disabled {
 	display: none;
 }
 
-/* .quiz_box section button{
-    height: 40px;
-    padding: 0 13px;
-    font-size: 18px;
-    font-weight: 400;
-    cursor: pointer;
-    border: none;
-    outline: none;
-    color: #fff;
-    border-radius: 5px;
-    background: #007bff;
-    border: 1px solid #007bff;
-    line-height: 10px;
-    opacity: 0;
-    pointer-events: none;
-    transform: scale(0.95);
-    transition: all 0.3s ease;
-}
-
-.quiz_box section button:hover{
-    background: #0263ca; 
-}*/
-
-.result {
+.quiz_box section .result {
 	margin: 10px auto;
 	height: 30vh;
 	/*  ni la t thay co co do, nghi cai doan cau hoi co the dai hon, thi du set lai nho chut, nhung da so thi z */
@@ -190,7 +163,7 @@ section .option_list .option.disabled {
 	align-items: flex-end;
 	/* background-color: palegreen; */
 }
-.result_item {
+.quiz_box section .result_item {
 	width: calc(25% - 10px);
 	background-color: #84d8d3;
 	border-radius: 5px;

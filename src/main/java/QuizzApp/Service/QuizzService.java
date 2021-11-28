@@ -17,6 +17,13 @@ public class QuizzService {
 	{
 		return service.Get_List_Exam_by_Email_User(email);
 	}
+
+	public int Get_Number_Of_Question(int ID_Exam) 
+	{
+		ArrayList<Question> questions = service.Get_List_Quesion_by_ID_Exam(ID_Exam);
+		int count = questions.size();
+		return count;
+	}
 	
 	public boolean Update_Exam(Exam ex)
 	{
@@ -25,7 +32,7 @@ public class QuizzService {
 	
 	public boolean Remove_Exam(int ID_Ex)
 	{
-		return service.Remove_Exam(ID_Ex);
+		return service.Remove_Object("exercise",ID_Ex);
 	}
 	
 	public boolean add_New_Question(int ID_Ex, QuestionForm form)
@@ -51,5 +58,15 @@ public class QuizzService {
 			System.out.println("Error get list question form: " + e.getMessage()); 
 		}
 		return null;
+	}
+	
+	public boolean Remove_Question(long ID_Question)
+	{
+		return service.Remove_Object("question", ID_Question);
+	}
+	
+	public boolean Remove_Answer(long ID_Answer)
+	{
+		return service.Remove_Object("question", ID_Answer);
 	}
 }

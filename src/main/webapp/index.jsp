@@ -42,8 +42,8 @@ try {
 				<!--Dẫn tới trang nhập code để chơi-->
 			</div>
 			<div class="btn-container">
-				<a href="">Vào game</a>
-				<!--Dẫn tới trang đăng ký-->
+				<a href="http://116.110.195.126:3000/playgame">Vào game</a>
+				<!--Dẫn tới trang game-->
 			</div>
 		</div>
 	</header>

@@ -2,28 +2,55 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quizz game</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Quizz game</title>
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/JoinGame.css">
+	<link rel="stylesheet" href="/css/Podium_P.css">
+	<link rel="stylesheet" type="text/css"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 
 <body>
-    <div class="start_box">
-        <h1 id="welcome-tag"></h1>
-        <form id="send-ID">
-            Nhập ID phòng:<input type="text" id="IDroom" name="ID">
-            <button id="send_id">Gửi</button>
-        </form>
-        <form id="send-name">
-            Nhập tên của bạn:<input type="text" id="UserName" name="ID">
-            <button id="send_Name">Gửi</button>
-        </form>
-    </div>
 
-    <!-- Quiz Box -->
+	<div class="start_box">
+		<section>
+			<h1 id="welcome-tag"></h1>
+			<div class="form-input-container">
+				<form class="form-input" id="send-ID">
+
+					<h1>
+						QUIZZ GAME
+					</h1>
+
+					<div class="input-item">
+						<input type="text" id="IDroom" placeholder="Nhập mã game" class="input-textbox">
+					</div>
+					<div class="input-item">
+						<input type="button" id="send_id" value="Nhập" class="input-button">
+					</div>
+				</form>
+			</div>
+
+			<div class="form-input-container" id="NameInput">
+				<form class="form-input" id="send-name">
+					<h1>
+						QUIZZ GAME
+					</h1>
+					<div class="input-item">
+						<input type="text" id="UserName" placeholder="Nhập tên" class="input-textbox">
+					</div>
+					<div class="input-item">
+						<input type="button" id="send_Name" value="Bắt đầu chơi" class="input-button"
+							onclick="InputName()">
+					</div>
+				</form>
+			</div>
+		</section>
+	</div>
+
+	<!-- Quiz Box -->
 	<div class="quiz_box">
 		<header>
 			<div class="total_ques">
@@ -47,7 +74,7 @@
 			</div>
 		</section>
 	</div>
-	
+
 	<div class="end_box">
 		<div class="rankings">
 			<!-- insert top 3 players with the highest score and player rank from JS -->

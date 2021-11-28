@@ -2,10 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
 <%
-if (session.getAttribute("user") != null) {
-	//RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-	//dispatcher.forward(request, response);
+//if (session.getAttribute("user") != null) {
+//RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+//dispatcher.forward(request, response);
+//	response.sendRedirect("Welcome.jsp");
+//}
+try {
+	Cookie[] cookies = request.getCookies();
+	for (Cookie c : cookies) {
+		if (c.getName().equals("name"))
 	response.sendRedirect("Welcome.jsp");
+	}
+} catch (Exception e) {
+	System.out.println(e);
 }
 %>
 <!DOCTYPE html>
@@ -42,10 +51,9 @@ if (session.getAttribute("user") != null) {
 					</div>
 					<hr>
 					<div>
-					Do not have account yet?
-					<button class="form-submit" onclick="signUp(this)" name="btn_signup">
-					SIGN UP
-					</button>
+						Do not have account yet?
+						<button class="form-submit" onclick="signUp(this)"
+							name="btn_signup">SIGN UP</button>
 					</div>
 				</form>
 			</div>
@@ -60,10 +68,9 @@ session.invalidate();%>
 		} else {
 		}
 	</script>
-	
+
 	<script>
-		function signUp(event)
-		{
+		function signUp(event) {
 			event.preventDefault();
 			location.href = "/QuizzApp/SignUp.jsp";
 		}

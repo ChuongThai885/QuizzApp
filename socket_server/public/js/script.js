@@ -2,10 +2,10 @@
 const socket = io();
 
 //constants that represent to elements in html file
-const form_sendID = document.querySelector('#send-ID');
-const form_sendName = document.querySelector('#send-name');
-const id_input = document.querySelector('#IDroom');
-const name_input = document.querySelector('#UserName');
+const form_sendID = document.getElementById('send-ID');
+const form_sendName = document.getElementById('send-name');
+const id_input = document.getElementById('IDroom');
+const name_input = document.getElementById('UserName');
 const result = document.querySelector(".result");
 const start_box = document.querySelector(".start_box");
 const quiz_box = document.querySelector(".quiz_box");
@@ -19,8 +19,8 @@ const tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
 const crossIconTag = '<div class="icon cross"><i class="fas fa-times"></i></div>';
 
 // all variable we use in this project
-let id_room,
-name_user;
+let id_room = 0,
+    name_user;
 
 let quiz;
 let total_ques = 0;
@@ -36,7 +36,7 @@ let timerID;
 form_sendID.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    id_room = id_input.value;
+    id_room = parseInt(id_input.value);
     id_input.value = "";
     socket.emit('joining-room', id_room, message => {
         if (message == "Room exist") {
@@ -127,8 +127,7 @@ function startTimer() //start counting, get received timex
     }
 }
 
-function select_CorrectAnswer()
-{
+function select_CorrectAnswer() {
     const correctAns = quiz.answer; //getting correct answer from array
     const allOptions = option_list.children.length; //getting all option items
     for (i = 0; i < allOptions; i++) {
@@ -152,7 +151,7 @@ function optionSelected(answer) {
     time_left = ((MAX_TIME * 1000 - (selected_time - received_time)) > 0) ? (MAX_TIME * 1000 - (selected_time - received_time)) : 0;
 
     selected_Answer = answer.textContent;
-    
+
     if (selected_Answer == quiz.answer) {
         score = calculate_score();
     }
@@ -178,13 +177,13 @@ socket.on('get-question', (maxquestion, question) => {
     ShowQuestion();
 })
 
-socket.on('end-quiz',() => {
+socket.on('end-quiz', () => {
     timeCount.textContent = "00";
     clearInterval(timerID); //clear counter
     timeText.textContent = "Time Off"; //change the time text to time off
     const allOptions = option_list.children.length; //getting all option items
     const correctAns = quiz.answer; //getting correct answer from array
-    
+
     const userAns = selected_Answer;
     result.innerHTML = `<div  class="result_item"> ${score} </div>`; // show score
     //show correct answer
@@ -225,34 +224,69 @@ socket.on('admin-disconnect', (message) => {
     document.getElementById('welcome-tag').textContent = "";
 })
 
-socket.on('return-result',(arr) => {
+socket.on('return-result', (arr) => {
     quiz_box.classList.add("hidden");
     end_box.classList.remove("hidden");
 
     const rankings = document.querySelector(".rankings");
     const data = JSON.parse(arr);
-    //const max_height = document.querySelector('.end_box').offsetHeight;
     let rankings_item = '';
-    // let total = 0;
-    // for (var i of data) {
-    //     total += i.count;// ?
-    // }
+    let inde = 1, cre = 0;
     for (var i of data) {
-        //console.log(i.Name);
-        //let height = (max_height * i.count) / total;
-        //result_item += `<div  class="result_item" style="height:${height}px"> ${i.count} </div>`;
-        rankings_item += `<div>${i.Name} + ${i.score}</div>`
+        if (inde == 1) {
+            rankings_item += `
+            <div class="position-container">
+                <img src="/Image/first.png" class="picture-container">
+                <div class="general first">
+                    <div class="position-name">
+                        <b>${i.Name}</b>
+                    </div>
+                </div>
+            </div>`;
+            cre = i.score;
+            inde++;
+        }
+        else if (inde == 2) {
+            rankings_item += `<div class="position-container"><img src="/Image/second.png" class="picture-container"><div class="general second"><div class="position-name"><b>${i.Name}</b></div></div></div>`;
+            cre = i.score;
+            inde++;
+        }
+        else if (inde == 3) {
+            rankings_item += `<div class="position-container"><img src="/Image/third.png" class="picture-container"><div class="general third"><div class="position-name"><b>${i.Name}</b></div></div></div>`;
+            cre = i.score;
+            inde++;
+        }
     }
     rankings.innerHTML = rankings_item;
     console.log(arr);
 })
 
-socket.on('get-rank',(score,rank) => {
+socket.on('get-rank', (score, rank) => {
     const player_rank = document.querySelector(".player_rank");
-    var player_rank_item = `<div>u are in rank ${rank} with score ${score},,congrats !</div>`;
-    if(parseInt(rank) < 4)
-    {
-        player_rank_item = `<div>u are in top ${rank} with score ${score}</div>`;
+    var player_rank_item = `
+    <div class="number">
+        ${rank}
+    </div>
+    <div class="player-info">
+        <div class="player-name">
+            ${score} score
+            <div class="player-score">
+                You are ${rank}th player
+            </div>
+        </div>
+    </div>`
+    if (parseInt(rank) < 4) {
+        player_rank_item = `<div class="number">
+        ${rank}
+        </div>
+        <div class="player-info">
+            <div class="player-name">
+                ${score} score
+                <div class="player-score">
+                    You are ${rank}th player, congrats
+                </div>
+            </div>
+        </div>`
     }
     player_rank.innerHTML = player_rank_item;
 })

@@ -1,10 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-Cookie[] cookies = request.getCookies();
-for (Cookie c : cookies) {
-	if (c.getName().equals("name"))
-		response.sendRedirect("Welcome.jsp");
+try
+{
+	Cookie[] cookies = request.getCookies();
+	for (Cookie c : cookies) {
+		if (c.getName().equals("name"))
+			response.sendRedirect("Welcome.jsp");
+	}
+}
+catch(Exception e)
+{
+	System.out.println(e);
 }
 %>
 <!DOCTYPE html>

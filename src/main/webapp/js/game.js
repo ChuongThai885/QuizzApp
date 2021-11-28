@@ -10,11 +10,11 @@ const timeCount = document.querySelector(".timer .timer_sec");
 const button_finish = document.querySelector(".finish_countdown");
 const button_next = document.querySelector(".next_ques");
 
-const users = document.querySelector('.users');
-const button_start = document.querySelector('.button-start');
-const button_cancel = document.querySelector('.button-cancel');
-const button_lock = document.querySelector('.button-lock');
-
+const button_start = document.getElementById('button-start');
+const button_cancel = document.getElementById('button-cancel');
+const button_lock = document.getElementById('button-lock');
+const lock_icon = document.querySelector('.lock-icon');
+    
 let number_of_users = 0;
 let quiz;
 let total_ques = 0;
@@ -23,12 +23,13 @@ let IDRoom = 0;
 
 //start, hidden quizbox and button start
 quiz_box.classList.add("hidden");
-end_box.classList.add("hidden");
+end_box.classList.add("hidden"); 
 button_start.setAttribute("hidden", "hidden"); // if users in room = 0 then disable
 button_finish.setAttribute("hidden", "hidden");
 button_next.setAttribute("hidden", "hidden");
+lock_icon.innerHTML = '<i class="fas fa-lock"></i>';
 
-const socket = io("http://116.103.144.150:3000/");
+const socket = io("http://116.110.195.126:3000/");
 
 const tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>'; // creating the new div tags which for icons
 
@@ -151,6 +152,7 @@ button_cancel.addEventListener('click', (e) => //when clicked button cancel redi
 
 button_lock.addEventListener('click',(e) => //when clicked button lock, lock or unlock room
 {
+    lock_icon.innerHTML = ((lock_icon.innerHTML) == '<i class="fas fa-lock"></i>') ?`<i class="fas fa-unlock-alt"></i>` : `<i class="fas fa-lock"></i>`;
     socket.emit('change-state-room',IDRoom);
 })
 
@@ -182,7 +184,7 @@ socket.on('connect', () => {
 
 socket.emit('create-room', room => {
     IDRoom = room;
-    document.querySelector('.ID-Room').textContent = `Your room ID is : ${room}`;
+    document.querySelector('.header-title').textContent = `Chào mừng, ID room của bạn là: ${room}`;
 })
 
 socket.on('joined-user', (message) => {
@@ -190,9 +192,8 @@ socket.on('joined-user', (message) => {
         button_start.removeAttribute("hidden");
     }
     number_of_users++;
-    const Item = document.createElement('li');
-    Item.textContent = message;
-    users.appendChild(Item);
+    const List_user = document.querySelector('.entry-players');
+    List_user.innerHTML += `<div class="player-name"><b>${message}</b></div>`
 })
 
 socket.on('get-question', (maxquestion, question) => {
@@ -210,16 +211,52 @@ socket.on('return-result', (arr) => {
     const data = JSON.parse(arr);
     //const max_height = document.querySelector('.end_box').offsetHeight;
     let rankings_item = '';
-    // let total = 0;
-    // for (var i of data) {
-    //     total += i.count;// ?
-    // }
+    let inde = 1, cre = 0;
     for (var i of data) {
-        //console.log(i.Name);
-        //let height = (max_height * i.count) / total;
-        //result_item += `<div  class="result_item" style="height:${height}px"> ${i.count} </div>`;
-        rankings_item += `<div>${i.Name} + ${i.score}</div>`
+        if (inde == 1) {
+            rankings_item += `
+            <div class="position-container">
+				<img src="img/first.png" class="picture-container">
+				<div class="general first">
+					<div class="position-name">
+						<b>${i.Name}</b>
+					</div>
+				</div>
+			</div>`;
+            cre = i.score;
+            inde++;
+        }
+        else if(inde == 2)
+        {
+            rankings_item += `
+            <div class="position-container">
+				<img src="img/second.png" class="picture-container">
+				<div class="general second">
+					<div class="position-name">
+						<b>${i.Name}</b>
+					</div>
+				</div>
+			</div>`;
+            cre = i.score;
+            inde++;
+        }
+        else if(inde == 3)
+        {
+            rankings_item += `
+			<div class="position-container">
+				<img src="img/third.png" class="picture-container">
+				<div class="general third">
+					<div class="position-name">
+						<b>${i.Name}</b>
+					</div>
+				</div>
+			</div>`;
+            cre = i.score;
+            inde++;
+        }
     }
+    rankings.innerHTML = rankings_item;
+    console.log(arr);
     rankings.innerHTML = rankings_item;
     console.log(arr);
 })

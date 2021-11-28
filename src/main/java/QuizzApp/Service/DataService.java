@@ -71,22 +71,6 @@ public class DataService {
 		}
 	}
 	
-	public boolean Remove_User(String email)
-	{
-		String query = "delete quizzappdata.users where Email= ?";
-		try (PreparedStatement st = CreateConnect().prepareStatement(query))
-		{
-			st.setString(1, email);
-			int res = st.executeUpdate();
-			if(res >0) return true;
-				return false;
-		}
-		catch (Exception e) {
-			System.out.println("Error remove: " +e.getMessage());
-		}
-		return false;
-	}
-	
 	public boolean Add_New_Exam()
 	{
 		return false;
@@ -126,22 +110,6 @@ public class DataService {
 			statement.setString(1, ex.getTopic());
 			statement.setString(2, ex.getName());
 			statement.setString(3, "" + ex.getID());
-			int result = statement.executeUpdate();
-			if(result > 0)
-				return true;
-		}
-		catch (Exception e) {
-			System.out.println(e);
-		}
-		return false;
-	}
-	
-	public boolean Remove_Exam(int ID)
-	{
-		String query = "delete from quizzappdata.exercise where ID = ?";
-		try (PreparedStatement statement = CreateConnect().prepareStatement(query))
-		{
-			statement.setString(1, "" + ID);
 			int result = statement.executeUpdate();
 			if(result > 0)
 				return true;
@@ -266,6 +234,21 @@ public class DataService {
 			System.out.println("Error get list ans :" + e.getMessage());
 		}
 		return null;
+	}
+	
+	public boolean Remove_Object(String name_object,long ID)
+	{
+		String query = "delete quizzappdata."+name_object+" where ID=" + ID;
+		try (Statement statement = CreateConnect().createStatement())
+		{
+			int res = statement.executeUpdate(query);
+			if(res >0) return true;
+				return false;
+		}
+		catch (Exception e) {
+			System.out.println("Error remove object: " +e.getMessage());
+		}
+		return false;
 	}
 	
 	private Connection CreateConnect()
