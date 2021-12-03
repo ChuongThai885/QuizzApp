@@ -1,0 +1,82 @@
+body{
+    background-color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    color: #0487d9;
+    font-size: 18px;
+}
+header {
+    top:0;
+    left: 0;
+    right: 0;
+	position: fixed;
+	z-index: 2;
+	height: 70px;
+	padding: 0 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.1);
+    font-size: 24px;
+}
+
+section{
+    margin-top: 70px;
+    display: flex;
+    height: 100vh;
+}
+.entry-button{
+    padding: 20px 20px 30px 10px;
+    position: fixed;
+    width: 200vh;
+    height: 55px;
+    margin: 0px 30px 0px 30px;
+}
+.entry-button-left{
+    width: 90%;
+    float: left;
+    align-items: center;
+}
+.entry-button-right{
+    width: 10%;
+    float: right;
+    display: flex;
+    align-items: center;
+}
+.btn-general {
+    margin: 0px 10px 0px 10px;
+    background-color: #0487d9;
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px 0px #84c5fe;
+    font-family:Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.btn-big {
+    font-size: 18px;
+    height: 40px;
+    width: 80px;
+}
+.btn-small{
+    height: 35px;
+    width: 40px;
+}
+.entry-players{
+    position: fixed;
+    width: 100%;
+    margin-top: 100px;
+    padding: 20px 10px 20px 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.player-name{
+    margin: 0px 10px 15px 10px;
+    padding: 8px 8px 8px 8px;
+    height: fit-content;
+    width: fit-content;
+    background-color: #0487d9;
+    border-radius: 5px;
+    color: #ffffff;
+}
