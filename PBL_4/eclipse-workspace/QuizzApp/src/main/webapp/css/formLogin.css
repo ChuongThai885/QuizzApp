@@ -67,8 +67,6 @@ a:hover{
 }
 
 .form-group{
-    border: 1px solid #0487d9;
-    border-radius: 10px;
     margin-top: 30px;
     margin-bottom: 30px;
     display: flex;
@@ -77,11 +75,12 @@ a:hover{
 .form-input{
     background: transparent;
     height: 40px;
-    border:0;
+    border: 1px solid #0487d9;
+    padding-left: 15px;
+    border-radius: 10px;
     color: #0487d9;
     font-size: 18px;
     flex-grow: 1;
-    padding-left: 15px;
 }
 
 .form-input::placeholder{

@@ -36,6 +36,12 @@
 		<description></description>
 		<servlet-class>QuizzApp.Controller.AddQuizController</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>AddQuestionController</servlet-name>
+		<display-name>AddQuestionController</display-name>
+		<description></description>
+		<servlet-class>QuizzApp.Controller.AddQuestionController</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>LoginController</servlet-name>
@@ -60,5 +66,9 @@
 	<servlet-mapping>
 		<servlet-name>AddQuizController</servlet-name>
 		<url-pattern>/AddQuizController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AddQuestionController</servlet-name>
+		<url-pattern>/AddQuestionController</url-pattern>
 	</servlet-mapping>
 </web-app>

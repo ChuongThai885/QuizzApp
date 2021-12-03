@@ -30,7 +30,9 @@ for (Cookie c : cookies) {
         <div class="btn-container">
             <input type="submit" name="btn_signup" class="form-submit" value="ĐĂNG KÝ">
         </div>    
-        <p></p>
+        <div class="form-group">
+            Quay về <a href="HomePage.jsp">Trang chủ</a>
+        </div> 
     </form>
 </body>
 </html>

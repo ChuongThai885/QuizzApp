@@ -40,6 +40,7 @@ public class AddQuizController extends HttpServlet {
 			Exam e = new Exam(quiz, topic, iduser);
 			boolean b = quizservice.Add_New_Quizz(iduser, e);
 			System.out.println(b);
+			
 			request.setAttribute("quiz", e);
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/AddQuestion.jsp");
 			rd.forward(request, response);

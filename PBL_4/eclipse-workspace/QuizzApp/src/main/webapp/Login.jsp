@@ -41,6 +41,10 @@ if (session.getAttribute("user") != null) {
                         Chưa có tài khoản?
                         <a href="SignUp.jsp">ĐĂNG KÝ</a>
                     </div>
+                    <div class="form-group">
+                        Quay về 
+                        <a href="HomePage.jsp">Trang chủ</a>
+                    </div>
                 </form>
             </div>
         </div>

@@ -1,23 +1,35 @@
 body{
     background-color: #ffffff;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: 'Poppins', sans-serif;
     color: #0487d9;
+    font-size: 18px;
 }
-
-.entry-title{
-    padding: 20px 20px 20px 30px;
-    border-bottom: 2px solid #84c5fe;
-    text-align: center;
+header {
+    top:0;
+    left: 0;
+    right: 0;
+	position: fixed;
+	z-index: 2;
+	height: 70px;
+	padding: 0 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.1);
     font-size: 24px;
 }
-.entry-main{
+
+section{
+    margin-top: 70px;
     display: flex;
+    height: 100vh;
 }
 .entry-button{
     padding: 20px 20px 30px 10px;
-    width: 1250px;
     position: fixed;
+    width: 200vh;
     height: 55px;
+    margin: 0px 30px 0px 30px;
 }
 .entry-button-left{
     width: 90%;
@@ -38,6 +50,7 @@ body{
     box-shadow: 2px 2px 4px 0px #84c5fe;
     font-family:Arial, Helvetica, sans-serif;
     color: #ffffff;
+    cursor: pointer;
 }
 
 .btn-big {
@@ -51,7 +64,7 @@ body{
 }
 .entry-players{
     position: fixed;
-    width: 1250px;
+    width: 100%;
     margin-top: 100px;
     padding: 20px 10px 20px 10px;
     display: flex;

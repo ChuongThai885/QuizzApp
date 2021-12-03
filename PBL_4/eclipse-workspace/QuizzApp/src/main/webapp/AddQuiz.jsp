@@ -1,17 +1,21 @@
+<%@page import="QuizzApp.Model.User_Infor"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Tạo quiz</title>
 <link rel="stylesheet" href="css/AddQuiz.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>	
+<%
+	User_Infor u = (User_Infor) request.getSession().getAttribute("user");
+	if (u!=null){
+%>
 	<!-- form tạo quiz -->
-	<div class="add-ques-form" id="addquesform" style="display: block;">
+	<div class="add-ques-form" id="addquesform">
 		<form name="addform" action="AddQuizController" method="post" class="form-inner">
             <h1>Tạo Quiz mới</h1>
             <div class="quiz-info">
@@ -30,5 +34,6 @@
             </div>				
 		</form>
 	</div>
+	<%} %>
 </body>
 </html>

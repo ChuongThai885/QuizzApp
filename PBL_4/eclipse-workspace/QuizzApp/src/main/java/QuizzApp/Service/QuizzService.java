@@ -1,9 +1,5 @@
 package QuizzApp.Service;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import QuizzApp.Model.*;
@@ -14,48 +10,41 @@ public class QuizzService {
 	
 	public boolean Add_New_Quizz(int ID_User,Exam ex)
 	{
-		String query = "insert into quizzappdata.exercise (Topic, Ex_Name, ID_User) values (?,?,?)";
-		try {
-			PreparedStatement ps = CreateConnect().prepareStatement(query);
-			ps.setString(1, ex.getTopic());
-			ps.setString(2, ex.getName());
-			ps.setInt(3, ID_User);
-			ps.execute();
-			return true;
-		} catch (SQLException e) {
-			System.out.println("DB Ser: "+ e.getMessage());
-			return false;
-		}		
+		return service.Add_New_Exam(ID_User, ex);
 	}
 	
-	public ArrayList<Exam> Get_AllQuizzes(String email)
+	public ArrayList<Exam> Get_All_Exam(String email)
 	{
 		return service.Get_List_Exam_by_Email_User(email);
 	}
+	public int Get_Number_Of_Question(int ID_Exam) 
+	{
+		ArrayList<Question> questions = service.Get_List_Quesion_by_ID_Exam(ID_Exam);
+		int count = questions.size();
+		return count;
+	}
+	public Exam Get_Exam_by_ID (int ID_Exam) {
+		return service.Get_Exam_By_IDExam(ID_Exam);
+	}
+	/*public int Get_Number_Of_Exam(String email) {
+		ArrayList<Exam> quizes = service.Get_List_Exam_by_Email_User(email);
+		int count = quizes.size();
+		return count;
+	}*/
 	
-	public boolean Update_Quizz(int ID_User,Exam ex)
+	public boolean Update_Exam(Exam ex)
 	{
-		return false;
+		return service.Update_Exam(ex);
 	}
 	
-	public boolean Remove_Quizz(int ID_Quiz)
+	public boolean Remove_Exam(int ID_Ex)
 	{
-		return false;
+		return service.Remove_Exam(ID_Ex);
 	}
 	
-	public boolean add_NewQuestion(int ID_Ex, Question ques, ArrayList<Answer> ans)
+	public boolean add_New_Question(int ID_Ex, QuestionForm form)
 	{
-		return false;
-	}
-	public ArrayList<Question> get_All_Questions(int ID_Quizz)
-	{
-		//
-		return null;
-	}
-	public QuestionForm get_Question_Forms(int ID_Ques)
-	{
-		//
-		return null;
+		return service.add_New_Question(ID_Ex, form);
 	}
 	public ArrayList<QuestionForm> get_List_QuestionForm_by_ID_Exam(int ID_Exam)
 	{
@@ -74,20 +63,6 @@ public class QuizzService {
 		}
 		catch (Exception e) {
 			System.out.println("Error get list question form: " + e.getMessage()); 
-		}
-		return null;
-	}
-	private Connection CreateConnect()
-	{
-		try
-		{
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:6033/quizzappdata";
-			String name = "root";
-			String pass = "matkhausql1@";
-			return DriverManager.getConnection(url,name,pass);
-		}catch (Exception e) {
-			System.out.println("Error: " +e);
 		}
 		return null;
 	}

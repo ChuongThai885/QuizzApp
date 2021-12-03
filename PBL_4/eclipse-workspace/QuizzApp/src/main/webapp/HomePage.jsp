@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Quiz App</title>
+    <title>Trang chủ</title>
     <link rel="stylesheet" href="css/HomePage.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
@@ -18,7 +18,7 @@
             </a>
         </div>
         <div class="nav-container">
-            <ul>
+            <ul> <!-- Cái ni thêm vô cho đẹp thôi chứ chả làm gì -->
                 <li><a href="">Cách chơi</a></li>
                 <li><a href="">Mẫu quiz mới</a></li>
             </ul>
@@ -29,7 +29,7 @@
                 <!--Dẫn tới trang nhập code để chơi-->
             </div>
             <div class="btn-container">
-                <a href="">Vào game</a>
+                <a href="JoinGame.html">Vào game</a>
                 <!--Dẫn tới trang đăng ký-->
             </div>
         </div>
@@ -66,21 +66,18 @@
                 <div class="step-num">1</div>
                 <div class="step-title">Tạo bộ câu hỏi</div>
                 <div><img src="https://cdn.riddle.com/website/assets/homepage/img/illo-quiz-types.webp" width="280"></div>
-                <!--hình ảnh minh hoạ-->
             </div>
             <div class="step-container">
                 <div class="step-num">2</div>
                 <div class="step-title">Người chơi tham gia qua mã pin</div>
                 <div><img src="https://loquiz.com/wpmainpage/wp-content/uploads/2020/02/Quiz-game-700x467.jpg"
                     width="280"></div>
-                <!--hình ảnh minh hoạ-->
             </div>
             <div class="step-container">
                 <div class="step-num">3</div>
                 <div class="step-title">Kết quả xếp hạng</div>
                 <div><img src="https://cdn1.participoll.com/wp-content/uploads/2013/01/27015509/feature3-300x196.png"
                     width="280"></div>
-                <!--hình ảnh minh hoạ-->
             </div>
         </div>
         </div>
