@@ -2,29 +2,43 @@
 //constants that represent to elements in html file
 const start_box = document.querySelector(".start_box");
 const quiz_box = document.querySelector(".quiz_box");
+const end_box = document.querySelector(".end_box");
+const result = document.querySelector(".result");
 const option_list = document.querySelector(".option_list");
 const timeText = document.querySelector(".timer .time_left_txt");
 const timeCount = document.querySelector(".timer .timer_sec");
 const button_finish = document.querySelector(".finish_countdown");
 const button_next = document.querySelector(".next_ques");
+const result_icon = document.querySelector(".result-icons");
 
-const users = document.querySelector('.users');
-const button_start = document.querySelector('.button-start');
-const button_cancel = document.querySelector('.button-cancel');
-
+const button_start = document.getElementById('button-start');
+const button_cancel = document.getElementById('button-cancel');
+const button_lock = document.getElementById('button-lock');
+const lock_icon = document.querySelector('.lock-icon');
+    
 let number_of_users = 0;
 let quiz;
 let total_ques = 0;
 let timerID;
 let IDRoom = 0;
 
+const answer_icons = [
+  '<i class="fas fa-square"></i>',
+  '<i class="fas fa-circle"></i>',
+  '<i class="fas fa-star"></i>',
+  '<i class="fas fa-heart"></i>'
+];
+let num_icon = 0;
+
 //start, hidden quizbox and button start
 quiz_box.classList.add("hidden");
+end_box.classList.add("hidden"); 
 button_start.setAttribute("hidden", "hidden"); // if users in room = 0 then disable
 button_finish.setAttribute("hidden", "hidden");
 button_next.setAttribute("hidden", "hidden");
+lock_icon.innerHTML = '<i class="fas fa-lock"></i>';
 
-const socket = io("http://116.103.144.150:3000/");
+const socket = io("http://localhost:3000/");
 
 const tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>'; // creating the new div tags which for icons
 
@@ -35,7 +49,9 @@ function ShowQuestion() //show question received from server
     let que_tag = '<span>' + quiz.question + '</span>';
     let option_tag = '';
     for (var i of quiz.option) {
-        option_tag += '<div class="option"><span>' + i + '</span></div>';
+        option_tag += '<div class="option" onclick="optionSelected(this)"><div class="icon anwsers">' + answer_icons[num_icon] + 
+    	'</div><div class="option-text">' + i + '</div></div>';
+    	num_icon += 1;
     }
     que_text.innerHTML = que_tag;
     option_list.innerHTML = option_tag;
@@ -48,6 +64,7 @@ function ShowQuestion() //show question received from server
     startTimer();
 
     QuestionCounter(quiz.num);
+	num_icon = 0;
 }
 
 function startTimer() //start counting, get received timex
@@ -77,7 +94,7 @@ function startTimer() //start counting, get received timex
                 button_next.removeAttribute("hidden");
 
                 socket.emit('get-result', IDRoom, message => {
-                    console.log(message);//get data from server and put on view
+                    ShowResult(JSON.parse(message));//get data from server and put on view
                 });
                 clearInterval(timerID); //clear counter
                 timeText.textContent = "Time Off"; //change the time text to time off
@@ -116,16 +133,28 @@ function select_CorrectAnswer() {
     }
 }
 
-//socket event process funtion
-socket.on('connect', () => {
-    console.log(socket.id + '');
-})
+function ShowResult(data) // add items into class result 
+{
+    const max_height = document.querySelector('.result').offsetHeight;
+    let result_item = '';
+	let result_icon_tag = '';
+    let total = 0;
+    for (var i of data) {
+        total += i.count;
+    }
+    for (var i of data) {
+        console.log(i.answer);
+        let height = (max_height * i.count) / total;
+        result_item += `<div class="result_item" style="height:${height}px;"></div>`;
+		result_icon_tag += `<div class="result-text">${answer_icons[num_icon]} ${i.count}</div>`;
+  		num_icon += 1;
+    }
+	num_icon = 0;
+    result.innerHTML = result_item;
+	result_icon.innerHTML = result_icon_tag;
+}
 
-socket.emit('create-room', room => {
-    IDRoom = room;
-    document.querySelector('.ID-Room').textContent = `Your room ID is : ${room}`;
-})
-
+//add event button
 button_start.addEventListener('click', (e) => //when clicked button start start quiz
 {
     start_box.classList.add("hidden");
@@ -136,6 +165,12 @@ button_start.addEventListener('click', (e) => //when clicked button start start 
 button_cancel.addEventListener('click', (e) => //when clicked button cancel redirect to home page
 {
     location.href = "/QuizzApp/Welcome.jsp";
+})
+
+button_lock.addEventListener('click',(e) => //when clicked button lock, lock or unlock room
+{
+    lock_icon.innerHTML = ((lock_icon.innerHTML) == '<i class="fas fa-lock"></i>') ?`<i class="fas fa-unlock-alt"></i>` : `<i class="fas fa-lock"></i>`;
+    socket.emit('change-state-room',IDRoom);
 })
 
 button_finish.addEventListener('click', (e) => // when button finish is being clicked, stop timer, show answer, bla bla... 
@@ -149,13 +184,24 @@ button_finish.addEventListener('click', (e) => // when button finish is being cl
     select_CorrectAnswer();
 
     socket.emit('get-result', IDRoom, message => {
-        console.log(message);//get data from server and put on view
+        ShowResult(JSON.parse(message));
     });
 })
 
 button_next.addEventListener('click', (e) => {
+    result.innerHTML = '';
     button_next.setAttribute("hidden", "hidden");
     socket.emit('next-question', IDRoom);
+})
+
+//socket event process funtion
+socket.on('connect', () => {
+    console.log(socket.id + '');
+})
+
+socket.emit('create-room', room => {
+    IDRoom = room;
+    document.querySelector('.header-title').textContent = `Chào mừng, ID room của bạn là: ${room}`;
 })
 
 socket.on('joined-user', (message) => {
@@ -163,20 +209,72 @@ socket.on('joined-user', (message) => {
         button_start.removeAttribute("hidden");
     }
     number_of_users++;
-    const Item = document.createElement('li');
-    Item.textContent = message;
-    users.appendChild(Item);
+    const List_user = document.querySelector('.entry-players');
+    List_user.innerHTML += `<div class="player-name"><b>${message}</b></div>`
 })
 
 socket.on('get-question', (maxquestion, question) => {
     quiz_box.classList.remove("hidden");
     quiz = JSON.parse(question);
     setMaxQuestion(maxquestion);
-    console.log(quiz + "," + maxquestion + "\n" + quiz.answer);
-    console.log(JSON.parse(question) + '\n' + JSON.parse(question).answer);
     ShowQuestion();
 })
 
 socket.on('return-result', (arr) => {
+    quiz_box.classList.add("hidden");
+    end_box.classList.remove("hidden");
+
+    const rankings = document.querySelector(".rankings");
+    const data = JSON.parse(arr);
+    //const max_height = document.querySelector('.end_box').offsetHeight;
+    let rankings_item = '';
+    let inde = 1, cre = 0;
+    for (var i of data) {
+        if (inde == 1) {
+            rankings_item += `
+            <div class="position-container">
+				<img src="img/first.png" class="picture-container">
+				<div class="general first">
+					<div class="position-name">
+						<b>${i.Name}</b>
+					</div>
+				</div>
+			</div>`;
+            cre = i.score;
+            inde++;
+        }
+        else if(inde == 2)
+        {
+            rankings_item += `
+            <div class="position-container">
+				<img src="img/second.png" class="picture-container">
+				<div class="general second">
+					<div class="position-name">
+						<b>${i.Name}</b>
+					</div>
+				</div>
+			</div>`;
+            cre = i.score;
+            inde++;
+        }
+        else if(inde == 3)
+        {
+            rankings_item += `
+			<div class="position-container">
+				<img src="img/third.png" class="picture-container">
+				<div class="general third">
+					<div class="position-name">
+						<b>${i.Name}</b>
+					</div>
+				</div>
+			</div>`;
+            cre = i.score;
+            inde++;
+        }
+    }
+    rankings.innerHTML = rankings_item;
+    console.log(arr);
+    rankings.innerHTML = rankings_item;
     console.log(arr);
 })
+

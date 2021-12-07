@@ -1,0 +1,41 @@
+.end_box .rankings {
+    margin: auto;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    border-bottom: 4px solid #9a9c9a;
+}
+
+.end_box .rankings .position-container {
+    margin: 0px 20px 0px 20px;
+    width: 150px;   
+    text-align: center;
+}
+
+.end_box .rankings .position-container .general {
+    background-color: #fd9727;
+    /*box-shadow: inset -7px 0px 5px 0px #c36a48, inset 7px 0px 5px 0px #f7d8ca;*/
+}
+
+.end_box .rankings .position-container .first {
+    height: 380px;
+}
+
+.end_box .rankings .position-container .third {
+    height: 180px;
+}
+
+.end_box .rankings .position-container .picture-container {
+    background-color: #ffffff;
+    width: 120px;
+}
+
+.end_box .rankings .position-container .position-name {
+    height: fit-content;
+    width: 150px;
+    background-color: #ffffff;
+    font-family:Arial, Helvetica, sans-serif;
+    color: #c36a48;
+    font-size: 24px;
+}

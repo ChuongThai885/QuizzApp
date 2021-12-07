@@ -54,7 +54,7 @@ public class UserService {
 			String encodepass = "";
 			encodepass = new EncodeService().encodeString(pass);
 			if(encodepass != user.getPass()) return false;
-			else return new DataService().Remove_User(email);
+			else return new DataService().Remove_Object("users",user.getID());
 		}catch (Exception e1) {
 			System.out.println("Error encode: " +e1.getMessage());
 		}

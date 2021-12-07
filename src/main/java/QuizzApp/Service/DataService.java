@@ -1,5 +1,6 @@
 package QuizzApp.Service;
 
+import java.io.Console;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -70,27 +71,11 @@ public class DataService {
 		}
 	}
 	
-	public boolean Remove_User(String email)
-	{
-		String query = "delete quizzappdata.users where Email= ?";
-		try (PreparedStatement st = CreateConnect().prepareStatement(query))
-		{
-			st.setString(1, email);
-			int res = st.executeUpdate();
-			if(res >0) return true;
-				return false;
-		}
-		catch (Exception e) {
-			System.out.println("Error remove: " +e.getMessage());
-		}
-		return false;
-	}
-	
-	public boolean Add_New_Exam(int ID_User,Exam ex)
+	public boolean Add_New_Exam(int ID_User, Exam ex)// đoá, để v đi cho đẹp :3
 	{
 		String query = "insert into quizzappdata.exercise (Topic, Ex_Name, ID_User) values (?,?,?)";
-		try {
-			PreparedStatement ps = CreateConnect().prepareStatement(query);
+		try (PreparedStatement ps = CreateConnect().prepareStatement(query))
+		{
 			ps.setString(1, ex.getTopic());
 			ps.setString(2, ex.getName());
 			ps.setInt(3, ID_User);
@@ -136,22 +121,6 @@ public class DataService {
 			statement.setString(1, ex.getTopic());
 			statement.setString(2, ex.getName());
 			statement.setString(3, "" + ex.getID());
-			int result = statement.executeUpdate();
-			if(result > 0)
-				return true;
-		}
-		catch (Exception e) {
-			System.out.println(e);
-		}
-		return false;
-	}
-	
-	public boolean Remove_Exam(int ID)
-	{
-		String query = "delete from quizzappdata.exercise where ID = ?";
-		try (PreparedStatement statement = CreateConnect().prepareStatement(query))
-		{
-			statement.setString(1, "" + ID);
 			int result = statement.executeUpdate();
 			if(result > 0)
 				return true;
@@ -276,6 +245,21 @@ public class DataService {
 			System.out.println("Error get list ans :" + e.getMessage());
 		}
 		return null;
+	}
+	
+	public boolean Remove_Object(String name_object,long ID)
+	{
+		String query = "delete quizzappdata."+name_object+" where ID=" + ID;
+		try (Statement statement = CreateConnect().createStatement())
+		{
+			int res = statement.executeUpdate(query);
+			if(res >0) return true;
+				return false;
+		}
+		catch (Exception e) {
+			System.out.println("Error remove object: " +e.getMessage());
+		}
+		return false;
 	}
 	
 	private Connection CreateConnect()

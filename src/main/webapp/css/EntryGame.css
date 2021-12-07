@@ -1,10 +1,11 @@
-body{
+/* .start_box body {
     background-color: #ffffff;
     font-family: 'Poppins', sans-serif;
     color: #0487d9;
     font-size: 18px;
-}
-header {
+} */
+
+.start_box header {
     top:0;
     left: 0;
     right: 0;
@@ -19,30 +20,36 @@ header {
     font-size: 24px;
 }
 
-section{
+.start_box section {
     margin-top: 70px;
     display: flex;
     height: 100vh;
 }
-.entry-button{
+
+.start_box section .entry-button {
     padding: 20px 20px 30px 10px;
     position: fixed;
     width: 200vh;
     height: 55px;
     margin: 0px 30px 0px 30px;
+    justify-content: space-between;
+    display: flex;
+    left: 0;
+    right: 0;
 }
-.entry-button-left{
-    width: 90%;
-    float: left;
+
+.start_box section .entry-button-left{
+	height: 100%;
     align-items: center;
 }
-.entry-button-right{
-    width: 10%;
-    float: right;
+
+.start_box section .entry-button-right{
+    height: 100%;
     display: flex;
     align-items: center;
 }
-.btn-general {
+
+.start_box section .btn-general {
     margin: 0px 10px 0px 10px;
     background-color: #0487d9;
     border: 0;
@@ -53,16 +60,18 @@ section{
     cursor: pointer;
 }
 
-.btn-big {
+.start_box section .btn-big {
     font-size: 18px;
     height: 40px;
     width: 80px;
 }
-.btn-small{
+
+.start_box section .btn-small{
     height: 35px;
     width: 40px;
 }
-.entry-players{
+
+.start_box section .entry-players{
     position: fixed;
     width: 100%;
     margin-top: 100px;
@@ -71,7 +80,7 @@ section{
     justify-content: center;
 }
 
-.player-name{
+.start_box section .player-name{
     margin: 0px 10px 15px 10px;
     padding: 8px 8px 8px 8px;
     height: fit-content;

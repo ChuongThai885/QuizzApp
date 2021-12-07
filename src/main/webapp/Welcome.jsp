@@ -4,7 +4,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
@@ -12,23 +11,21 @@ response.setHeader("Pragma", "no-cache"); //HTTP 1.0
 response.setHeader("Expires", "0"); //Proxies
 User_Infor u = (User_Infor) request.getSession().getAttribute("user");
 ArrayList<Exam> le = new ArrayList<Exam>();
-le = (ArrayList<Exam>)request.getSession().getAttribute("listquizz");
-ArrayList<Integer> numberQues = (ArrayList<Integer>) request.getSession().getAttribute("numberQues");
+int n;
 try {
+	le = new QuizzService().Get_All_Exam(u.getEmail());
 	//check user login yet
 	boolean check = false;
 	Cookie[] cookies = request.getCookies();
 	for (Cookie c : cookies) {
-		if (c.getName().equals("name")){
-			check = true;
-			String str = new EncodeService().decodeString(c.getValue());		
+		if (c.getName().equals("name")) {
+	check = true;
 		}
 	}
-	
 	if (check == false)
 		response.sendRedirect("index.jsp");
 	//le = (ArrayList<Exam>) request.getSession().getAttribute("listquizz");
-	
+
 } catch (Exception e) {
 	System.out.println(e.getMessage());
 }
@@ -37,16 +34,17 @@ try {
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<title>Trang cá nhân</title>
-	<link rel="stylesheet" href="css/Welcome.css">
+<meta charset="UTF-8">
+<title>Trang cá nhân</title>
+<link rel="stylesheet" href="css/Welcome.css">
 </head>
 
 <body>
 	<header>
 		<div class="left-container">
-			<a href="HomePage.html"><img src="https://www.dng24.co.uk/wp-content/uploads/2016/12/quiz.jpg" height="50">
-			</a>
+			<a href="HomePage.html"><img
+				src="https://www.dng24.co.uk/wp-content/uploads/2016/12/quiz.jpg"
+				height="50"> </a>
 		</div>
 		<div class="nav-container">
 			<ul>
@@ -55,11 +53,13 @@ try {
 			</ul>
 		</div>
 		<div class="right-container">
-			<!-- <div class="right-item">
-				<input type="text" name="txtSearch" class="form-input" placeholder="Tìm kiếm">
-			</div> -->
 			<div class="right-item">
-				Chào, <%=u.getName() %><!--${name}-->
+				<input type="text" name="txtSearch" class="form-input"
+					placeholder="Tìm kiếm">
+			</div>
+			<div class="right-item">
+				Chào,
+				<%=u.getName()%><!--${name}-->
 			</div>
 			<div class="right-item">
 				<a href="Logout">Đăng xuất</a>
@@ -69,37 +69,54 @@ try {
 	<div class="content">
 		<div class="personal-info">
 			<div class="info-item">
-				<h4>Thông tin cá nhân </h4>
+				<h4>Thông tin cá nhân</h4>
 			</div>
 			<div class="info-item">
-				<%=u.getName() %>
+				<%=u.getName()%>
 			</div>
 			<div class="info-item">
-				<%=u.getEmail() %>
+				<%=u.getEmail()%>
 			</div>
 			<div class="info-item">
 				Tạo quiz mới <input type="button" onclick="location.href='AddQuiz.jsp';" class="btn-general btn-add" value="+">
 			</div>
 		</div>
 		<div class="quizlist-container">
-		<p>Bạn hiện có <%=le.size() %> quiz</p>
-		<%for (int i=0; i<le.size(); i++){%>
+			<%
+			for (Exam e : le) {
+				try
+				{
+					e.getName();
+				}
+				catch(Exception e1)
+				{
+					response.sendRedirect("index.jsp");
+				}
+				n = new QuizzService().Get_Number_Of_Question(e.getID());
+			%>
 			<div class="quiz-container">
 				<div class="quiz-title">
 					<div class="title-text">
-						<b><%=le.get(i).getName() %></b>
+						<b><%=e.getName()%></b>
 					</div>
 					<div class="btn-group">
-						<input type="button" class="btn-general btn-important" value="Chơi">
+						<form method="post" action="PlayGame?id=<%=e.getID()%>">
+							<input type="submit" class="btn-general btn-important"
+								value="Chơi">
+						</form>
 						<input type="submit" class="btn-general btn-other" value="Sửa">
 					</div>
 				</div>
 				<div class="quiz-content">
-					<p><%=le.get(i).getTopic() %></p>
-					<p><%=numberQues.get(i)  %> câu hỏi</p>					
+					<p><%=e.getTopic()%></p>
+					<p><%=n%>
+						câu hỏi
+					</p>
 				</div>
 			</div>
-			<%} %>
+			<%
+			}
+			%>
 		</div>
 	</div>
 </body>
