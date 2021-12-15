@@ -1,6 +1,7 @@
 package QuizzApp.Controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -40,8 +41,9 @@ public class AddQuizController extends HttpServlet {
 			Exam e = new Exam(quiz, topic, iduser);
 			boolean b = quizservice.Add_New_Quizz(iduser, e);
 			System.out.println(b);
-			
-			request.setAttribute("quiz", e);
+			ArrayList<Exam> ql = quizservice.Get_All_Exam(user.getEmail());
+			Exam q = ql.get(ql.size()-1);
+			request.setAttribute("quiz", q);
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/AddQuestion.jsp");
 			rd.forward(request, response);
 		}

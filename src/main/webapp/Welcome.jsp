@@ -13,7 +13,7 @@ User_Infor u = (User_Infor) request.getSession().getAttribute("user");
 ArrayList<Exam> le = new ArrayList<Exam>();
 int n;
 try {
-	le = new QuizzService().Get_All_Exam(u.getEmail());
+	//le = new QuizzService().Get_All_Exam(u.getEmail());
 	//check user login yet
 	boolean check = false;
 	Cookie[] cookies = request.getCookies();
@@ -24,8 +24,8 @@ try {
 	}
 	if (check == false)
 		response.sendRedirect("index.jsp");
-	//le = (ArrayList<Exam>) request.getSession().getAttribute("listquizz");
-
+	le = (ArrayList<Exam>) request.getSession().getAttribute("listquizz");
+	
 } catch (Exception e) {
 	System.out.println(e.getMessage());
 }
@@ -92,8 +92,10 @@ try {
 				{
 					response.sendRedirect("index.jsp");
 				}
-				n = new QuizzService().Get_Number_Of_Question(e.getID());
+				n = (int) request.getSession().getAttribute("numberQuiz");
+				//n = new QuizzService().Get_Number_Of_Question(e.getID());
 			%>
+			Bạn hiện có <%=n %> quiz
 			<div class="quiz-container">
 				<div class="quiz-title">
 					<div class="title-text">
@@ -109,8 +111,7 @@ try {
 				</div>
 				<div class="quiz-content">
 					<p><%=e.getTopic()%></p>
-					<p><%=n%>
-						câu hỏi
+					<p>... câu hỏi
 					</p>
 				</div>
 			</div>

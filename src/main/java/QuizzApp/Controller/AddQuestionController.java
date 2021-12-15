@@ -43,7 +43,7 @@ public class AddQuestionController extends HttpServlet {
 		Question ques = new Question();
 		QuizzService quizservice = new QuizzService();
 		ArrayList<Answer> la = new ArrayList<Answer>();
-		Answer a = new Answer();
+		
 		if (question.equals("") || time.equals("") || trueans.equals("") || 
 				ans1.equals("") || ans2.equals("") || ans3.equals("") || ans4.equals("")) {
 			response.sendRedirect("AddQues.jsp");
@@ -56,14 +56,15 @@ public class AddQuestionController extends HttpServlet {
 			ques.setIs_Multi(false);
 			form.setQues(ques);
 			for (int i = 0; i<4; i++) {
+				Answer a = new Answer();
 				a.setAns(la1[i]);
 				if (Integer.parseInt(trueans)==i) a.setSelected(true);
 				else a.setSelected(false);
-				a.toString();
+				System.out.println(a.toString());				
 				la.add(a);
 			}
 			form.setAns(la);
-			System.out.println(form.getQues().getQues()); 
+			System.out.println(form.getQues().getQues() + ", " + form.getAns()); 
 			quizservice.add_New_Question(ID_Ex, form);
 			ArrayList<QuestionForm> ql = quizservice.get_List_QuestionForm_by_ID_Exam(ID_Ex);
 			Exam e = quizservice.Get_Exam_by_ID(ID_Ex);

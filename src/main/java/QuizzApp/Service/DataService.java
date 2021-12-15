@@ -138,7 +138,7 @@ public class DataService {
 		try (PreparedStatement statement = CreateConnect().prepareStatement(query))
 		{
 			statement.setString(1, form.getQues().getQues());
-			statement.setString(2, "" + form.getQues().isIs_Multi());
+			if (form.getQues().isIs_Multi() == false) statement.setInt(2, 0);
 			statement.setString(3, "" + form.getQues().getCountdown_Time());
 			statement.setString(4, "" + ID_Ex);
 			int result = statement.executeUpdate();
@@ -173,7 +173,12 @@ public class DataService {
 				try (PreparedStatement statement = CreateConnect().prepareStatement(query))
 				{
 					statement.setString(1, i.getAns());
-					statement.setString(2, "" + i.isSelected());
+					if (i.isSelected() ==  false) {
+						statement.setInt(2, 0);
+					}
+					else {
+						statement.setInt(2, 1);
+					}
 					statement.setString(3, form.getQues().getQues());
 					int result = statement.executeUpdate();
 					if(result < 1)

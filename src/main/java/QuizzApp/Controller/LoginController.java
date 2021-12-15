@@ -3,6 +3,7 @@ package QuizzApp.Controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
@@ -30,8 +31,8 @@ public class LoginController extends HttpServlet {
 			ses.setAttribute("user", user);			
 			ArrayList<Exam> el = new QuizzService().Get_All_Exam(email);
 			ses.setAttribute("listquizz", el);		
-			//int numberQuiz = el.size();
-			//ses.setAttribute("numberQuiz", numberQuiz);
+			int numberQuiz = el.size();
+			ses.setAttribute("numberQuiz", numberQuiz);
 			ArrayList<Integer> numberQues = new ArrayList<Integer>();
 			int n;
 			for (Exam e : el) {
@@ -48,7 +49,9 @@ public class LoginController extends HttpServlet {
 			}
 			Cookie cookie = new Cookie("name", email);
 			response.addCookie(cookie);
-			response.sendRedirect("Welcome.jsp");
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/Welcome.jsp");
+			rd.forward(request, response);
+			//response.sendRedirect("Welcome.jsp");
 		}
 		else 
 		{

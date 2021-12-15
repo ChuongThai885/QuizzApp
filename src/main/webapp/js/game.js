@@ -4,6 +4,7 @@ const start_box = document.querySelector(".start_box");
 const quiz_box = document.querySelector(".quiz_box");
 const end_box = document.querySelector(".end_box");
 const result = document.querySelector(".result");
+const result_icon = document.querySelector(".result-icons");
 const option_list = document.querySelector(".option_list");
 const timeText = document.querySelector(".timer .time_left_txt");
 const timeCount = document.querySelector(".timer .timer_sec");
@@ -45,6 +46,7 @@ const tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
 //all funtions 
 function ShowQuestion() //show question received from server
 {
+	result_icon.innerHTML = "";
     const que_text = document.querySelector(".que_text");
     let que_tag = '<span>' + quiz.question + '</span>';
     let option_tag = '';
