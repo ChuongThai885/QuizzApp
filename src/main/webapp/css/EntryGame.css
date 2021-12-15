@@ -27,11 +27,9 @@
 }
 
 .start_box section .entry-button {
-    padding: 20px 20px 30px 10px;
     position: fixed;
-    width: 200vh;
     height: 55px;
-    margin: 0px 30px 0px 30px;
+    margin: 20px 30px 0px 30px;
     justify-content: space-between;
     display: flex;
     left: 0;
@@ -39,12 +37,11 @@
 }
 
 .start_box section .entry-button-left{
-	height: 100%;
+	display: flex;
     align-items: center;
 }
 
 .start_box section .entry-button-right{
-    height: 100%;
     display: flex;
     align-items: center;
 }

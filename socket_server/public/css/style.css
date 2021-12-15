@@ -7,13 +7,59 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: 'Poppins', sans-serif;
+	font-family: 'Arial', 'Poppins', sans-serif;
 }
 
 body {
-	background-color: #ecf5ff;
+	background-color: #ffffff;
 }
-
+.start_box {
+	display: flex;	
+    color: #0487d9;
+    height: 100vh;
+    text-align: center;
+    justify-content: center;
+}
+.start_box h1{
+    font-size: 36px;
+    margin-top:20px;
+}
+.start_box .form-input-container{
+    -webkit-box-align: center;
+    text-align: center;
+    margin: auto;
+    width: 550px;
+    border-radius: 7px;
+    border: 3px solid #84c5fe;
+    align-items: center;
+}
+.start_box .input-item{
+	margin: 40px 20px 40px 20px;
+}
+.start_box .input-textbox{
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    border: 2px solid #84c5fe;
+    border-radius: 5px;
+    width: 400px;
+    height: 50px;
+    text-align: center;
+    color: #0487d9;
+}
+.start_box .input-textbox::placeholder{
+    color: #dfdfdf;
+}
+.start_box .input-button{
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    background-color: #0487d9;
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px 0px #84c5fe;
+    width: 400px;
+    height: 50px;
+    color: #ffffff;
+}
 .quiz_box {
 	position: relative;
 	width: 100%;
@@ -142,7 +188,6 @@ section .option_list .option.disabled {
 	pointer-events: none;
 }
 section .option_list .option.disabled-selected {
-	pointer-events: none;
 	opacity: 0.5;
 }
 .quiz_box section .option_list .option .icon {

@@ -30,6 +30,14 @@ let received_time = new Date();
 let selected_Answer = '';
 let timerID;
 
+const answer_icons = [
+  '<i class="fas fa-square"></i>',
+  '<i class="fas fa-circle"></i>',
+  '<i class="fas fa-star"></i>',
+  '<i class="fas fa-heart"></i>'
+];
+let num_icon = 0;
+
 // add event for process data on start_box
 form_sendID.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -56,12 +64,12 @@ form_sendName.addEventListener('submit', (e) => {
 
     socket.emit('set-name', id_room, name, message => {
         if (message == "OK") {
-            document.getElementById('welcome-tag').textContent = `Welcome player, you are in room ${id_room}`;
+            document.getElementById('welcome-tag').textContent = `Xin chào ${name}, bạn đang ở phòng chơi ${id_room}`;
             document.getElementById("send-name").style.display = "none";
         }
         else {
             name = "";
-            document.getElementById('welcome-tag').textContent = "Name has been used, please types again";
+            document.getElementById('welcome-tag').textContent = "Tên này đã được sử dụng, vui lòng nhập lại";
         }
     })
 })
@@ -82,8 +90,11 @@ function ShowQuestion() //show question received from server
     let que_tag = '<span>' + quiz.question + '</span>';
     let option_tag = '';
     for (var i of quiz.option) {
-        option_tag += '<div class="option" onclick="optionSelected(this)"><span>' + i + '</span></div>';
+        option_tag += '<div class="option" onclick="optionSelected(this)"><div class="icon anwsers">' + answer_icons[num_icon] + 
+    	'</div><div class="option-text">' + i + '</div></div>';
+    	num_icon += 1;
     }
+	num_icon = 0;
     que_text.innerHTML = que_tag;
     option_list.innerHTML = option_tag;
     clearInterval(timerID);
@@ -124,6 +135,7 @@ function startTimer() //start counting, get received timex
                 const correctAns = quiz.answer; //getting correct answer from array
 
                 const userAns = selected_Answer;
+				
                 //show incorrect answer
                 for (i = 0; i < allOptions; i++) {
                     if (option_list.children[i].textContent == userAns) {
@@ -145,7 +157,8 @@ function select_CorrectAnswer()
     const allOptions = option_list.children.length; //getting all option items
     for (i = 0; i < allOptions; i++) {
         if (option_list.children[i].textContent == correctAns) { //if there is an option which is matched to an array answer 
-            option_list.children[i].setAttribute("class", "option correct"); //adding green color to matched option
+            option_list.children[i].classList.remove("disabled-selected");
+			option_list.children[i].classList.add("correct"); //adding green color to matched option
             option_list.children[i].insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to matched option
             console.log("Auto selected correct answer.");
         }
@@ -166,7 +179,7 @@ function optionSelected(answer) {
     console.log(selected_time - received_time);
     console.log(received_time + "," + selected_time + "\n" + time_left);
     selected_Answer = answer.textContent;
-    
+    answer.classList.add("disabled-selected");
     if (selected_Answer == quiz.answer) {
         score = calculate_score();
         console.log(score + "inner");
@@ -175,9 +188,9 @@ function optionSelected(answer) {
 
     console.log(score);
 
-    for (i = 0; i < allOptions; i++) {
-        option_list.children[i].classList.add("disabled"); //once user select an option then disabled all options
-    }
+    /*for (i = 0; i < allOptions; i++) {
+        option_list.children[i].classList.add("disabled-selected"); //once user select an option then disabled all options
+    }*/
 }
 
 function calculate_score() {
