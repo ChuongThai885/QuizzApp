@@ -156,9 +156,8 @@ function select_CorrectAnswer()
     const correctAns = quiz.answer; //getting correct answer from array
     const allOptions = option_list.children.length; //getting all option items
     for (i = 0; i < allOptions; i++) {
-        if (option_list.children[i].textContent == correctAns) { //if there is an option which is matched to an array answer 
-            option_list.children[i].classList.remove("disabled-selected");
-			option_list.children[i].classList.add("correct"); //adding green color to matched option
+        if (option_list.children[i].textContent == correctAns) { //if there is an option which is matched to an array answer            
+			option_list.children[i].setAttribute("class","correct"); //adding green color to matched option
             option_list.children[i].insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to matched option
             console.log("Auto selected correct answer.");
         }
@@ -179,7 +178,7 @@ function optionSelected(answer) {
     console.log(selected_time - received_time);
     console.log(received_time + "," + selected_time + "\n" + time_left);
     selected_Answer = answer.textContent;
-    answer.classList.add("disabled-selected");
+    
     if (selected_Answer == quiz.answer) {
         score = calculate_score();
         console.log(score + "inner");
@@ -188,9 +187,10 @@ function optionSelected(answer) {
 
     console.log(score);
 
-    /*for (i = 0; i < allOptions; i++) {
-        option_list.children[i].classList.add("disabled-selected"); //once user select an option then disabled all options
-    }*/
+    for (i = 0; i < allOptions; i++) {
+        option_list.children[i].classList.add("disabled"); //once user select an option then disabled all options
+    }
+	answer.classList.add("disabled-selected");
 }
 
 function calculate_score() {
@@ -201,6 +201,7 @@ function calculate_score() {
 // event socket process funtion
 socket.on('get-question', (maxquestion, question) => {
     document.getElementById('welcome-tag').textContent = "";
+	start_box.classList.add("hidden");
     quiz_box.classList.remove("hidden");
     setMaxQuestion(maxquestion);
     quiz = JSON.parse(question);
@@ -224,10 +225,12 @@ socket.on('end-quiz',() => {
         for (i = 0; i < allOptions; i++) {
             if (option_list.children[i].textContent == userAns) {
                 if (userAns == correctAns) {
+					option_list.children[i].classList.remove("disabled-selected");
                     option_list.children[i].classList.add("correct");
                     option_list.children[i].insertAdjacentHTML("beforeend", tickIconTag);
                     console.log('Correct answer');
                 } else {
+					option_list.children[i].classList.remove("disabled-selected");
                     option_list.children[i].classList.add("incorrect");
                     option_list.children[i].insertAdjacentHTML("beforeend", crossIconTag);
                     console.log('Inorrect answer');
