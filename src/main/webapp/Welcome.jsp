@@ -11,9 +11,9 @@ response.setHeader("Pragma", "no-cache"); //HTTP 1.0
 response.setHeader("Expires", "0"); //Proxies
 User_Infor u = (User_Infor) request.getSession().getAttribute("user");
 ArrayList<Exam> le = new ArrayList<Exam>();
-int n;
+ArrayList<Integer> numques = new ArrayList<Integer>();
+
 try {
-	//le = new QuizzService().Get_All_Exam(u.getEmail());
 	//check user login yet
 	boolean check = false;
 	Cookie[] cookies = request.getCookies();
@@ -24,8 +24,8 @@ try {
 	}
 	if (check == false)
 		response.sendRedirect("index.jsp");
-	le = (ArrayList<Exam>) request.getSession().getAttribute("listquizz");
-	
+	le = (ArrayList<Exam>) request.getSession().getAttribute("listquizz");	
+	numques = (ArrayList<Integer>) request.getSession().getAttribute("numberQues");
 } catch (Exception e) {
 	System.out.println(e.getMessage());
 }
@@ -37,6 +37,8 @@ try {
 <meta charset="UTF-8">
 <title>Trang cá nhân</title>
 <link rel="stylesheet" href="css/Welcome.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 
 <body>
@@ -49,7 +51,7 @@ try {
 		<div class="nav-container">
 			<ul>
 				<li><a href="Welcome.jsp">Trang cá nhân</a></li>
-				<li><a href="AddQuiz.jsp">Tạo quiz mới</a></li>
+				<li><a href="AddQuizController">Tạo quiz mới</a></li>
 			</ul>
 		</div>
 		<div class="right-container">
@@ -78,40 +80,46 @@ try {
 				<%=u.getEmail()%>
 			</div>
 			<div class="info-item">
-				Tạo quiz mới <input type="button" onclick="location.href='AddQuiz.jsp';" class="btn-general btn-add" value="+">
+				Tạo quiz mới <input type="button" onclick="location.href='AddQuizController';" class="btn-general btn-add" value="+">
 			</div>
 		</div>
 		<div class="quizlist-container">
-			<%
-			for (Exam e : le) {
+		<%int n = (int) request.getSession().getAttribute("numberQuiz"); %>
+		Bạn hiện có <%=n %> quiz
+			<%			
+			for (int i=0; i<le.size(); i++) {
 				try
 				{
-					e.getName();
+					le.get(i).getName();
 				}
 				catch(Exception e1)
 				{
 					response.sendRedirect("index.jsp");
 				}
-				n = (int) request.getSession().getAttribute("numberQuiz");
+				
 				//n = new QuizzService().Get_Number_Of_Question(e.getID());
 			%>
-			Bạn hiện có <%=n %> quiz
+			
 			<div class="quiz-container">
 				<div class="quiz-title">
 					<div class="title-text">
-						<b><%=e.getName()%></b>
+						<b><%=le.get(i).getName()%></b>
 					</div>
 					<div class="btn-group">
-						<form method="post" action="PlayGame?id=<%=e.getID()%>">
+						<form method="post" action="PlayGame?id=<%=le.get(i).getID()%>">
 							<input type="submit" class="btn-general btn-important"
 								value="Chơi">
 						</form>
 						<input type="submit" class="btn-general btn-other" value="Sửa">
+						<form method="post" action="">
+						<button type="submit" class="btn-general btn-del"><i class="fas fa-trash-alt"></i></button>
+						</form>
+					
 					</div>
 				</div>
 				<div class="quiz-content">
-					<p><%=e.getTopic()%></p>
-					<p>... câu hỏi
+					<p><%=le.get(i).getTopic()%></p>
+					<p><%=numques.get(i) %> câu hỏi
 					</p>
 				</div>
 			</div>

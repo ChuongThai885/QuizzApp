@@ -33,9 +33,9 @@ public class LoginController extends HttpServlet {
 			ses.setAttribute("listquizz", el);		
 			int numberQuiz = el.size();
 			ses.setAttribute("numberQuiz", numberQuiz);
-			ArrayList<Integer> numberQues = new ArrayList<Integer>();
-			int n;
+			ArrayList<Integer> numberQues = new ArrayList<Integer>();			
 			for (Exam e : el) {
+				int n;
 				n = new QuizzService().Get_Number_Of_Question(e.getID());
 				numberQues.add(n);
 			}

@@ -93,11 +93,11 @@ public class DataService {
 		try (PreparedStatement st = CreateConnect().prepareStatement(query))
 		{
 			st.setString(1, email);
-			ArrayList<Exam> le = new ArrayList<Exam>();
-			Exam ex = new Exam();
+			ArrayList<Exam> le = new ArrayList<Exam>();			
 			ResultSet res = st.executeQuery();
 			while(res.next())
 			{
+				Exam ex = new Exam();
 				ex.setID(res.getInt("ID"));
 				ex.setTopic(res.getString("Topic"));
 				ex.setName(res.getString("Ex_Name"));

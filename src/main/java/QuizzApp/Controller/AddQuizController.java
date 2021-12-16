@@ -23,7 +23,7 @@ public class AddQuizController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		response.sendRedirect("AddQuiz.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
