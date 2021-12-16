@@ -1,4 +1,4 @@
-<%@page import="QuizzApp.Model.User_Infor"%>
+<%@page import="QuizzApp.Model.Exam"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -6,23 +6,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Tạo quiz</title>
+<title>Sửa quiz</title>
 <link rel="stylesheet" href="css/AddQuiz.css">
 </head>
 <body>	
 <%
-	User_Infor u = (User_Infor) request.getSession().getAttribute("user");
-	if (u!=null){
+	Exam e = (Exam) request.getSession().getAttribute("quiz");
+	if (e!=null){
 %>
 	<!-- form tạo quiz -->
 	<div class="add-ques-form" id="addquesform">
-		<form name="addform" action="AddQuizController" method="post" class="form-inner">
-            <h1>Tạo Quiz mới</h1>
+		<form name="addform" action="UpdateQuizController" method="post" class="form-inner">
+            <h1>Sửa thông tin Quiz</h1>
+            <div class="quiz-info" style="display:none">
+                <input type="text" name="id" value="<%=e.getID()%>">
+                <!-- <input type="text" name="edit" value="1">  -->
+            </div>
             <div class="quiz-info">
-                <input type="text" name="txtQuiz" class="form-input" placeholder="Tên Quiz" required="required">
+                <input type="text" name="txtQuiz" class="form-input" value="<%=e.getName()%>" required="required">
             </div>
 			<div class="quiz-info">
-                <input type="text" name="txtTopic" class="form-input" placeholder="Chủ đề" required="required">
+                <input type="text" name="txtTopic" class="form-input" value="<%=e.getTopic()%>" required="required">
             </div>
             <div class="group-button">
                 <div class="btn-container">

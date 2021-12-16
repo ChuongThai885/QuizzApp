@@ -109,10 +109,11 @@ try {
 						<form method="post" action="PlayGame?id=<%=le.get(i).getID()%>">
 							<input type="submit" class="btn-general btn-important"
 								value="Chơi">
-						</form>
-						<input type="submit" class="btn-general btn-other" value="Sửa">
+						</form>						
+						<input type="button" onclick="location.href='UpdateQuizController?id=<%=le.get(i).getID()%>';" 
+						class="btn-general btn-other" value="Sửa">
 						<form method="post" action="">
-						<button type="submit" class="btn-general btn-del"><i class="fas fa-trash-alt"></i></button>
+							<button type="submit" class="btn-general btn-del"><i class="fas fa-trash-alt"></i></button>
 						</form>
 					
 					</div>

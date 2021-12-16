@@ -9,6 +9,8 @@
 <meta charset="UTF-8">
 <title>Tạo quiz</title>
 <link rel="stylesheet" href="css/AddQuestion.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <script>
 	// Popup Open
 	function popupOpen() {
@@ -64,11 +66,12 @@
 	</div>
     <!--show ra câu hỏi-->
     <% if (ql!=null){
+    	int dem = 1;
     for (QuestionForm q : ql) {%>
     <div class="question-show">
         <div class="question-header">
             <div class="question-header-text">
-                <%=q.getQues() %>
+                Câu hỏi <%=dem %>
             </div>
             <div class="group-button">
                     <input type="submit" name="btnEditQues" class="btn-general btn-important" value="Sửa">
@@ -77,25 +80,27 @@
         </div>
         <div class="question-content">
             <div class="question-title">
-                Một tháng có tối đa bao nhiêu ngày chủ nhật?
+                <%=q.getQues().getQues() %>
             </div>
+            <%for (int i=0; i < q.getAns().size();i++){ %>
             <div class="anwser">
-
+				<i class="far fa-circle"></i><%=q.getAns().get(i).getAns() %>
             </div>
+            <%} %>
         </div>
     </div>
-    <%}} %>
+    <%dem+=1;}} %>
     <!--overlay-->
 	<div class="overlay" id="overlay" style="display: none;"></div>
 	<!-- form sửa thông tin quiz -->
 	<div class="edit-form" id="editquizform" style="display: none;">
-		<form name="quizform" class="form-inner">
-            <h1>Thông tin Quiz</h1>
+		<form method="post" name="quizform" class="form-inner" action="UpdateQuizController?idexam=<%=e.getID()%>"> 
+            <h1>Thông tin Quiz</h1>         
             <div class="quiz-info">
-                <input type="text" name="txtQuiz" class="form-input" placeholder="Tên Quiz">
+                <input type="text" name="txtQuiz" class="form-input" value="<%=e.getName()%>" required="required">
             </div>
 			<div class="quiz-info">
-                <input type="text" name="txtTopic" class="form-input" placeholder="Chủ đề">
+                <input type="text" name="txtTopic" class="form-input" value="<%=e.getTopic()%>" required="required">
             </div>
             <div class="group-button" style="justify-content:center">
                 <input type="submit" name="btnSaveQuiz" class="btn-general btn-important" value="Lưu">
@@ -112,7 +117,7 @@
             <h1>Câu hỏi mới</h1>
             <input type="text" name="idquiz" value="<%=e.getID() %>" style="display:none;">
 			<div class="quiz-info">
-				<input type="text" name="txtQues" class="form-input" placeholder="Câu hỏi">
+				<input type="text" name="txtQues" class="form-input" placeholder="Câu hỏi" required="required">
 			</div>
 			<div class="quiz-info">
 				<select name="selectTime" class="select-box">
@@ -124,19 +129,19 @@
 			</div>	
 			<div class="quiz-info">
 				<input type="radio" name="trueAns" value="1">
-				<input type="text" name="txtAns1" class="form-input" placeholder="Đáp án 1">
+				<input type="text" name="txtAns1" class="form-input" placeholder="Đáp án 1" required="required">
 			</div>
 			<div class="quiz-info">
 				<input type="radio" name="trueAns" value="2">
-				<input type="text" name="txtAns2" class="form-input" placeholder="Đáp án 2">
+				<input type="text" name="txtAns2" class="form-input" placeholder="Đáp án 2" required="required">
 			</div>
 			<div class="quiz-info">
 				<input type="radio" name="trueAns" value="3">
-				<input type="text" name="txtAns3" class="form-input" placeholder="Đáp án 3">
+				<input type="text" name="txtAns3" class="form-input" placeholder="Đáp án 3" required="required">
 			</div>
 			<div class="quiz-info">
 				<input type="radio" name="trueAns" value="4">
-				<input type="text" name="txtAns4" class="form-input" placeholder="Đáp án 4">
+				<input type="text" name="txtAns4" class="form-input" placeholder="Đáp án 4" required="required">
 			</div>
 			<div class="group-button" style="justify-content:center">
 				<input type="submit" name="btnAddQues" class="btn-general btn-important" value="Lưu">

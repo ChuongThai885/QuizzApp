@@ -126,7 +126,7 @@ public class DataService {
 				return true;
 		}
 		catch (Exception e) {
-			System.out.println(e);
+			System.out.println("Update error: " + e);
 		}
 		return false;
 	}

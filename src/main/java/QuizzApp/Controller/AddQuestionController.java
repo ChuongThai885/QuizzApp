@@ -44,11 +44,11 @@ public class AddQuestionController extends HttpServlet {
 		QuizzService quizservice = new QuizzService();
 		ArrayList<Answer> la = new ArrayList<Answer>();
 		
-		if (question.equals("") || time.equals("") || trueans.equals("") || 
+		/*if (question.equals("") || time.equals("") || trueans.equals("") || 
 				ans1.equals("") || ans2.equals("") || ans3.equals("") || ans4.equals("")) {
 			response.sendRedirect("AddQues.jsp");
 		}
-		else {
+		else {*/
 			
 			ques.setQues(question);
 			ques.setCountdown_Time(Integer.parseInt(time));
@@ -72,7 +72,7 @@ public class AddQuestionController extends HttpServlet {
 			request.setAttribute("queslist", ql);			
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/AddQuestion.jsp");
 			rd.forward(request, response);
-		}
+		//}
 	}
 
 }
