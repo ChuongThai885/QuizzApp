@@ -254,7 +254,8 @@ public class DataService {
 	
 	public boolean Remove_Object(String name_object,long ID)
 	{
-		String query = "delete quizzappdata."+name_object+" where ID=" + ID;
+		String query = "delete from quizzappdata."+name_object+" where ID=" + ID;
+		System.out.println(query);
 		try (Statement statement = CreateConnect().createStatement())
 		{
 			int res = statement.executeUpdate(query);

@@ -28,6 +28,8 @@ public class AddQuestionController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("utf-8");
 		String question = request.getParameter("txtQues");
 		String time = request.getParameter("selectTime");
 		String trueans = request.getParameter("trueAns");
@@ -56,12 +58,14 @@ public class AddQuestionController extends HttpServlet {
 			ques.setIs_Multi(false);
 			form.setQues(ques);
 			for (int i = 0; i<4; i++) {
-				Answer a = new Answer();
-				a.setAns(la1[i]);
-				if (Integer.parseInt(trueans)==i) a.setSelected(true);
-				else a.setSelected(false);
-				System.out.println(a.toString());				
-				la.add(a);
+				if (!la1[i].equals("")) {
+					Answer a = new Answer();
+					a.setAns(la1[i]);
+					if (Integer.parseInt(trueans)==i) a.setSelected(true);
+					else a.setSelected(false);
+					System.out.println(a.toString());				
+					la.add(a);
+				}				
 			}
 			form.setAns(la);
 			System.out.println(form.getQues().getQues() + ", " + form.getAns()); 

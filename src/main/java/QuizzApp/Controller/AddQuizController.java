@@ -28,12 +28,14 @@ public class AddQuizController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// doGet(request, response);
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("utf-8");
 		String quiz = request.getParameter("txtQuiz");
 		String topic = request.getParameter("txtTopic");
 		if (quiz.equals("") || topic.equals("")) {
 			response.sendRedirect("AddQuiz.jsp");
 		} else {
+			
 			User_Infor user = (User_Infor) request.getSession().getAttribute("user");
 			int iduser = (int) user.getID();
 			System.out.println(iduser);

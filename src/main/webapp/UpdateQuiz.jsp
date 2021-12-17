@@ -16,10 +16,10 @@
 %>
 	<!-- form tạo quiz -->
 	<div class="add-ques-form" id="addquesform">
-		<form name="addform" action="UpdateQuizController" method="post" class="form-inner">
+		<form name="addform" action="UpdateQuizController?id=<%=e.getID()%>" method="post" class="form-inner">
             <h1>Sửa thông tin Quiz</h1>
             <div class="quiz-info" style="display:none">
-                <input type="text" name="id" value="<%=e.getID()%>">
+                
                 <!-- <input type="text" name="edit" value="1">  -->
             </div>
             <div class="quiz-info">

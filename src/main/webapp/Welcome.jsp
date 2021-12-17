@@ -111,11 +111,9 @@ try {
 								value="Chơi">
 						</form>						
 						<input type="button" onclick="location.href='UpdateQuizController?id=<%=le.get(i).getID()%>';" 
-						class="btn-general btn-other" value="Sửa">
-						<form method="post" action="">
-							<button type="submit" class="btn-general btn-del"><i class="fas fa-trash-alt"></i></button>
-						</form>
-					
+						class="btn-general btn-other" value="Sửa">					
+						<button type="button" class="btn-general btn-del" onclick="location.href='DelQuizController?id=<%=le.get(i).getID() %>';">
+						<i class="fas fa-trash-alt"></i></button>										
 					</div>
 				</div>
 				<div class="quiz-content">

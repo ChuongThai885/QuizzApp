@@ -40,6 +40,8 @@ public class UpdateQuizController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("utf-8");
 		String idexam = request.getParameter("idexam");
 		// String edit = request.getParameter("edit");
 		int ID_Exam = Integer.parseInt(idexam);

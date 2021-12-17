@@ -48,7 +48,8 @@
 		</div>
 		<div class="group-button">			
 			<button name="btnSave" class="btn-general btn-important">Chơi</button>
-			<button name="btnExit" class="btn-general btn-other">Thoát</button>
+			<button name="btnExit" class="btn-general btn-other" 
+			onclick="location.href='';">Thoát</button>
 		</div>
 	</header>
 	<!-- Tên quiz, thêm câu hỏi -->
@@ -75,7 +76,9 @@
             </div>
             <div class="group-button">
                     <input type="submit" name="btnEditQues" class="btn-general btn-important" value="Sửa">
-                    <input type="button" name="btnCloseQues" class="btn-general btn-other" value="Huỷ">
+                    <button type="button" class="btn-general btn-other" 
+                    onclick="location.href='DelQuesController?id=<%=q.getQues().getID() %>&quiz=<%=q.getQues().getID_Ex()%>';">
+                    <i class="fas fa-trash-alt"></i></button>
             </div>
         </div>
         <div class="question-content">
@@ -113,9 +116,9 @@
 	<div class="overlay" id="overlay" style="display: none;"></div>
 	<!-- form thêm câu hỏi -->
 	<div class="ques-form" id="addquesform" style="display: none;">
-		<form name="quizform" action="AddQuestionController" method="post" class="form-inner">
+		<form name="quizform" action="AddQuestionController?idquiz=<%=e.getID() %>" method="post" class="form-inner">
             <h1>Câu hỏi mới</h1>
-            <input type="text" name="idquiz" value="<%=e.getID() %>" style="display:none;">
+            
 			<div class="quiz-info">
 				<input type="text" name="txtQues" class="form-input" placeholder="Câu hỏi" required="required">
 			</div>
@@ -137,11 +140,11 @@
 			</div>
 			<div class="quiz-info">
 				<input type="radio" name="trueAns" value="3">
-				<input type="text" name="txtAns3" class="form-input" placeholder="Đáp án 3" required="required">
+				<input type="text" name="txtAns3" class="form-input" placeholder="Đáp án 3">
 			</div>
 			<div class="quiz-info">
 				<input type="radio" name="trueAns" value="4">
-				<input type="text" name="txtAns4" class="form-input" placeholder="Đáp án 4" required="required">
+				<input type="text" name="txtAns4" class="form-input" placeholder="Đáp án 4">
 			</div>
 			<div class="group-button" style="justify-content:center">
 				<input type="submit" name="btnAddQues" class="btn-general btn-important" value="Lưu">
