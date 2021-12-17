@@ -306,5 +306,64 @@ public class DataService {
 		return null;
 	}
 
+	public boolean Update_Question(int iD_Ques, QuestionForm form) {
+		String query = "update quizzappdata.question set Ques=?, Countdown_Time=? where ID=?";
+		try (PreparedStatement st = CreateConnect().prepareStatement(query)){
+			st.setString(1, form.getQues().getQues());
+			st.setInt(2, form.getQues().getCountdown_Time());
+			st.setInt(3, iD_Ques);
+			int result = st.executeUpdate();
+			if(result < 1)
+				return false;
+		} catch (Exception e) {
+			System.out.println("update question: " + e.getMessage());
+			return false;
+		}
+		
+		try {
+			for (Answer a : form.getAns()) {
+				query = "update quizzappdata.answers set Answer=?, Selected=? where ID=?";
+				try (PreparedStatement st = CreateConnect().prepareStatement(query)){
+					st.setString(1, a.getAns());
+					if (a.isSelected()==false) st.setInt(2, 0);
+					else st.setInt(2, 1);
+					st.setLong(3, a.getID());
+					int result = st.executeUpdate();
+					if(result < 1)
+						return false;
+				} catch (Exception e) {
+					System.out.println("Update answer: " + e.getMessage());
+					return false;
+				}
+			}						
+		} catch (Exception e) {
+			System.out.println("update answer: " + e.getMessage());
+			return false;
+		}
+		return false;
+	}
+
+	public boolean Add_New_Anwser(int iD_Ques, Answer a) {
+		String query = "insert into quizzappdata.answers(Answer,Selected,ID_Ques) values (?, ?, ?);";
+		try (PreparedStatement statement = CreateConnect().prepareStatement(query))
+		{
+			statement.setString(1, a.getAns());
+			if (a.isSelected() ==  false) {
+				statement.setInt(2, 0);
+			}
+			else {
+				statement.setInt(2, 1);
+			}
+			statement.setInt(3, iD_Ques);
+			int result = statement.executeUpdate();
+			if(result < 1)
+				return false;
+		} catch (Exception e) {
+			System.out.println("Add answer: " + e.getMessage());
+			return false;
+		}
+		return false;
+	}
+
 	
 }

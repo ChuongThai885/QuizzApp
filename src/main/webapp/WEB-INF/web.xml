@@ -60,6 +60,12 @@
 		<description></description>
 		<servlet-class>QuizzApp.Controller.DelQuizController</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>UpdateQuesController</servlet-name>
+		<display-name>UpdateQuesController</display-name>
+		<description></description>
+		<servlet-class>QuizzApp.Controller.UpdateQuesController</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>LoginController</servlet-name>
@@ -100,5 +106,9 @@
 	<servlet-mapping>
 		<servlet-name>DelQuizController</servlet-name>
 		<url-pattern>/DelQuizController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UpdateQuesController</servlet-name>
+		<url-pattern>/UpdateQuesController</url-pattern>
 	</servlet-mapping>
 </web-app>

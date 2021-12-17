@@ -46,6 +46,14 @@ public class QuizzService {
 	{
 		return service.add_New_Question(ID_Ex, form);
 	}
+	public boolean Update_Question(int ID_Ques, QuestionForm form)
+	{
+		return service.Update_Question(ID_Ques, form);
+	}
+	public boolean Add_New_Anwser (int ID_Ques, Answer a)
+	{
+		return service.Add_New_Anwser(ID_Ques, a);
+	}
 	public ArrayList<QuestionForm> get_List_QuestionForm_by_ID_Exam(int ID_Exam)
 	{
 		try

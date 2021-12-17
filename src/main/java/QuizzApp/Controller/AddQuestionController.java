@@ -61,7 +61,7 @@ public class AddQuestionController extends HttpServlet {
 				if (!la1[i].equals("")) {
 					Answer a = new Answer();
 					a.setAns(la1[i]);
-					if (Integer.parseInt(trueans)==i) a.setSelected(true);
+					if (Integer.parseInt(trueans)==(i+1)) a.setSelected(true);
 					else a.setSelected(false);
 					System.out.println(a.toString());				
 					la.add(a);
