@@ -1,22 +1,18 @@
 .start_box section {
-    background-color: #ffffff;
-    font-family:Arial, Helvetica, sans-serif;
+    display: flex;	
     color: #0487d9;
+    height: 100vh;
+    text-align: center;
+    justify-content: center;
 }
 
 .start_box h1 {
     font-size: 36px;
+    margin-top:20px;
 }
 
-.start_box section .form-input-container {
-    display: flex;
-    margin: auto;
-    position: absolute;
-    top: 50%;
-    transform: translate(75%, -50%);
-}
-
-.start_box section .form-input-container .form-input {
+.start_box section .form-input {
+    -webkit-box-align: center;
     text-align: center;
     margin: auto;
     width: 550px;
@@ -25,11 +21,11 @@
     align-items: center;  
 }
 
-.start_box section .form-input-container .form-input .input-item {
+.start_box section .form-input .input-item {
     margin: 40px 20px 40px 20px;
 }
 
-.start_box section .form-input-container .form-input .input-item .input-textbox {
+.start_box section .form-input .input-item .input-textbox {
     font-family:Arial, Helvetica, sans-serif;
     font-size: 22px;
     border: 2px solid #84c5fe;
@@ -40,11 +36,11 @@
     color: #0487d9;
 }
 
-.start_box section .form-input-container .form-input .input-item .input-textbox::placeholder {
+.start_box section .form-input .input-item .input-textbox::placeholder {
     color: #dfdfdf;
 }
 
-.start_box section .form-input-container .form-input .input-item .input-button {
+.start_box section .form-input .input-item .input-button {
     font-family:Arial, Helvetica, sans-serif;
     font-size: 22px;
     background-color: #0487d9;

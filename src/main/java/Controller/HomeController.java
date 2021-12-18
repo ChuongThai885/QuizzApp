@@ -1,10 +1,14 @@
-package QuizzApp.Controller;
+package Controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class HomeController
@@ -24,8 +28,18 @@ public class HomeController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		Cookie [] cookies = request.getCookies();
+		HttpSession session = request.getSession();
+		System.out.println(cookies.length);
+		for (Cookie i : cookies)
+		{
+			if(i.getName() == "name")
+			{
+				//redirect to home
+			}
+		}
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/HomePage.jsp");
+		rd.forward(request, response);
 	}
 
 	/**

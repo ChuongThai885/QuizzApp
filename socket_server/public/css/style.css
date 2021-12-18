@@ -83,11 +83,13 @@
 }
 
 .quiz_box section {
-	padding: 25px 30px 20px 30px;
+	margin-top: 170px;
+	padding: 0px 30px 20px 30px;
 	background: #fff;
 }
 
 .quiz_box section .que_text {
+	margin-top: 30px;
 	font-size: 25px;
 	font-weight: 600;
 }
@@ -108,7 +110,6 @@
 	transition: all 0.3s ease;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
 }
 
 .quiz_box section .option_list .option:last-child {
@@ -133,8 +134,12 @@ section .option_list .option.incorrect {
 	border: 1px solid #f5c6cb;
 }
 
-section .option_list .option.disabled {
+.quiz_box section .option_list .option.disabled {
 	pointer-events: none;
+}
+
+.quiz_box section .option_list .option.disabled-selected {
+	opacity: 0.5;
 }
 
 .quiz_box section .option_list .option .icon {
@@ -147,6 +152,21 @@ section .option_list .option.disabled {
 	pointer-events: none;
 	transition: all 0.3s ease;
 	line-height: 24px;
+}
+
+.quiz_box section .option_list .option .option-text {
+	width: 95%;
+	text-align: left;
+}
+
+.quiz_box section .option_list .option .icon.anwsers{
+	width: 40px;
+	font-size: 20px;
+	color: #007bff;
+	border-right: 1px solid #84c5fe;
+	margin-right: 20px;
+	border-radius: 0;
+	padding-right: 20px;
 }
 
 .quiz_box section .option_list .option .icon.tick {
@@ -176,8 +196,28 @@ section .option_list .option.disabled {
 	align-items: flex-end;
 	/* background-color: palegreen; */
 }
+
 .quiz_box section .result_item {
 	width: calc(25% - 10px);
-	background-color: #84d8d3;
 	border-radius: 5px;
+	display: flex;
+	align-items: flex-end;
+	text-align:center; 
+	background-color: #007bff;
+}
+
+.quiz_box section .result-icons{
+	margin: 5px auto;
+	width: 50%;
+	display: flex;
+	justify-content: space-around;
+	align-items: flex-end;
+	height: 30px;
+	text-align: center;
+}
+
+.quiz_box section .result-text{
+	width: calc(25% - 10px);
+	color:rgb(253, 152, 0);
+	font-size: 20px;
 }

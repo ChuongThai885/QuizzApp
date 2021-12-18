@@ -2,63 +2,53 @@
 	pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
 <%
-//if (session.getAttribute("user") != null) {
-//RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-//dispatcher.forward(request, response);
-//	response.sendRedirect("Welcome.jsp");
-//}
-try {
-	Cookie[] cookies = request.getCookies();
-	for (Cookie c : cookies) {
-		if (c.getName().equals("name"))
+if (session.getAttribute("user") != null) {
+	//RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+	//dispatcher.forward(request, response);
 	response.sendRedirect("Welcome.jsp");
-	}
-} catch (Exception e) {
-	System.out.println(e);
 }
 %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="css/formLogin.css">
-<title>Login</title>
-</head>
-<body>
-	<div>
-		<div id="heading">
-			<h1>LOGIN</h1>
-		</div>
-		<div class="splitdiv">
-			<div class="leftsplit">
-				<h1>WELCOME TO QUIZGAME!</h1>
-			</div>
-			<div class="rightsplit">
-				<form action="Login" method="post" class="form-login">
 
-					<label id="error"></label>
-					<div class="form-group">
-						<input type="text" class="form-input" name="user"
-							placeholder="Username">
-					</div>
-					<div class="form-group">
-						<input type="password" class="form-input" name="pass"
-							placeholder="Password">
-					</div>
-					<div>
-						<input type="submit" class="form-submit" name="btn_login"
-							onsubmit="event.preventDefault()" value="LOGIN">
-					</div>
-					<hr>
-					<div>
-						Do not have account yet?
-						<button class="form-submit" onclick="signUp(this)"
-							name="btn_signup">SIGN UP</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/formLogin.css">
+    <title>Đăng nhập</title>
+</head>
+
+<body>
+    <div>
+        <div id="heading">
+            <h1>ĐĂNG NHẬP</h1>
+        </div>
+        <div class="splitdiv">
+            <div class="leftsplit">
+                <h2>CHÀO BẠN!</h2>
+            </div>
+            <div class="rightsplit">
+                <form action="Login" method="post" class="form-login">
+                    <div class="form-group">
+                        <input type="text" class="form-input" name="user" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-input" name="pass" placeholder="Mật khẩu">
+                    </div>
+                    <div class="btn-group">
+                        <input type="submit" class="form-submit" name="btn_login" value="ĐĂNG NHẬP">
+                    </div>
+                    <div class="btn-group">
+                        Chưa có tài khoản?
+                        <a href="SignUp">ĐĂNG KÝ</a>
+                    </div>
+                    <div class="form-group">
+                        Quay về 
+                        <a href="HomePage.jsp">Trang chủ</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 	<script type="text/javascript">
 		var str = document.getElementById("error");
 		if ("${error}" != "") {
@@ -66,13 +56,6 @@ try {
 	<%session.removeAttribute("error");
 session.invalidate();%>
 		} else {
-		}
-	</script>
-
-	<script>
-		function signUp(event) {
-			event.preventDefault();
-			location.href = "/QuizzApp/SignUp.jsp";
 		}
 	</script>
 </body>

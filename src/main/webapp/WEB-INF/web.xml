@@ -2,6 +2,9 @@
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 <web-app>
+	<welcome-file-list>
+	<welcome-file>Home</welcome-file>
+	</welcome-file-list>
 	<display-name>Archetype Created Web Application</display-name>
 	<servlet>
 		<servlet-name>LoginController</servlet-name>
@@ -31,7 +34,43 @@
 		<servlet-name>HomeController</servlet-name>
 		<display-name>HomeController</display-name>
 		<description></description>
-		<servlet-class>QuizzApp.Controller.HomeController</servlet-class>
+		<servlet-class>Controller.HomeController</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>AddQuestionController</servlet-name>
+		<display-name>AddQuestionController</display-name>
+		<description></description>
+		<servlet-class>QuizzApp.Controller.AddQuestionController</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>UpdateQuizController</servlet-name>
+		<display-name>UpdateQuizController</display-name>
+		<description></description>
+		<servlet-class>QuizzApp.Controller.UpdateQuizController</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>UpdateQuesController</servlet-name>
+		<display-name>UpdateQuesController</display-name>
+		<description></description>
+		<servlet-class>QuizzApp.Controller.UpdateQuesController</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>DelQuizController</servlet-name>
+		<display-name>DelQuizController</display-name>
+		<description></description>
+		<servlet-class>QuizzApp.Controller.DelQuizController</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>DelQuesController</servlet-name>
+		<display-name>DelQuesController</display-name>
+		<description></description>
+		<servlet-class>QuizzApp.Controller.DelQuesController</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>indexServlet</servlet-name>
+		<display-name>indexServlet</display-name>
+		<description></description>
+		<servlet-class>Controller.indexServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -56,6 +95,30 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>HomeController</servlet-name>
-		<url-pattern>/HomeController</url-pattern>
+		<url-pattern>/Home</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AddQuestionController</servlet-name>
+		<url-pattern>/AddQuestionController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UpdateQuizController</servlet-name>
+		<url-pattern>/UpdateQuizController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UpdateQuesController</servlet-name>
+		<url-pattern>/UpdateQuesController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DelQuizController</servlet-name>
+		<url-pattern>/DelQuizController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DelQuesController</servlet-name>
+		<url-pattern>/DelQuesController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>indexServlet</servlet-name>
+		<url-pattern>/index</url-pattern>
 	</servlet-mapping>
 </web-app>

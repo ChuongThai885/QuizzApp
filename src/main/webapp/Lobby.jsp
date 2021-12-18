@@ -68,6 +68,9 @@
 				<div class="result">
 					<!-- insert number of times the answer is selected from JS -->
 				</div>
+				<div class="result-icons">
+				
+				</div>
 				<div class="option_list">
 					<!--insert options from JS-->
 				</div>
@@ -80,8 +83,8 @@
 			</div>
 		</div>
 
-		<!-- <script src="http://localhost:3000/socket.io/socket.io.js"></script> -->
-		<script src="http://116.110.195.126:3000/socket.io/socket.io.js"></script>
+		<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+		<!--<script src="http://116.110.195.126:3000/socket.io/socket.io.js"></script>-->
 		<script>const quizes = <%= request.getSession().getAttribute("quiz") %>;</script>
 		<script src="js/game.js"></script>
 	</body>

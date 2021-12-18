@@ -32,6 +32,14 @@ let received_time = new Date();
 let selected_Answer = '';
 let timerID;
 
+const answer_icons = [
+  '<i class="fas fa-square"></i>',
+  '<i class="fas fa-circle"></i>',
+  '<i class="fas fa-star"></i>',
+  '<i class="fas fa-heart"></i>'
+];
+let num_icon = 0;
+
 // add event for process data on start_box
 form_sendID.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -44,6 +52,7 @@ form_sendID.addEventListener('submit', (e) => {
             document.getElementById("send-name").style.display = "block";
         }
         else {
+            id_input.value = "";
             id_room = 0;
             alert(message);
         }
@@ -58,10 +67,11 @@ form_sendName.addEventListener('submit', (e) => {
 
     socket.emit('set-name', id_room, name_user, message => {
         if (message == "OK") {
-            document.getElementById('welcome-tag').textContent = `Welcome player, you are in room ${id_room}`;
+            document.getElementById('welcome-tag').textContent = `Xin chào ${name_user}, bạn đang ở phòng chơi ${id_room}`;
             document.getElementById("send-name").style.display = "none";
         }
         else {
+	        name_user = "";
             document.getElementById('welcome-tag').textContent = "Name has been used, please types again";
         }
     })
@@ -84,8 +94,11 @@ function ShowQuestion() //show question received from server
     let que_tag = '<span>' + quiz.question + '</span>';
     let option_tag = '';
     for (var i of quiz.option) {
-        option_tag += '<div class="option" onclick="optionSelected(this)"><span>' + i + '</span></div>';
+        option_tag += '<div class="option" onclick="optionSelected(this)"><div class="icon anwsers">' + answer_icons[num_icon] + 
+    	'</div><div class="option-text">' + i + '</div></div>';
+    	num_icon += 1;
     }
+	num_icon = 0;
     que_text.innerHTML = que_tag;
     option_list.innerHTML = option_tag;
     clearInterval(timerID);
@@ -150,6 +163,8 @@ function optionSelected(answer) {
     var selected_time = new Date();
     time_left = ((MAX_TIME * 1000 - (selected_time - received_time)) > 0) ? (MAX_TIME * 1000 - (selected_time - received_time)) : 0;
 
+    console.log(selected_time - received_time);
+    console.log(received_time + "," + selected_time + "\n" + time_left);
     selected_Answer = answer.textContent;
 
     if (selected_Answer == quiz.answer) {
@@ -160,6 +175,7 @@ function optionSelected(answer) {
     for (i = 0; i < allOptions; i++) {
         option_list.children[i].classList.add("disabled"); //once user select an option then disabled all options
     }
+	answer.classList.add("disabled-selected");
 }
 
 function calculate_score() {
@@ -169,8 +185,10 @@ function calculate_score() {
 
 // event socket process funtion
 socket.on('get-question', (maxquestion, question) => {
+    result.innerHTML = "";
     score = 0;
     document.getElementById('welcome-tag').textContent = "";
+    start_box.classList.add("hidden");
     quiz_box.classList.remove("hidden");
     setMaxQuestion(maxquestion);
     quiz = JSON.parse(question);
@@ -193,10 +211,12 @@ socket.on('end-quiz', () => {
         for (i = 0; i < allOptions; i++) {
             if (option_list.children[i].textContent == userAns) {
                 if (userAns == correctAns) {
+					option_list.children[i].classList.remove("disabled-selected");
                     option_list.children[i].classList.add("correct");
                     option_list.children[i].insertAdjacentHTML("beforeend", tickIconTag);
                     console.log('Correct answer');
                 } else {
+					option_list.children[i].classList.remove("disabled-selected");
                     option_list.children[i].classList.add("incorrect");
                     option_list.children[i].insertAdjacentHTML("beforeend", crossIconTag);
                     console.log('Inorrect answer');
@@ -217,6 +237,7 @@ socket.on('end-quiz', () => {
 socket.on('admin-disconnect', (message) => {
     alert(message);
 
+    start_box.classList.remove("hidden");
     quiz_box.classList.add("hidden");
     end_box.classList.add("hidden");
     document.getElementById("send-ID").style.display = "block";

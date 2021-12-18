@@ -10,20 +10,27 @@ public class QuizzService {
 	
 	public boolean Add_New_Quizz(int ID_User,Exam ex)
 	{
-		return false;
+		return service.Add_New_Exam(ID_User, ex);
 	}
 	
 	public ArrayList<Exam> Get_All_Exam(String email)
 	{
 		return service.Get_List_Exam_by_Email_User(email);
 	}
-
 	public int Get_Number_Of_Question(int ID_Exam) 
 	{
 		ArrayList<Question> questions = service.Get_List_Quesion_by_ID_Exam(ID_Exam);
 		int count = questions.size();
 		return count;
 	}
+	public Exam Get_Exam_by_ID (int ID_Exam) {
+		return service.Get_Exam_By_IDExam(ID_Exam);
+	}
+	/*public int Get_Number_Of_Exam(String email) {
+		ArrayList<Exam> quizes = service.Get_List_Exam_by_Email_User(email);
+		int count = quizes.size();
+		return count;
+	}*/
 	
 	public boolean Update_Exam(Exam ex)
 	{
@@ -38,6 +45,14 @@ public class QuizzService {
 	public boolean add_New_Question(int ID_Ex, QuestionForm form)
 	{
 		return service.add_New_Question(ID_Ex, form);
+	}
+	public boolean Update_Question(int ID_Ques, QuestionForm form)
+	{
+		return service.Update_Question(ID_Ques, form);
+	}
+	public boolean Add_New_Anwser (int ID_Ques, Answer a)
+	{
+		return service.Add_New_Anwser(ID_Ques, a);
 	}
 	public ArrayList<QuestionForm> get_List_QuestionForm_by_ID_Exam(int ID_Exam)
 	{

@@ -4,6 +4,7 @@ const start_box = document.querySelector(".start_box");
 const quiz_box = document.querySelector(".quiz_box");
 const end_box = document.querySelector(".end_box");
 const result = document.querySelector(".result");
+const result_icon = document.querySelector(".result-icons");
 const option_list = document.querySelector(".option_list");
 const timeText = document.querySelector(".timer .time_left_txt");
 const timeCount = document.querySelector(".timer .timer_sec");
@@ -21,6 +22,14 @@ let total_ques = 0;
 let timerID;
 let IDRoom = 0;
 
+const answer_icons = [
+  '<i class="fas fa-square"></i>',
+  '<i class="fas fa-circle"></i>',
+  '<i class="fas fa-star"></i>',
+  '<i class="fas fa-heart"></i>'
+];
+let num_icon = 0;
+
 //start, hidden quizbox and button start
 quiz_box.classList.add("hidden");
 end_box.classList.add("hidden"); 
@@ -29,18 +38,21 @@ button_finish.setAttribute("hidden", "hidden");
 button_next.setAttribute("hidden", "hidden");
 lock_icon.innerHTML = '<i class="fas fa-lock"></i>';
 
-const socket = io("http://116.110.195.126:3000/");
+const socket = io("http://localhost:3000/");
 
 const tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>'; // creating the new div tags which for icons
 
 //all funtions 
 function ShowQuestion() //show question received from server
 {
+	result_icon.innerHTML = "";
     const que_text = document.querySelector(".que_text");
     let que_tag = '<span>' + quiz.question + '</span>';
     let option_tag = '';
     for (var i of quiz.option) {
-        option_tag += '<div class="option"><span>' + i + '</span></div>';
+        option_tag += '<div class="option" onclick="optionSelected(this)"><div class="icon anwsers">' + answer_icons[num_icon] + 
+    	'</div><div class="option-text">' + i + '</div></div>';
+    	num_icon += 1;
     }
     que_text.innerHTML = que_tag;
     option_list.innerHTML = option_tag;
@@ -53,6 +65,7 @@ function ShowQuestion() //show question received from server
     startTimer();
 
     QuestionCounter(quiz.num);
+	num_icon = 0;
 }
 
 function startTimer() //start counting, get received timex
@@ -125,6 +138,7 @@ function ShowResult(data) // add items into class result
 {
     const max_height = document.querySelector('.result').offsetHeight;
     let result_item = '';
+	let result_icon_tag = '';
     let total = 0;
     for (var i of data) {
         total += i.count;
@@ -132,9 +146,13 @@ function ShowResult(data) // add items into class result
     for (var i of data) {
         console.log(i.answer);
         let height = (max_height * i.count) / total;
-        result_item += `<div  class="result_item" style="height:${height}px"> ${i.count} </div>`;
+        result_item += `<div class="result_item" style="height:${height}px;"></div>`;
+		result_icon_tag += `<div class="result-text">${answer_icons[num_icon]} ${i.count}</div>`;
+  		num_icon += 1;
     }
+	num_icon = 0;
     result.innerHTML = result_item;
+	result_icon.innerHTML = result_icon_tag;
 }
 
 //add event button
@@ -255,9 +273,9 @@ socket.on('return-result', (arr) => {
             inde++;
         }
     }
+    button_cancel.removeAttribute("hidden");
     rankings.innerHTML = rankings_item;
     console.log(arr);
     rankings.innerHTML = rankings_item;
     console.log(arr);
 })
-

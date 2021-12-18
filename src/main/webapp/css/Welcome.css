@@ -88,16 +88,15 @@ li a:hover {
     font-size: 16px;
 }
 .content{
-    max-width: 1400px;
-    height: 1100px;
-    padding-top: 60px;
+    margin-top: 80px;
+    padding: 0px 40px;
+    justify-content: space-between;
+    display: flex;
 }
 .personal-info{
     background-color: #ffffff;
-	position: fixed;
-	left: 20px;
 	width: 250px;
-	top: 80px;
+	height: 200px;
 	display: flex;
 	flex-direction: column;
     border-radius: 5px;
@@ -122,6 +121,13 @@ li a:hover {
     box-shadow: 2px 2px 2px #a0e3f2;
     font-weight: bolder;
 }
+.btn-del{
+	background-color: #ffffff;
+    width: 35px;
+    color: #0487d9;
+    border: 1px solid #0487d9;
+    box-shadow: 2px 2px 2px #a0e3f2;
+}
 .btn-general:hover{
     color: #f25ea3;
     border: 1px solid #f25ea3;
@@ -130,14 +136,13 @@ li a:hover {
 }
 
 .quizlist-container{
-    max-width: 1000px;
-    margin: 10px 0px 0px 350px;
     display: flex;
 	flex-direction: column;
+	width: 70%;
 }
 
 .quiz-container{
-    width: 900px;
+	margin-top: 20px;
     height: 150px;
     background-color: #ffffff;
     border-radius: 5px;
@@ -148,6 +153,7 @@ li a:hover {
     border-bottom: 1px solid #dfdfdf;
     margin: 15px 20px 15px 20px;
     display: flex;
+    justify-content: space-between;
 }
 
 .quiz-content > p{
@@ -159,11 +165,8 @@ li a:hover {
     padding: 5px 10px 5px 10px;
 }
 .btn-group{
-    width: 20%;
     display: flex;
-    float: right;
     align-items: center;
-    justify-items: flex-end;
 }
 
 .btn-important{  
