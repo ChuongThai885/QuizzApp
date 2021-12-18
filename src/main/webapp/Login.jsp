@@ -39,7 +39,7 @@ if (session.getAttribute("user") != null) {
                     </div>
                     <div class="btn-group">
                         Chưa có tài khoản?
-                        <a href="SignUp.jsp">ĐĂNG KÝ</a>
+                        <a href="SignUp">ĐĂNG KÝ</a>
                     </div>
                     <div class="form-group">
                         Quay về 

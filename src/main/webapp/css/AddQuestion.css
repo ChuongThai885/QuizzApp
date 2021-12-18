@@ -64,7 +64,10 @@ header {
 	justify-content: center;
 	align-items: center;
 }
-
+.quiz-info h2 {
+	margin-top: 0px;
+	margin-bottom: 0px; 
+}
 .quiz-btn {
 	background-color: #0487d9;
 	font-size: 16px;
@@ -133,21 +136,25 @@ h1{
 .form-input::placeholder{
     color:#a0e3f2;
 }
-
+.question-list-show{
+	display: flex;
+	justify-content: center;
+	margin: 55px 0px 0px 250px;
+	flex-direction: column;
+}
 .question-show{
     background-color: #ffffff;
     width: 800px;
-    height: 200px;
-    position: relative;
-    margin-top: 80px;
-    margin-left: 400px;
+    margin: 20px auto;
     box-shadow: 2px 2px 2px #dfdfdf;
+    border-radius: 5px;
 }
 .question-header{
     height: 50px;
     background-color: #04d9d9;
     display: flex;
 	justify-content: space-between;
+	border-radius: 5px 5px 0 0;
 }
 .question-header-text{
     height: 50px;
@@ -156,7 +163,25 @@ h1{
     font-weight: bold;
     padding-left: 20px;
 }
-
+.question-content{
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+}
+.answer-list{
+	display: grid;
+	grid-template-columns: 50% 50%;
+	width: 100%;
+}
+.answer {
+	margin-top: 20px;
+}
+.question-title{
+	font-size: larger;
+	font-weight: bolder;
+	border-bottom: 1px solid #dfdfdf;
+    padding-bottom: 15px;
+}
 .ques-form{
 	background-color: #ffffff;
 	position: absolute;

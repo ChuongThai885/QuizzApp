@@ -25,11 +25,11 @@
         </div>
         <div class="right-container">
             <div class="btn-container">
-                <a href="SignUp.jsp">Đăng ký</a>
+                <a href="SignUp">Đăng ký</a>
                 <!--Dẫn tới trang nhập code để chơi-->
             </div>
             <div class="btn-container">
-                <a href="JoinGame.html">Vào game</a>
+                <a href="">Vào game</a>
                 <!--Dẫn tới trang đăng ký-->
             </div>
         </div>
@@ -42,11 +42,11 @@
                 <h3>Học, ôn tập, vui chơi cùng Quiz App</h3>
                 <div class="group-button">
                     <div class="main-btn-container">
-                        <a href="SignUp.jsp">Bắt đầu </a>                       
+                        <a href="SignUp">Bắt đầu </a>                       
                         <!--Dẫn tới đăng ký-->
                     </div>
                     <div class="main-btn-container">
-                        <a href="Login.jsp">Đăng nhập</a>
+                        <a href="Login">Đăng nhập</a>
                         <!--Dẫn tới đăng nhập-->
                     </div>
                 </div>

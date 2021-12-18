@@ -66,8 +66,8 @@
 	</header>
 	<!-- Tên quiz, thêm câu hỏi -->
 	<div class="quiz-main">		
-		<div class="quiz-info"><%=e.getName() %></div>
-		<div class="quiz-info"><%=e.getTopic() %></div>
+		<div class="quiz-info"><h2><%=e.getName() %></h2></div>
+		<div class="quiz-info"><i class="fas fa-clipboard-list"></i> <%=e.getTopic() %></div>
 		<div class="quiz-info">
 			<input type="button" name="btnAddQuiz" class="quiz-btn"
 				onclick="popupOpen();" value="Sửa Quiz">		
@@ -78,10 +78,12 @@
 		</div>
 	</div>
     <!--show ra câu hỏi-->
+    <div>
     <% if (ql!=null){
     	int dem = 1;
-    	int countdown[] = {20, 30, 60, 90};
-    for (QuestionForm q : ql) {%>
+    	int countdown[] = {20, 30, 60, 90};%>
+    <div class="question-list-show">	
+    <% for (QuestionForm q : ql) {%>
     <div class="question-show">
         <div class="question-header">
             <div class="question-header-text">
@@ -98,11 +100,18 @@
             <div class="question-title">
                 <%=q.getQues().getQues() %>
             </div>
+            <div class="answer-list">
             <%for (int i=0; i < q.getAns().size();i++){ %>
-            <div class="anwser">
-				<i class="far fa-circle"></i><%=q.getAns().get(i).getAns() %>
+            <div class="answer">
+            <%if (q.getAns().get(i).isSelected()){ %>
+				<i class="fas fa-check-circle" style="color: #159E15;"></i>
+				<%} else{ %>
+				<i class="far fa-circle" style="color: #EB5931;"></i>
+				<%} %>
+				<%=q.getAns().get(i).getAns() %>
             </div>
             <%} %>
+            </div>
         </div>
     </div>
     
@@ -159,6 +168,7 @@
 	</div>
     <%dem+=1;%> 
     <% }} %>
+    </div>
     <!--overlay-->
 	<div class="overlay" id="overlay" style="display: none;"></div>
 	<!-- form sửa thông tin quiz -->
@@ -177,6 +187,7 @@
                     onclick="popupClose();" value="Huỷ">
             </div>				
 		</form>
+	</div>
 	</div>
 	<!--overlay-->
 	<div class="overlay" id="overlay" style="display: none;"></div>
