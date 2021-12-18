@@ -13,6 +13,7 @@ import QuizzApp.Model.Answer;
 import QuizzApp.Model.Exam;
 import QuizzApp.Model.Question;
 import QuizzApp.Model.QuestionForm;
+import QuizzApp.Model.User_Infor;
 import QuizzApp.Service.QuizzService;
 
 public class AddQuestionController extends HttpServlet {
@@ -30,6 +31,7 @@ public class AddQuestionController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("utf-8");
+		User_Infor user = (User_Infor) request.getSession().getAttribute("user");
 		String question = request.getParameter("txtQues");
 		String time = request.getParameter("selectTime");
 		String trueans = request.getParameter("trueAns");

@@ -29,7 +29,7 @@
                     <input type="submit" name="btnSaveQuiz" class="btn-important" value="Lưu">
                 </div>
                 <div class="btn-container">
-                    <input type="button" name="btnClose" class="btn-other" value="Huỷ">
+                    <input type="button" onclick="location.href='Login';" name="btnClose" class="btn-other" value="Huỷ">
                 </div>
             </div>				
 		</form>

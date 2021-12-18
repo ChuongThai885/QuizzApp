@@ -23,9 +23,9 @@ try {
 		}
 	}
 	if (check == false)
-		response.sendRedirect("index.jsp");
-	le = (ArrayList<Exam>) request.getSession().getAttribute("listquizz");	
-	numques = (ArrayList<Integer>) request.getSession().getAttribute("numberQues");
+		response.sendRedirect("HomePage.jsp");
+	le = (ArrayList<Exam>) request.getAttribute("listquizz");	
+	numques = (ArrayList<Integer>) request.getAttribute("numberQues");
 } catch (Exception e) {
 	System.out.println(e.getMessage());
 }
@@ -50,7 +50,7 @@ try {
 		</div>
 		<div class="nav-container">
 			<ul>
-				<li><a href="Welcome.jsp">Trang cá nhân</a></li>
+				<li><a href="Login">Trang cá nhân</a></li>
 				<li><a href="AddQuizController">Tạo quiz mới</a></li>
 			</ul>
 		</div>
@@ -84,7 +84,7 @@ try {
 			</div>
 		</div>
 		<div class="quizlist-container">
-		<%int n = (int) request.getSession().getAttribute("numberQuiz"); %>
+		<%int n = (int) request.getAttribute("numberQuiz"); %>
 		Bạn hiện có <%=n %> quiz
 			<%			
 			for (int i=0; i<le.size(); i++) {

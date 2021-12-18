@@ -56,10 +56,12 @@
 				src="https://www.dng24.co.uk/wp-content/uploads/2016/12/quiz.jpg"
 				height="55">
 		</div>
-		<div class="group-button">			
-			<button name="btnSave" class="btn-general btn-important">Chơi</button>
+		<div class="group-button">
+		<form method="post" action="PlayGame?id=<%=e.getID()%>">
+			<button type="submit" name="btnSave" class="btn-general btn-important">Chơi</button>
+		</form>						
 			<button name="btnExit" class="btn-general btn-other" 
-			onclick="location.href='';">Thoát</button>
+			onclick="location.href='Login';">Thoát</button>
 		</div>
 	</header>
 	<!-- Tên quiz, thêm câu hỏi -->

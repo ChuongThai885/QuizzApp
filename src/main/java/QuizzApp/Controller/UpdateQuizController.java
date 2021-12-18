@@ -24,6 +24,7 @@ public class UpdateQuizController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		String idexam = request.getParameter("id");
 		int ID_Exam = Integer.parseInt(idexam);
 		QuizzService quizservice = new QuizzService();

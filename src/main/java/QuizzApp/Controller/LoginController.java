@@ -16,9 +16,26 @@ import QuizzApp.Service.*;
  */
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		User_Infor user = (User_Infor) request.getSession().getAttribute("user");
+		if (user != null) {
+			ArrayList<Exam> el = new QuizzService().Get_All_Exam(user.getEmail());
+			request.setAttribute("listquizz", el);
+			int numberQuiz = el.size();
+			request.setAttribute("numberQuiz", numberQuiz);
+			ArrayList<Integer> numberQues = new ArrayList<Integer>();			
+			for (Exam e : el) {
+				int n;
+				n = new QuizzService().Get_Number_Of_Question(e.getID());
+				numberQues.add(n);
+			}
+			request.setAttribute("numberQues", numberQues);
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/Welcome.jsp");
+			rd.forward(request, response);
+		}
+		else response.sendRedirect("Login.jsp");
+	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("user");
 		String pass = request.getParameter("pass");
@@ -30,16 +47,16 @@ public class LoginController extends HttpServlet {
 			User_Infor user = new UserService().Get_User(email);
 			ses.setAttribute("user", user);			
 			ArrayList<Exam> el = new QuizzService().Get_All_Exam(email);
-			ses.setAttribute("listquizz", el);		
+			request.setAttribute("listquizz", el);		
 			int numberQuiz = el.size();
-			ses.setAttribute("numberQuiz", numberQuiz);
+			request.setAttribute("numberQuiz", numberQuiz);
 			ArrayList<Integer> numberQues = new ArrayList<Integer>();			
 			for (Exam e : el) {
 				int n;
 				n = new QuizzService().Get_Number_Of_Question(e.getID());
 				numberQues.add(n);
 			}
-			ses.setAttribute("numberQues", numberQues);
+			request.setAttribute("numberQues", numberQues);
 			try
 			{
 				email = new EncodeService().encodeString(email);
