@@ -1,4 +1,4 @@
-<%@page import="QuizzApp.Model.User_Infor"%>
+<%@page import="Model.Bean.User_Infor"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -11,12 +11,12 @@
 </head>
 <body>	
 <%
-	User_Infor u = (User_Infor) request.getSession().getAttribute("user");
+	User_Infor u = (User_Infor) session.getAttribute("user");
 	if (u!=null){
 %>
 	<!-- form tạo quiz -->
 	<div class="add-ques-form" id="addquesform">
-		<form name="addform" action="AddQuizController" method="post" class="form-inner">
+		<form name="addform" action="AddQuiz" method="post" class="form-inner">
             <h1>Tạo Quiz mới</h1>
             <div class="quiz-info">
                 <input type="text" name="txtQuiz" class="form-input" placeholder="Tên Quiz" required="required">
@@ -29,7 +29,7 @@
                     <input type="submit" name="btnSaveQuiz" class="btn-important" value="Lưu">
                 </div>
                 <div class="btn-container">
-                    <input type="button" onclick="location.href='Login';" name="btnClose" class="btn-other" value="Huỷ">
+                    <input type="button" onclick="location.href='Home';" name="btnClose" class="btn-other" value="Huỷ">
                 </div>
             </div>				
 		</form>

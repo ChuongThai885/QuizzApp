@@ -1,4 +1,4 @@
-package QuizzApp.Model;
+package Model.Bean;
 
 import java.util.ArrayList;
 

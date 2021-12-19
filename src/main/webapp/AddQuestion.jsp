@@ -1,6 +1,5 @@
+<%@page import="Model.Bean.*"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="QuizzApp.Model.User_Infor"%>
-<%@page import="QuizzApp.Model.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -44,9 +43,9 @@
 </head>
 <body>
 <%
-	User_Infor u = (User_Infor) request.getSession().getAttribute("user");
-	Exam e = (Exam) request.getAttribute("quiz");
-	ArrayList<QuestionForm> ql = (ArrayList<QuestionForm>) request.getAttribute("queslist");
+	User_Infor u = (User_Infor) session.getAttribute("user");
+	Exam e = (Exam) session.getAttribute("quiz");
+	ArrayList<QuestionForm> ql = (ArrayList<QuestionForm>) session.getAttribute("queslist");
 	if (u!=null){
 %>
 	<!-- header -->
@@ -61,7 +60,7 @@
 			<button type="submit" name="btnSave" class="btn-general btn-important">Chơi</button>
 		</form>						
 			<button name="btnExit" class="btn-general btn-other" 
-			onclick="location.href='Login';">Thoát</button>
+			onclick="location.href='/QuizzApp/';">Thoát</button>
 		</div>
 	</header>
 	<!-- Tên quiz, thêm câu hỏi -->
@@ -92,7 +91,7 @@
             <div class="group-button">
                     <input type="button" name="btnEditQues" onclick="editQuesOpen(<%=dem %>);" class="btn-general btn-important" value="Sửa">
                     <button type="button" class="btn-general btn-other" 
-                    onclick="location.href='DelQuesController?id=<%=q.getQues().getID() %>&quiz=<%=q.getQues().getID_Ex()%>';">
+                    onclick="location.href='DeleteQuestion?id=<%=q.getQues().getID() %>&quiz=<%=q.getQues().getID_Ex()%>';">
                     <i class="fas fa-trash-alt"></i></button>
             </div>
         </div>
@@ -119,7 +118,7 @@
 	<div class="overlay" id="overlay" style="display: none;"></div>
 	<!-- form sửa câu hỏi -->
 	<div class="ques-form" id="editquesform<%=dem %>" style="display: none;">
-		<form name="quizform" action="UpdateQuesController?id=<%=q.getQues().getID() %>" method="post" class="form-inner">
+		<form name="quizform" action="UpdateQuestion?id=<%=q.getQues().getID() %>" method="post" class="form-inner">
             <h1>Sửa câu hỏi</h1>
             <input type="text" name="idQuiz" value="<%=q.getQues().getID_Ex()%>" style="display:none">
 			<div class="quiz-info">
@@ -173,7 +172,7 @@
 	<div class="overlay" id="overlay" style="display: none;"></div>
 	<!-- form sửa thông tin quiz -->
 	<div class="edit-form" id="editquizform" style="display: none;">
-		<form method="post" name="quizform" class="form-inner" action="UpdateQuizController?idexam=<%=e.getID()%>"> 
+		<form method="post" name="quizform" class="form-inner" action="UpdateQuiz?idexam=<%=e.getID()%>"> 
             <h1>Thông tin Quiz</h1>         
             <div class="quiz-info">
                 <input type="text" name="txtQuiz" class="form-input" value="<%=e.getName()%>" required="required">
@@ -193,7 +192,7 @@
 	<div class="overlay" id="overlay" style="display: none;"></div>
 	<!-- form thêm câu hỏi -->
 	<div class="ques-form" id="addquesform" style="display: none;">
-		<form name="quizform" action="AddQuestionController?idquiz=<%=e.getID() %>" method="post" class="form-inner">
+		<form name="quizform" action="AddQuestion?idquiz=<%=e.getID() %>" method="post" class="form-inner">
             <h1>Câu hỏi mới</h1>
             
 			<div class="quiz-info">

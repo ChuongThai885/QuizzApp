@@ -1,4 +1,4 @@
-package QuizzApp.Model;
+package Model.Bean;
 
 public class Question {
 	

@@ -1,4 +1,4 @@
-package QuizzApp.Controller;
+package Controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,6 +6,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class LogoutController
@@ -25,14 +26,14 @@ public class LogoutController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		HttpSession session = request.getSession();
-//		session.removeAttribute("user");
-//		session.invalidate();
 		Cookie cookie = new Cookie("name", "");
 		cookie.setMaxAge(0); 
 		response.addCookie(cookie);
+		HttpSession session = request.getSession();
+		session.removeAttribute("user");
+		session.invalidate();
 		
-		response.sendRedirect("Login.jsp");
+		response.sendRedirect("/QuizzApp/");
 	}
 
 }

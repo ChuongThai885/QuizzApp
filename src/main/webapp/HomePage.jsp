@@ -1,88 +1,132 @@
+<%@page import="Model.Bean.User_Infor"%>
+<%@page import="Model.Bean.Exam"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%String url = "localhost:3000/playgame"; %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+response.setHeader("Expires", "0"); //Proxies
+
+User_Infor u = (User_Infor) session.getAttribute("user");
+ArrayList<Exam> le = new ArrayList<Exam>();
+ArrayList<Integer> numques = new ArrayList<Integer>();
+
+try {
+	//check user login yet
+	boolean check = false;
+	Cookie[] cookies = request.getCookies();
+	for (Cookie c : cookies) {
+		if (c.getName().equals("name")) {
+	check = true;
+		}
+	}
+	if (check == false)
+		response.sendRedirect("HomePage.jsp");
+	le = (ArrayList<Exam>) session.getAttribute("listquizz");	
+	numques = (ArrayList<Integer>) session.getAttribute("numberQues");
+} catch (Exception e) {
+	System.out.println(e.getMessage());
+}
+%>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>Trang chủ</title>
-    <link rel="stylesheet" href="css/HomePage.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<meta charset="UTF-8">
+<title>Trang cá nhân</title>
+<link rel="stylesheet" href="css/Welcome.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 
 <body>
-    <!--header-->
-    <header>
-        <div class="left-container">
-            <a href=""><img src="https://www.dng24.co.uk/wp-content/uploads/2016/12/quiz.jpg" height="60">
-            </a>
-        </div>
-        <div class="nav-container">
-            <ul> <!-- Cái ni thêm vô cho đẹp thôi chứ chả làm gì -->
-                <li><a href="">Cách chơi</a></li>
-                <li><a href="">Mẫu quiz mới</a></li>
-            </ul>
-        </div>
-        <div class="right-container">
-            <div class="btn-container">
-                <a href="SignUp">Đăng ký</a>
-                <!--Dẫn tới trang nhập code để chơi-->
-            </div>
-            <div class="btn-container">
-                <a href="<%=url%>">Vào game</a>
-                <!--Dẫn tới trang đăng ký-->
-            </div>
-        </div>
-    </header>
-    <div class="content">
-        <!--nội dung-->
-        <div class="introduction-container">
-            <div class="text-container">
-                <h1>Quiz App</h1>
-                <h3>Học, ôn tập, vui chơi cùng Quiz App</h3>
-                <div class="group-button">
-                    <div class="main-btn-container">
-                        <a href="SignUp">Bắt đầu </a>                       
-                        <!--Dẫn tới đăng ký-->
-                    </div>
-                    <div class="main-btn-container">
-                        <a href="Login">Đăng nhập</a>
-                        <!--Dẫn tới đăng nhập-->
-                    </div>
-                </div>
-            </div>
-            <div class="picture-container">
-                <img src="https://stjohns.wrexhamparish.org.uk/wp-content/uploads/2017/11/QuizGeobuuk-547x381.png"
-                    width="500px">
-            </div>
-        </div>
-        <div class="usage-container">
-            <div class="usage-title">
-                <h2>Sử dụng Quiz App thật dễ dàng</h2>
-            </div>
-            <!--hướng dẫn sử dụng-->
-            <div class="usage-content-container">
-            <div class="step-container">
-                <div class="step-num">1</div>
-                <div class="step-title">Tạo bộ câu hỏi</div>
-                <div><img src="https://cdn.riddle.com/website/assets/homepage/img/illo-quiz-types.webp" width="280"></div>
-            </div>
-            <div class="step-container">
-                <div class="step-num">2</div>
-                <div class="step-title">Người chơi tham gia qua mã pin</div>
-                <div><img src="https://loquiz.com/wpmainpage/wp-content/uploads/2020/02/Quiz-game-700x467.jpg"
-                    width="280"></div>
-            </div>
-            <div class="step-container">
-                <div class="step-num">3</div>
-                <div class="step-title">Kết quả xếp hạng</div>
-                <div><img src="https://cdn1.participoll.com/wp-content/uploads/2013/01/27015509/feature3-300x196.png"
-                    width="280"></div>
-            </div>
-        </div>
-        </div>
-    </div>
+	<header>
+		<div class="left-container">
+			<a href="Home"><img
+				src="https://www.dng24.co.uk/wp-content/uploads/2016/12/quiz.jpg"
+				height="50"> </a>
+		</div>
+		<div class="nav-container">
+			<ul>
+				<li><a href="Home">Trang cá nhân</a></li>
+				<li><a href="AddQuiz">Tạo quiz mới</a></li>
+			</ul>
+		</div>
+		<div class="right-container">
+			<div class="right-item">
+				<input type="text" name="txtSearch" class="form-input"
+					placeholder="Tìm kiếm">
+			</div>
+			<div class="right-item">
+				Chào,
+				<%=u.getName()%><!--${name}-->
+			</div>
+			<div class="right-item">
+				<a href="Logout">Đăng xuất</a>
+			</div>
+		</div>
+	</header>
+	<div class="content">
+		<div class="personal-info">
+			<div class="info-item">
+				<h4>Thông tin cá nhân</h4>
+			</div>
+			<div class="info-item">
+				<%=u.getName()%>
+			</div>
+			<div class="info-item">
+				<%=u.getEmail()%>
+			</div>
+			<div class="info-item">
+				Tạo quiz mới <input type="button" onclick="location.href='AddQuiz';" class="btn-general btn-add" value="+">
+			</div>
+		</div>
+		<div class="quizlist-container">
+		<%int n = (int) session.getAttribute("numberQuiz"); %>
+		Bạn hiện có <%=n %> quiz
+			<%			
+			for (int i=0; i<le.size(); i++) {
+				try
+				{
+					le.get(i).getName();
+				}
+				catch(Exception e1)
+				{
+					response.sendRedirect("/QuizzApp/");
+				}
+				
+				//n = new QuizzService().Get_Number_Of_Question(e.getID());
+			%>
+			
+			<div class="quiz-container">
+				<div class="quiz-title">
+					<div class="title-text">
+						<b><%=le.get(i).getName()%></b>
+					</div>
+					<div class="btn-group">
+						<form method="post" action="PlayGame?id=<%=le.get(i).getID()%>">
+							<input type="submit" class="btn-general btn-important"
+								value="Chơi">
+						</form>						
+						<input type="button" onclick="location.href='UpdateQuiz?id=<%=le.get(i).getID()%>';" 
+						class="btn-general btn-other" value="Sửa">					
+						<button type="button" class="btn-general btn-del" onclick="location.href='DeleteQuiz?id=<%=le.get(i).getID() %>';">
+						<i class="fas fa-trash-alt"></i></button>										
+					</div>
+				</div>
+				<div class="quiz-content">
+					<p><%=le.get(i).getTopic()%></p>
+					<p><%=numques.get(i) %> câu hỏi
+					</p>
+				</div>
+			</div>
+			<%
+			}
+			%>
+		</div>
+	</div>
 </body>
 
 </html>

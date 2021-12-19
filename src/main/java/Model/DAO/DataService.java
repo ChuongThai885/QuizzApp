@@ -1,6 +1,5 @@
-package QuizzApp.Service;
+package Model.DAO;
 
-import java.io.Console;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,7 +7,11 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.*;
 
-import QuizzApp.Model.*;
+import Model.Bean.Answer;
+import Model.Bean.Exam;
+import Model.Bean.Question;
+import Model.Bean.QuestionForm;
+import Model.Bean.User_Infor;
 
 public class DataService {
 	public boolean Create_User(String name,String email,String pass)

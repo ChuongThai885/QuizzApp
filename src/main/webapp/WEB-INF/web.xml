@@ -3,32 +3,32 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 <web-app>
 	<welcome-file-list>
-	<welcome-file>Home</welcome-file>
+	<welcome-file>index</welcome-file>
 	</welcome-file-list>
 	<display-name>Archetype Created Web Application</display-name>
 	<servlet>
 		<servlet-name>LoginController</servlet-name>
 		<display-name>LoginController</display-name>
 		<description></description>
-		<servlet-class>QuizzApp.Controller.LoginController</servlet-class>
+		<servlet-class>Controller.LoginController</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>LogoutController</servlet-name>
 		<display-name>LogoutController</display-name>
 		<description></description>
-		<servlet-class>QuizzApp.Controller.LogoutController</servlet-class>
+		<servlet-class>Controller.LogoutController</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>SignUpController</servlet-name>
 		<display-name>SignUpController</display-name>
 		<description></description>
-		<servlet-class>QuizzApp.Controller.SignUpController</servlet-class>
+		<servlet-class>Controller.SignUpController</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>GameController</servlet-name>
 		<display-name>GameController</display-name>
 		<description></description>
-		<servlet-class>QuizzApp.Controller.GameController</servlet-class>
+		<servlet-class>Controller.GameController</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>HomeController</servlet-name>
@@ -37,40 +37,40 @@
 		<servlet-class>Controller.HomeController</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>AddQuizController</servlet-name>
+		<display-name>AddQuizController</display-name>
+		<description></description>
+		<servlet-class>Controller.AddQuizController</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>AddQuestionController</servlet-name>
 		<display-name>AddQuestionController</display-name>
 		<description></description>
-		<servlet-class>QuizzApp.Controller.AddQuestionController</servlet-class>
+		<servlet-class>Controller.AddQuestionController</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>UpdateQuizController</servlet-name>
 		<display-name>UpdateQuizController</display-name>
 		<description></description>
-		<servlet-class>QuizzApp.Controller.UpdateQuizController</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>UpdateQuesController</servlet-name>
-		<display-name>UpdateQuesController</display-name>
-		<description></description>
-		<servlet-class>QuizzApp.Controller.UpdateQuesController</servlet-class>
+		<servlet-class>Controller.UpdateQuizController</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>DelQuizController</servlet-name>
 		<display-name>DelQuizController</display-name>
 		<description></description>
-		<servlet-class>QuizzApp.Controller.DelQuizController</servlet-class>
+		<servlet-class>Controller.DelQuizController</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>UpdateQuesController</servlet-name>
+		<display-name>UpdateQuesController</display-name>
+		<description></description>
+		<servlet-class>Controller.UpdateQuesController</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>DelQuesController</servlet-name>
 		<display-name>DelQuesController</display-name>
 		<description></description>
-		<servlet-class>QuizzApp.Controller.DelQuesController</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>indexServlet</servlet-name>
-		<display-name>indexServlet</display-name>
-		<description></description>
-		<servlet-class>Controller.indexServlet</servlet-class>
+		<servlet-class>Controller.DelQuesController</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -98,27 +98,31 @@
 		<url-pattern>/Home</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
+		<servlet-name>HomeController</servlet-name>
+		<url-pattern>/index</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>AddQuestionController</servlet-name>
-		<url-pattern>/AddQuestionController</url-pattern>
+		<url-pattern>/AddQuestion</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>UpdateQuizController</servlet-name>
-		<url-pattern>/UpdateQuizController</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>UpdateQuesController</servlet-name>
-		<url-pattern>/UpdateQuesController</url-pattern>
+		<url-pattern>/UpdateQuiz</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>DelQuizController</servlet-name>
-		<url-pattern>/DelQuizController</url-pattern>
+		<url-pattern>/DeleteQuiz</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UpdateQuesController</servlet-name>
+		<url-pattern>/UpdateQuestion</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>DelQuesController</servlet-name>
-		<url-pattern>/DelQuesController</url-pattern>
+		<url-pattern>/DeleteQuestion</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>indexServlet</servlet-name>
-		<url-pattern>/index</url-pattern>
+		<servlet-name>AddQuizController</servlet-name>
+		<url-pattern>/AddQuiz</url-pattern>
 	</servlet-mapping>
 </web-app>

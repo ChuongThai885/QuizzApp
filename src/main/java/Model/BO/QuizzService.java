@@ -1,8 +1,9 @@
-package QuizzApp.Service;
+package Model.BO;
 
 import java.util.ArrayList;
 
-import QuizzApp.Model.*;
+import Model.Bean.*;
+import Model.DAO.DataService;
 
 public class QuizzService {
 	

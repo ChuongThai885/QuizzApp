@@ -43,7 +43,7 @@ if (session.getAttribute("user") != null) {
                     </div>
                     <div class="form-group">
                         Quay về 
-                        <a href="HomePage.jsp">Trang chủ</a>
+                        <a href="/QuizzApp/">Trang chủ</a>
                     </div>
                 </form>
             </div>

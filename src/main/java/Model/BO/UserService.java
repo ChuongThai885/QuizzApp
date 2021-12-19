@@ -1,6 +1,7 @@
-package QuizzApp.Service;
+package Model.BO;
 
-import QuizzApp.Model.*;
+import Model.Bean.*;
+import Model.DAO.DataService;
 
 public class UserService {
 	
