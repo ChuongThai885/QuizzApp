@@ -11,11 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Model.BO.QuizzService;
-import Model.Bean.Answer;
-import Model.Bean.Exam;
-import Model.Bean.Question;
-import Model.Bean.QuestionForm;
-import Model.Bean.User_Infor;
+import Model.Bean.*;
 
 public class AddQuestionController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -37,7 +33,6 @@ public class AddQuestionController extends HttpServlet {
 			request.setCharacterEncoding("utf-8");
 			
 			HttpSession session = request.getSession();
-			User_Infor user = (User_Infor) session.getAttribute("user");
 			String question = request.getParameter("txtQues");
 			String time = request.getParameter("selectTime");
 			String trueans = request.getParameter("trueAns");

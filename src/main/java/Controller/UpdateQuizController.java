@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import Model.BO.QuizzService;
 import Model.Bean.Exam;
 import Model.Bean.QuestionForm;
-import Model.Bean.User_Infor;
 
 public class UpdateQuizController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -35,8 +34,6 @@ public class UpdateQuizController extends HttpServlet {
 			
 			ArrayList<QuestionForm> ql = quizservice.get_List_QuestionForm_by_ID_Exam(ID_Exam);
 			Exam e = quizservice.Get_Exam_by_ID(ID_Exam);
-			User_Infor user = (User_Infor) session.getAttribute("user");
-			int iduser = (int) user.getID();
 			
 		    session.setAttribute("quiz", e);
 			session.setAttribute("queslist", ql);

@@ -1,14 +1,11 @@
 package Controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
 import Model.BO.*;
-import Model.Bean.*;
 
 /**
  * Servlet implementation class LoginController

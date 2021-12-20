@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import Model.BO.EncodeService;
-import Model.BO.QuizzService;
-import Model.BO.UserService;
+import Model.BO.*;
 import Model.Bean.Exam;
 import Model.Bean.User_Infor;
 
@@ -82,7 +80,6 @@ public class HomeController extends HttpServlet {
 			else 
 			{
 				Cookie [] cookies = request.getCookies();
-				HttpSession session = request.getSession();
 				for (Cookie i : cookies)
 				{
 					if((i.getName()).compareTo("name") == 0)

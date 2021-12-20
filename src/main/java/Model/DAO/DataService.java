@@ -105,13 +105,12 @@ public class DataService {
 				ex.setTopic(res.getString("Topic"));
 				ex.setName(res.getString("Ex_Name"));
 				ex.setID_User(res.getInt("ID_User"));
-				System.out.println(ex.toString());
 				le.add(ex);
 			}
 			return le;
 		}
 		catch (Exception e) {
-			// TODO: handle exception
+			System.out.println(e.getMessage());
 		}
 		return null;
 	}
@@ -216,10 +215,6 @@ public class DataService {
 				question.setID_Ex(res.getInt("ID_Ex"));
 				arrayList.add(question);
 			}
-//			for(Question as : arrayList)
-//			{
-//				System.out.println(as.toString());
-//			}
 			return arrayList;
 		}
 		catch (Exception e) {
@@ -243,10 +238,6 @@ public class DataService {
 				answer.setID_Question(res.getLong("ID_Ques"));
 				arrayList.add(answer);
 			}
-//			for(Answer as : arrayList)
-//			{
-//				System.out.println(as.toString());
-//			}
 			return arrayList;
 		}
 		catch (Exception e) {
@@ -258,7 +249,6 @@ public class DataService {
 	public boolean Remove_Object(String name_object,long ID)
 	{
 		String query = "delete from quizzappdata."+name_object+" where ID=" + ID;
-		System.out.println(query);
 		try (Statement statement = CreateConnect().createStatement())
 		{
 			int res = statement.executeUpdate(query);
@@ -283,8 +273,7 @@ public class DataService {
 				ex.setID(res.getInt("ID"));
 				ex.setTopic(res.getString("Topic"));
 				ex.setName(res.getString("Ex_Name"));
-				ex.setID_User(res.getInt("ID_User"));
-				System.out.println(ex.toString());				
+				ex.setID_User(res.getInt("ID_User"));			
 			}
 			return ex;
 		}

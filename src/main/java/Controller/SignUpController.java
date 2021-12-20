@@ -37,8 +37,6 @@ public class SignUpController extends HttpServlet {
 		{
 			if(ser.Create_User(name,email,pass))
 			{
-//				HttpSession session = request.getSession();
-//				session.setAttribute("user", email);
 				try
 				{
 					email = new EncodeService().encodeString(email);

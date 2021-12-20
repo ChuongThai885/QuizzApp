@@ -3,7 +3,6 @@ package Controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,11 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Model.BO.QuizzService;
-import Model.Bean.Answer;
-import Model.Bean.Exam;
-import Model.Bean.Question;
-import Model.Bean.QuestionForm;
-import Model.Bean.User_Infor;
+import Model.Bean.*;
 
 public class UpdateQuesController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -36,7 +31,6 @@ public class UpdateQuesController extends HttpServlet {
 			request.setCharacterEncoding("utf-8");
 			HttpSession session = request.getSession();
 			
-			User_Infor user = (User_Infor) session.getAttribute("user");
 			String id = request.getParameter("id");
 			int ID_Ques = Integer.parseInt(id);
 			int ID_Quiz = Integer.parseInt(request.getParameter("idQuiz"));

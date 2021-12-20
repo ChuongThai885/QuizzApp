@@ -48,7 +48,7 @@ public class AddQuizController extends HttpServlet {
 				int iduser = (int) user.getID();
 				QuizzService quizservice = new QuizzService();
 				Exam e = new Exam(quiz, topic, iduser);
-				boolean b = quizservice.Add_New_Quizz(iduser, e);
+				quizservice.Add_New_Quizz(iduser, e);
 				
 				ArrayList<Exam> ql = quizservice.Get_All_Exam(user.getEmail());
 				Exam q = ql.get(ql.size()-1);
