@@ -83,8 +83,8 @@
 			</div>
 		</div>
 
-		<script src="http://localhost:3000/socket.io/socket.io.js"></script>
-		<!--<script src="http://116.110.195.126:3000/socket.io/socket.io.js"></script>-->
+		<!-- <script src="http://localhost:3000/socket.io/socket.io.js"></script> -->
+		<script src="http://171.251.251.51:3000/socket.io/socket.io.js"></script>
 		<script>const quizes = <%= request.getSession().getAttribute("quiz") %>;</script>
 		<script src="js/game.js"></script>
 	</body>

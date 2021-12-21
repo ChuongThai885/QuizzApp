@@ -38,7 +38,8 @@ button_finish.setAttribute("hidden", "hidden");
 button_next.setAttribute("hidden", "hidden");
 lock_icon.innerHTML = '<i class="fas fa-lock"></i>';
 
-const socket = io("http://localhost:3000/");
+//const socket = io("http://localhost:3000/");
+const socket = io("http://171.251.251.51:3000/");
 
 const tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>'; // creating the new div tags which for icons
 
@@ -165,7 +166,7 @@ button_start.addEventListener('click', (e) => //when clicked button start start 
 
 button_cancel.addEventListener('click', (e) => //when clicked button cancel redirect to home page
 {
-    location.href = "/QuizzApp/Home";
+    location.href = "/QuizzApp/";
 })
 
 button_lock.addEventListener('click',(e) => //when clicked button lock, lock or unlock room

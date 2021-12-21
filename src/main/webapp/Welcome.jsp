@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%String url = "http://localhost:3000/playgame"; %>
+    <%String url = "http://171.251.251.51:3000/playgame"; %>
 <!DOCTYPE html>
 <html>
 

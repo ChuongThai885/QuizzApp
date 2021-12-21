@@ -44,37 +44,47 @@ let num_icon = 0;
 form_sendID.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    id_room = parseInt(id_input.value);
-    id_input.value = "";
-    socket.emit('joining-room', id_room, message => {
-        if (message == "Room exist") {
-            document.getElementById("send-ID").style.display = "none";
-            document.getElementById("send-name").style.display = "block";
-        }
-        else {
-            id_input.value = "";
-            id_room = 0;
-            alert(message);
-        }
-    })
+    if (id_input.value == "") {
+        alert("Nhập ID phòng vào !!");
+    }
+    else {
+        id_room = parseInt(id_input.value);
+        id_input.value = "";
+        socket.emit('joining-room', id_room, message => {
+            if (message == "Room exist") {
+                document.getElementById("send-ID").style.display = "none";
+                document.getElementById("send-name").style.display = "block";
+            }
+            else {
+                id_input.value = "";
+                id_room = 0;
+                alert(message);
+            }
+        })
+    }
 })
 
 form_sendName.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    name_user = name_input.value;
-    name_input.value = "";
+    if (name_input.value == "") {
+        alert("Nhập tên vào !!");
+    }
+    else {
+        name_user = name_input.value;
+        name_input.value = "";
 
-    socket.emit('set-name', id_room, name_user, message => {
-        if (message == "OK") {
-            document.getElementById('welcome-tag').textContent = `Xin chào ${name_user}, bạn đang ở phòng chơi ${id_room}`;
-            document.getElementById("send-name").style.display = "none";
-        }
-        else {
-            name_user = "";
-            alert("Tên đã được sử dụng, vui lòng nhập tên khác !!");
-        }
-    })
+        socket.emit('set-name', id_room, name_user, message => {
+            if (message == "OK") {
+                document.getElementById('welcome-tag').textContent = `Xin chào ${name_user}, bạn đang ở phòng chơi ${id_room}`;
+                document.getElementById("send-name").style.display = "none";
+            }
+            else {
+                name_user = "";
+                alert("Tên đã được sử dụng, vui lòng nhập tên khác !!");
+            }
+        })
+    }
 })
 
 //start, hidden quizbox and button start
