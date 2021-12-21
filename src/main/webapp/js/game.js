@@ -165,7 +165,7 @@ button_start.addEventListener('click', (e) => //when clicked button start start 
 
 button_cancel.addEventListener('click', (e) => //when clicked button cancel redirect to home page
 {
-    location.href = "/QuizzApp/Welcome.jsp";
+    location.href = "/QuizzApp/Home";
 })
 
 button_lock.addEventListener('click',(e) => //when clicked button lock, lock or unlock room
