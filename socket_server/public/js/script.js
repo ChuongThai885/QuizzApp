@@ -33,10 +33,10 @@ let selected_Answer = '';
 let timerID;
 
 const answer_icons = [
-  '<i class="fas fa-square"></i>',
-  '<i class="fas fa-circle"></i>',
-  '<i class="fas fa-star"></i>',
-  '<i class="fas fa-heart"></i>'
+    '<i class="fas fa-square"></i>',
+    '<i class="fas fa-circle"></i>',
+    '<i class="fas fa-star"></i>',
+    '<i class="fas fa-heart"></i>'
 ];
 let num_icon = 0;
 
@@ -71,8 +71,8 @@ form_sendName.addEventListener('submit', (e) => {
             document.getElementById("send-name").style.display = "none";
         }
         else {
-	        name_user = "";
-            document.getElementById('welcome-tag').textContent = "Name has been used, please types again";
+            name_user = "";
+            alert("Tên đã được sử dụng, vui lòng nhập tên khác !!");
         }
     })
 })
@@ -94,11 +94,11 @@ function ShowQuestion() //show question received from server
     let que_tag = '<span>' + quiz.question + '</span>';
     let option_tag = '';
     for (var i of quiz.option) {
-        option_tag += '<div class="option" onclick="optionSelected(this)"><div class="icon anwsers">' + answer_icons[num_icon] + 
-    	'</div><div class="option-text">' + i + '</div></div>';
-    	num_icon += 1;
+        option_tag += '<div class="option" onclick="optionSelected(this)"><div class="icon anwsers">' + answer_icons[num_icon] +
+            '</div><div class="option-text">' + i + '</div></div>';
+        num_icon += 1;
     }
-	num_icon = 0;
+    num_icon = 0;
     que_text.innerHTML = que_tag;
     option_list.innerHTML = option_tag;
     clearInterval(timerID);
@@ -175,7 +175,7 @@ function optionSelected(answer) {
     for (i = 0; i < allOptions; i++) {
         option_list.children[i].classList.add("disabled"); //once user select an option then disabled all options
     }
-	answer.classList.add("disabled-selected");
+    answer.classList.add("disabled-selected");
 }
 
 function calculate_score() {
@@ -211,12 +211,12 @@ socket.on('end-quiz', () => {
         for (i = 0; i < allOptions; i++) {
             if (option_list.children[i].textContent == userAns) {
                 if (userAns == correctAns) {
-					option_list.children[i].classList.remove("disabled-selected");
+                    option_list.children[i].classList.remove("disabled-selected");
                     option_list.children[i].classList.add("correct");
                     option_list.children[i].insertAdjacentHTML("beforeend", tickIconTag);
                     console.log('Correct answer');
                 } else {
-					option_list.children[i].classList.remove("disabled-selected");
+                    option_list.children[i].classList.remove("disabled-selected");
                     option_list.children[i].classList.add("incorrect");
                     option_list.children[i].insertAdjacentHTML("beforeend", crossIconTag);
                     console.log('Inorrect answer');

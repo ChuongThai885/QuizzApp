@@ -14,6 +14,10 @@ const io = require("socket.io")(server, {
 });
 app.use(express.static('public'));
 
+app.get('/playgame', (req, res) => {
+    res.sendFile(__dirname + "/index.html");
+})
+
 //All variables
 const IDRoom = [];   // contain ID of the room
 const RoomList = []; // contain Room [IDRoom] (has an ID Admin, List of ID user, name  user, score)
@@ -72,13 +76,6 @@ function getQuestion(i) {
     } return "";
 }
 //vd
-
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + "/lobby.html");
-})
-app.get('/playgame', (req, res) => {
-    res.sendFile(__dirname + "/index.html");
-})
 
 
 io.on('connection', (socket) => {
