@@ -1,5 +1,5 @@
 .end_box .rankings {
-    margin: auto;
+    margin: 80px auto;
     height: 500px;
     display: flex;
     justify-content: center;
@@ -42,4 +42,16 @@
     font-family:Arial, Helvetica, sans-serif;
     color: #c36a48;
     font-size: 24px;
+}
+.end_box .btn-exit {
+	margin: 30px;
+    padding: 10px 15px;
+    background-color: #fd9727;
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px 0px #c36a48;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    color: #ffffff;
+    cursor: pointer;
 }

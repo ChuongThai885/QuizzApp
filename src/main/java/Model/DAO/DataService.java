@@ -349,7 +349,7 @@ public class DataService {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:6033/quizzappdata";
 			String name = "root";
-			String pass = "@chuongthai1357901";
+			String pass = "matkhausql1@";
 			return DriverManager.getConnection(url,name,pass);
 		}catch (Exception e) {
 			System.out.println("Error: " +e);

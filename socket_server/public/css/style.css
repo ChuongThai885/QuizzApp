@@ -16,8 +16,6 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
-	height: 100vh; 
-	/*  ni la bang chieu cao man hinh nha */
 	background: #fff;
 }
 
@@ -83,8 +81,8 @@
 }
 
 .quiz_box section {
-	margin-top: 170px;
-	padding: 0px 30px 20px 30px;
+	margin-top: 70px;
+	padding: 20px 30px 20px 30px;
 	background: #fff;
 }
 
@@ -188,22 +186,26 @@ section .option_list .option.incorrect {
 .quiz_box section .result {
 	
 	margin: 10px auto;
-	height: 30vh;
+	height: 20vh;
 	/*  ni la t thay co co do, nghi cai doan cau hoi co the dai hon, thi du set lai nho chut, nhung da so thi z */
 	width: 50%;
 	display: flex;
 	justify-content: space-around;
-	align-items: flex-end;
+	align-items: center;
 	/* background-color: palegreen; */
 }
 
 .quiz_box section .result_item {
-	width: calc(25% - 10px);
+	width: calc(50% - 10px);
+	height: 60%;
 	border-radius: 5px;
 	display: flex;
-	align-items: flex-end;
-	text-align:center; 
-	background-color: #007bff;
+	align-items: center;
+	justify-content: center;	
+	font-size: 25px;
+    color: #ffffff;
+    /*background-color: #007bff;
+    border: 5px solid #84c5fe;*/
 }
 
 .quiz_box section .result-icons{

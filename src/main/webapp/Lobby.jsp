@@ -78,13 +78,14 @@
 		</div>
 
 		<div class="end_box">
+			<input type="button" id="button-out" class="btn-exit" value="Thoát">
 			<div class="rankings">
 				<!-- insert top 3 players with the highest score and player rank from JS -->
 			</div>
 		</div>
 
-		<!-- <script src="http://localhost:3000/socket.io/socket.io.js"></script> -->
-		<script src="http://171.251.251.51:3000/socket.io/socket.io.js"></script>
+		<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+		<!-- <script src="http://171.251.251.51:3000/socket.io/socket.io.js"></script> -->
 		<script>const quizes = <%= request.getSession().getAttribute("quiz") %>;</script>
 		<script src="js/game.js"></script>
 	</body>

@@ -13,6 +13,7 @@
 <script>
 	// Popup Open
 	function popupOpen() {
+		window.scrollTo(0,0);
 		document.getElementById("editquizform").style.display = "block";
         document.getElementById("overlay").style.display = "block";
 	}
@@ -22,6 +23,7 @@
         document.getElementById("overlay").style.display = "none";
 	}
 	function quesPopupOpen(){
+		window.scrollTo(0,0);
 		document.getElementById("addquesform").style.display = "block";
 		document.getElementById("overlay").style.display = "block";
 	}
@@ -30,6 +32,7 @@
         document.getElementById("overlay").style.display = "none";
 	}
 	function editQuesOpen(dem) {
+		window.scrollTo(0,0);
 		idpopup = "editquesform" + dem;
 		document.getElementById(idpopup).style.display = "block";
 		document.getElementById("overlay").style.display = "block";
@@ -145,8 +148,13 @@
 				<input type="radio" name="trueAns" value="<%=i+1 %>">
 				<%} %>
 				<input type="text" name="txtIDAns<%=i+1 %>" value="<%=q.getAns().get(i).getID() %>" style="display:none">
+			<%if (i < 2){ %>
 				<input type="text" name="txtAns<%=i+1 %>" class="form-input" 
 				required="required" value="<%=q.getAns().get(i).getAns()%>">
+			<%} else { %>
+			<input type="text" name="txtAns<%=i+1 %>" class="form-input" 
+				value="<%=q.getAns().get(i).getAns()%>">
+			<%} %>
 			</div>
 			<%} %>
 			<!-- hiển thị thêm các textbox rỗng nếu số đáp án < 4 -->

@@ -213,7 +213,14 @@ socket.on('end-quiz', () => {
     const correctAns = quiz.answer; //getting correct answer from array
 
     const userAns = selected_Answer;
-    result.innerHTML = `<div  class="result_item"> ${score} </div>`; // show score
+    if (score > 0){
+		result.innerHTML = `<div  class="result_item" style="background-color: #20A86D;
+    border: 5px solid #63FFBC;">+ ${score} điểm</div>`; // show score
+	}else {
+		result.innerHTML = `<div  class="result_item" style="background-color: #A8260F;
+    border: 5px solid #F56147;">+ ${score} điểm</div>`; // show score
+	}
+    
     //show correct answer
     if (userAns == '') { // if player not select any answer
         select_CorrectAnswer();
@@ -300,9 +307,9 @@ socket.on('get-rank', (score, rank) => {
     </div>
     <div class="player-info">
         <div class="player-name">
-            ${score} score
+            ${score} điểm
             <div class="player-score">
-                You are ${rank}th player
+                Bạn đứng vị trí thứ ${rank}
             </div>
         </div>
     </div>`
@@ -312,9 +319,9 @@ socket.on('get-rank', (score, rank) => {
         </div>
         <div class="player-info">
             <div class="player-name">
-                ${score} score
+                ${score} điểm
                 <div class="player-score">
-                    You are ${rank}th player, congrats
+                    Bạn đứng vị trí thứ ${rank} <br> Xin chúc mừng
                 </div>
             </div>
         </div>`
