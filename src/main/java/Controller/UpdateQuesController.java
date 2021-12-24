@@ -1,5 +1,6 @@
 package Controller;
 
+import java.io.Console;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -37,13 +38,16 @@ public class UpdateQuesController extends HttpServlet {
 			String question = request.getParameter("txtQues");
 			String time = request.getParameter("selectTime");
 			String trueans = request.getParameter("trueAns");
-			
 			//get cac cau tra loi
 			String ans1 = request.getParameter("txtAns1");
 			String ans2 = request.getParameter("txtAns2");
 			String ans3 = request.getParameter("txtAns3");
 			String ans4 = request.getParameter("txtAns4");
 			String la1[] = {ans1, ans2, ans3, ans4};
+			if(la1[Integer.parseInt(trueans)-1] == "")
+			{
+				throw new Exception();
+			}
 			
 			//get id cac cau tra loi
 			String idans1 = request.getParameter("txtIDAns1");
@@ -94,7 +98,7 @@ public class UpdateQuesController extends HttpServlet {
 			response.sendRedirect("/QuizzApp/AddQuestion");
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
-			response.sendRedirect("/QuizzApp/");
+			response.sendRedirect("/QuizzApp/Home");
 		}
 	}
 
