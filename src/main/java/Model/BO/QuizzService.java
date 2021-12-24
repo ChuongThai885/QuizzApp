@@ -83,6 +83,6 @@ public class QuizzService {
 	
 	public boolean Remove_Answer(long ID_Answer)
 	{
-		return service.Remove_Object("question", ID_Answer);
+		return service.Remove_Object("answers", ID_Answer);
 	}
 }

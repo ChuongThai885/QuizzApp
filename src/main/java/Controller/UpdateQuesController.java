@@ -44,6 +44,7 @@ public class UpdateQuesController extends HttpServlet {
 			String ans3 = request.getParameter("txtAns3");
 			String ans4 = request.getParameter("txtAns4");
 			String la1[] = {ans1, ans2, ans3, ans4};
+			
 			//get id cac cau tra loi
 			String idans1 = request.getParameter("txtIDAns1");
 			String idans2 = request.getParameter("txtIDAns2");
@@ -75,7 +76,7 @@ public class UpdateQuesController extends HttpServlet {
 					quizservice.Add_New_Anwser(ID_Ques, a);
 				}//neu co id ma khong co ans thi xoa dap an
 				else if (la1[i].equals("") && !lid1[i].equals("")) {
-					quizservice.Remove_Answer(Integer.parseInt(lid1[i]));
+					boolean b = quizservice.Remove_Answer(Integer.parseInt(lid1[i]));
 				}
 			}
 			

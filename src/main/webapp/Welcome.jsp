@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%String url = "http://171.251.251.51:3000/playgame"; %>
+    <%String url = "http://localhost:3000/playgame"; %>
 <!DOCTYPE html>
 <html>
 
@@ -39,8 +39,8 @@
         <!--nội dung-->
         <div class="introduction-container">
             <div class="text-container">
-                <h1>Quiz App</h1>
-                <h3>Học, ôn tập, vui chơi cùng Quiz App</h3>
+                <h1>Quizz App</h1>
+                <h3>Học, ôn tập, vui chơi cùng Quizz App</h3>
                 <div class="group-button">
                     <div class="main-btn-container">
                         <a href="SignUp">Bắt đầu </a>                       

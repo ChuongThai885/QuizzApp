@@ -39,6 +39,7 @@ button_finish.setAttribute("hidden", "hidden");
 button_next.setAttribute("hidden", "hidden");
 lock_icon.innerHTML = '<i class="fas fa-lock"></i>';
 
+//const socket = io("http://ce6d-2405-4800-440f-84d-2816-1e62-e16c-b6a7.ngrok.io/");
 const socket = io("http://localhost:3000/");
 //const socket = io("http://171.251.251.51:3000/");
 
