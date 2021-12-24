@@ -1,3 +1,6 @@
+//const socket = io("http://ce6d-2405-4800-440f-84d-2816-1e62-e16c-b6a7.ngrok.io/");
+//const socket = io("http://localhost:3000/");
+const socket = io("http://171.251.251.51:3000/");
 
 //constants that represent to elements in html file
 const start_box = document.querySelector(".start_box");
@@ -38,10 +41,6 @@ button_start.setAttribute("hidden", "hidden"); // if users in room = 0 then disa
 button_finish.setAttribute("hidden", "hidden");
 button_next.setAttribute("hidden", "hidden");
 lock_icon.innerHTML = '<i class="fas fa-lock"></i>';
-
-//const socket = io("http://ce6d-2405-4800-440f-84d-2816-1e62-e16c-b6a7.ngrok.io/");
-const socket = io("http://localhost:3000/");
-//const socket = io("http://171.251.251.51:3000/");
 
 const tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>'; // creating the new div tags which for icons
 
@@ -254,7 +253,7 @@ socket.on('return-result', (arr) => {
         }
         else if(inde == 2)
         {
-            rankings_item += `
+            rankings_item = `
             <div class="position-container">
 				<img src="img/second.png" class="picture-container">
 				<div class="general second">
@@ -262,7 +261,7 @@ socket.on('return-result', (arr) => {
 						<b>${i.Name}</b>
 					</div>
 				</div>
-			</div>`;
+			</div>` + rankings_item;
             cre = i.score;
             inde++;
         }

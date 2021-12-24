@@ -285,12 +285,28 @@ socket.on('return-result', (arr) => {
             inde++;
         }
         else if (inde == 2) {
-            rankings_item += `<div class="position-container"><img src="/Image/second.png" class="picture-container"><div class="general second"><div class="position-name"><b>${i.Name}</b></div></div></div>`;
+            rankings_item = `
+            <div class="position-container">
+                <img src="/Image/second.png" class="picture-container">
+                <div class="general second">
+                    <div class="position-name">
+                            <b>${i.Name}</b>
+                    </div>
+                </div>
+            </div>` + rankings_item;
             cre = i.score;
             inde++;
         }
         else if (inde == 3) {
-            rankings_item += `<div class="position-container"><img src="/Image/third.png" class="picture-container"><div class="general third"><div class="position-name"><b>${i.Name}</b></div></div></div>`;
+            rankings_item += `
+            <div class="position-container">
+                <img src="/Image/third.png" class="picture-container">
+                <div class="general third">
+                    <div class="position-name">
+                            <b>${i.Name}</b>
+                    </div>
+                </div>
+            </div>`;
             cre = i.score;
             inde++;
         }
