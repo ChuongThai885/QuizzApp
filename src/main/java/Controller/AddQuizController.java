@@ -25,6 +25,9 @@ public class AddQuizController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try
 		{
+			HttpSession session = request.getSession();
+			session.removeAttribute("quiz");
+			session.removeAttribute("queslist");
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/AddQuiz.jsp");
 			rd.forward(request, response);
 		}catch (Exception e) {

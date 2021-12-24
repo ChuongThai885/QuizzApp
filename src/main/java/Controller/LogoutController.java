@@ -30,7 +30,6 @@ public class LogoutController extends HttpServlet {
 		cookie.setMaxAge(0); 
 		response.addCookie(cookie);
 		HttpSession session = request.getSession();
-		session.removeAttribute("user");
 		session.invalidate();
 		
 		response.sendRedirect("/QuizzApp/");
